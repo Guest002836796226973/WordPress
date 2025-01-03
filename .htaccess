@@ -111,7 +111,7 @@ ErrorDocument 402 https://site_exemple.fr/erreur-404/
 ErrorDocument 403 https://site_exemple.fr/erreur-404/
 ErrorDocument 404 https://site_exemple.fr/erreur-404/
 ########################################################################
-#	Filtre anti-leech Google et Youtube
+#	Filtre anti-fishing Google et Youtube
 #
 <IfModule mod_rewrite.c>
 RewriteEngine On
