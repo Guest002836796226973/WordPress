@@ -111,14 +111,19 @@ ErrorDocument 402 https://site_exemple.fr/erreur-404/
 ErrorDocument 403 https://site_exemple.fr/erreur-404/
 ErrorDocument 404 https://site_exemple.fr/erreur-404/
 ########################################################################
-#	Protect your WordPress Login with HTTP Authentification
-#	If you want to use it, comment it out and set your path to .htpasswd
-#<Files wp-login.php>
-#AuthName "xxx"
-#AuthType Basic
-#AuthUserFile /usr/local/www/apache24/your-path/your-domain.com/.htpasswd 
-#require valid-user
-#</Files>
+#	Filtre anti-leech Google et Youtube
+#
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?.*gstatic\.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(jnn-pa.)?.*googleapis\.com.*$ [NC,OR]
+#RewriteCond %{HTTP_REFERER} ^http(s)?://(play.)?.*google\.com.*$ [NC,OR]
+#RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*google\.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.fr.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.fr.*$ [NC,OR]
+</IfModule>
 ########################################################################
 #	Bloque les fichiers et dossiers WordPress
 #
