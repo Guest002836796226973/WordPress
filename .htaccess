@@ -1,4 +1,4 @@
-# Ajouter par Petitpoids
+# BEGIN mon_fichier
 AddDefaultCharset utf-8
 DirectoryIndex index.php
 Options -Indexes
@@ -103,14 +103,74 @@ FileETag None
 	</FilesMatch>
 </IfModule>
 ########################################################################
+#	Bloque hameçonnage utilisateur WordPress
+#
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{QUERY_STRING} ^author=([0-9]*)
+RewriteRule .* - [F]
+</IfModule>
+########################################################################
 #	404 Fix
 #
-ErrorDocument 401 https://site_exemple.fr/erreur-404/
-ErrorDocument 402 https://site_exemple.fr/erreur-404/
-ErrorDocument 403 https://site_exemple.fr/erreur-404/
-ErrorDocument 404 https://site_exemple.fr/erreur-404/
+ErrorDocument 401 "Autorisation requise"
+ErrorDocument 402 "Refus de paiement"
+ErrorDocument 403 "Acc&egrave;s interdit"
+ErrorDocument 404 https://mon_site.fr/erreur-404/
 ########################################################################
-#	Filtre anti-fishing Google et Youtube
+#	Bloque les fichiers sensibles WordPress
+#
+# Fichiers stop scan
+<IfModule mod_rewrite.c>
+<files install-helper.php>
+	Order allow,deny
+	Deny from all
+</files>
+<files wp-config.php>
+	Order allow,deny
+	Deny from all
+</files>
+<FilesMatch "\.(.htaccess|.htpasswd)$">
+	Order allow,deny
+	Deny from all
+</FilesMatch>
+<files error_log>
+	Order allow,deny
+	Deny from all
+</files>
+<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
+	Order allow,deny
+	Deny from all
+</FilesMatch>
+</IfModule>
+########################################################################
+#	Bloque tout les fichiers
+#
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond "%{HTTP_REFERER}" "!^$"
+RewriteCond "%{HTTP_REFERER}" "!mon_site.fr" [NC]
+RewriteRule "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$" "-" [F,NC]
+</IfModule>
+<IfModule mod_rewrite.c>
+SetEnvIf Referer "mon_site\.fr" localreferer
+<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
+	Require env localreferer
+</FilesMatch>
+</IfModule>
+########################################################################
+# Bloque les dossiers sensibles WordPress
+#
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+########################################################################
+#	Filtre hameçonnage Google, Youtube et W3
 #
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -122,81 +182,251 @@ RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.fr.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.fr.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3\.org.*$ [NC,OR]
+RewriteRule .* - [F,L]
 </IfModule>
 ########################################################################
-#	Bloque les fichiers et dossiers WordPress
-#
-<IfModule mod_rewrite.c>
-	RewriteCond %{QUERY_STRING} ^author=([0-9]*)
-	RewriteRule .* - [F]
-</IfModule>
-# Fichiers stop scan
-<files install-helper.php>
-	Order allow,deny
-	Deny from all
-</files>
-<files wp-config.php>
-	Order allow,deny
-	Deny from all
-</files>
-<files readme.txt>
-	Order allow,deny
-	Deny from all
-</Files>
-<files wp-trackback.php>
-	Order allow,deny
-	Deny from all
-</Files>
-<FilesMatch "\.(.htaccess|.htpasswd)$">
-	Order allow,deny
-	Deny from all
-</FilesMatch>
-<FilesMatch "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-	Order allow,deny
-	Deny from all
-</FilesMatch>
-<files error_log>
-	Order allow,deny
-	Deny from all
-</files>
-########################################################################
-# Bloque les dossiers
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteRule ^wp-admin/includes/ - [F,L]
-	RewriteRule !^wp-includes/ - [S=3]
-	RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
-	RewriteRule ^wp-includes/js/tinymce/.+\.php - [F,L]
-	RewriteRule ^wp-includes/theme-compat/ - [F,L]
-	RewriteRule ^/\.well-known/.+ - [END]
-</IfModule>
-########################################################################
-#	Blocking the »ReallyLongRequest« Bandit - New in 2018  
+#	Blocking the »ReallyLongRequest« Bandit - New in 2018
 #	https://perishablepress.com/blocking-reallylongrequest-bandit/
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{REQUEST_METHOD} .* [NC]
-	RewriteCond %{THE_REQUEST} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC,OR]
-	RewriteCond %{QUERY_STRING} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC]
-	RewriteRule .* - [F,L]
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} .* [NC]
+RewriteCond %{THE_REQUEST} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC,OR]
+RewriteCond %{QUERY_STRING} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC]
+RewriteRule .* - [F,L]
 </IfModule>
 ########################################################################
 #	Addon: Stop Aggressive Scanning for Uploads-Related Targets
 #	https://perishablepress.com/stop-aggressive-scanning-uploads/
 <IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} (_timthumb_|timthumb.php) [NC,OR]
+RewriteCond %{REQUEST_URI} /(uploadify|uploadbg|up__uzegp)\.php [NC,OR]
+RewriteCond %{REQUEST_URI} /(comm\.js|mysql-date-function|simplebootadmin|vuln\.htm|www\.root\.) [NC,OR]
+RewriteCond %{REQUEST_URI} /(admin-uploadify|fileupload|jquery-file-upload|upload_file|upload|uploadify|webforms)/ [NC,OR]
+RewriteCond %{REQUEST_URI} /(ajax_pluginconf|apikey|connector(.minimal)?|eval-stdin|f0x|login|router|setup-config|sssp|vuln|xattacker)\.php [NC]
+RewriteRule .* - [F,L]
+</IfModule>
+########################################################################
+#	6G FIREWALL/BLACKLIST
+#	https://perishablepress.com/6g/
+#
+# [QUERY STRING]
+<IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{REQUEST_URI} (_timthumb_|timthumb.php) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(uploadify|uploadbg|up__uzegp)\.php [NC,OR]
-	RewriteCond %{REQUEST_URI} /(comm\.js|mysql-date-function|simplebootadmin|vuln\.htm|www\.root\.) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(admin-uploadify|fileupload|jquery-file-upload|upload_file|upload|uploadify|webforms)/ [NC,OR]
-	RewriteCond %{REQUEST_URI} /(ajax_pluginconf|apikey|connector(.minimal)?|eval-stdin|f0x|login|router|setup-config|sssp|vuln|xattacker)\.php [NC]
-	RewriteRule .* - [F,L]
+	RewriteCond %{QUERY_STRING} (eval\() [NC,OR]
+	RewriteCond %{QUERY_STRING} (127\.0\.0\.1) [NC,OR]
+	RewriteCond %{QUERY_STRING} ([a-z0-9]{2000,}) [NC,OR]
+	RewriteCond %{QUERY_STRING} (javascript:)(.*)(;) [NC,OR]
+	RewriteCond %{QUERY_STRING} (base64_encode)(.*)(\() [NC,OR]
+	RewriteCond %{QUERY_STRING} (GLOBALS|REQUEST)(=|\[) [NC,OR]
+	RewriteCond %{QUERY_STRING} (<|%3C)(.*)script(.*)(>|%3) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\\|\.\.\.|\.\./|~|`|<|>|\|) [NC,OR]
+	RewriteCond %{QUERY_STRING} (boot\.ini|etc/passwd|self/environ) [NC,OR]
+	RewriteCond %{QUERY_STRING} (thumbs?(_editor|open)?|tim(thumb)?)\.php [NC,OR]
+	RewriteCond %{QUERY_STRING} (\'|\")(.*)(drop|insert|md5|select|union) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+#
+# [REQUEST METHOD]
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_METHOD} ^(connect|debug|move|put|trace|track) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+#
+# [REFERRER]
+<IfModule mod_rewrite.c>
+	RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000,}) [NC,OR]
+	RewriteRule .* - [F]
+</IfModule>
+#
+# [REQUEST STRING]	#RedirectMatch 403 (?i)/(\$(\&)?|\*|\"|\.|,|&|&?)/?$
+<IfModule mod_alias.c>
+	RedirectMatch 403 (?i)([a-z0-9]{2000,})
+	RedirectMatch 403 (?i)(https?|ftp|php):/
+	RedirectMatch 403 (?i)(base64_encode)(.*)(\()
+	RedirectMatch 403 (?i)(=\\\'|=\\%27|/\\\'/?)\.
+	RedirectMatch 403 (?i)(\{0\}|\(/\(|\.\.\.|\+\+\+|\\\"\\\")
+	RedirectMatch 403 (?i)(~|`|<|>|:|;|,|%|\\|\{|\}|\[|\]|\|)
+	RedirectMatch 403 (?i)/(=|\$&|_mm|cgi-|muieblack)
+	RedirectMatch 403 (?i)(&pws=0|_vti_|\(null\)|\{\$itemURL\}|echo(.*)kae|etc/passwd|eval\(|self/environ)
+	RedirectMatch 403 (?i)\.(aspx?|bash|bak?|cfg|cgi|dll|exe|git|hg|ini|jsp|log|mdb|out|sql|svn|swp|tar|rar|rdf)$
+	RedirectMatch 403 (?i)/(^$|(wp-)?config|mobiquo|phpinfo|shell|sqlpatch|thumb|thumb_editor|thumbopen|timthumb|webshell)\.php
+</IfModule>
+#
+# [USER AGENT]
+<IfModule mod_setenvif.c>
+	SetEnvIfNoCase User-Agent ([a-z0-9]{2000,}) bad_bot
+	SetEnvIfNoCase User-Agent (archive.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|nutch|planetwork|postrank|purebot|pycurl|python|seekerspider|siclab|skygrid|sqlmap|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) bad_bot
+	<IfModule mod_authz_core.c>
+		<RequireAll>
+			Require all Granted
+			Require not env bad_bot
+		</RequireAll>
+	</IfModule>
+</IfModule>
+########################################################################
+#	8G FIREWALL/BLACKLIST
+#	https://perishablepress.com/8g-firewall/
+#
+# [QUERY STRING]
+<IfModule mod_rewrite.c>
+	RewriteCond %{QUERY_STRING} ^(%2d|-)[^=]+$ [NC,OR]
+	RewriteCond %{QUERY_STRING} ([a-z0-9]{4000,}) [NC,OR]
+	RewriteCond %{QUERY_STRING} (/|%2f)(:|%3a)(/|%2f) [NC,OR]
+	RewriteCond %{QUERY_STRING} (etc/(hosts|motd|shadow)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (order(\s|%20)by(\s|%20)1--) [NC,OR]
+	RewriteCond %{QUERY_STRING} (/|%2f)(\*|%2a)(\*|%2a)(/|%2f) [NC,OR]
+	RewriteCond %{QUERY_STRING} (`|<|>|\^|\|\\|0x00|%00|%0d%0a) [NC,OR]
+	RewriteCond %{QUERY_STRING} (f?ckfinder|f?ckeditor|fullclick) [NC,OR]
+	RewriteCond %{QUERY_STRING} ((.*)header:|(.*)set-cookie:(.*)=) [NC,OR]
+	RewriteCond %{QUERY_STRING} (localhost|127(\.|%2e)0(\.|%2e)0(\.|%2e)1) [NC,OR]
+	RewriteCond %{QUERY_STRING} (cmd|command)(=|%3d)(chdir|mkdir)(.*)(x20) [NC,OR]
+	RewriteCond %{QUERY_STRING} (globals|mosconfig([a-z_]{1,22})|request)(=|\[) [NC,OR]
+	RewriteCond %{QUERY_STRING} (/|%2f)((wp-)?config)((\.|%2e)inc)?((\.|%2e)php) [NC,OR]
+	RewriteCond %{QUERY_STRING} (thumbs?(_editor|open)?|tim(thumbs?)?)((\.|%2e)php) [NC,OR]
+	RewriteCond %{QUERY_STRING} (absolute_|base|root_)(dir|path)(=|%3d)(ftp|https?) [NC,OR]
+	RewriteCond %{QUERY_STRING} (s)?(ftp|inurl|php)(s)?(:(/|%2f|%u2215)(/|%2f|%u2215)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\.|20)(get|the)(_|%5f)(permalink|posts_page_url)(\(|%28) [NC,OR]
+	RewriteCond %{QUERY_STRING} ((boot|win)((\.|%2e)ini)|etc(/|%2f)passwd|self(/|%2f)environ) [NC,OR]
+	RewriteCond %{QUERY_STRING} (((/|%2f){3,3})|((\.|%2e){3,3})|((\.|%2e){2,2})(/|%2f|%u2215)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (benchmark|exec|fopen|function|html)(.*)(\(|%28)(.*)(\)|%29) [NC,OR]
+	RewriteCond %{QUERY_STRING} (php)([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}) [NC,OR]
+	RewriteCond %{QUERY_STRING} (e|%65|%45)(v|%76|%56)(a|%61|%31)(l|%6c|%4c)(.*)(\(|%28)(.*)(\)|%29) [NC,OR]
+	RewriteCond %{QUERY_STRING} (/|%2f)(=|%3d|$&|_mm|cgi(\.|-)|inurl(:|%3a)(/|%2f)|(mod|path)(=|%3d)(\.|%2e)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (<|%3c)(.*)(e|%65|%45)(m|%6d|%4d)(b|%62|%42)(e|%65|%45)(d|%64|%44)(.*)(>|%3e) [NC,OR]
+	RewriteCond %{QUERY_STRING} (<|%3c)(.*)(i|%69|%49)(f|%66|%46)(r|%72|%52)(a|%61|%41)(m|%6d|%4d)(e|%65|%45)(.*)(>|%3e) [NC,OR]
+	RewriteCond %{QUERY_STRING} (<|%3c)(.*)(o|%4f|%6f)(b|%62|%42)(j|%4a|%6a)(e|%65|%45)(c|%63|%43)(t|%74|%54)(.*)(>|%3e) [NC,OR]
+	RewriteCond %{QUERY_STRING} (<|%3c)(.*)(s|%73|%53)(c|%63|%43)(r|%72|%52)(i|%69|%49)(p|%70|%50)(t|%74|%54)(.*)(>|%3e) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\+|%2b|%20)(d|%64|%44)(e|%65|%45)(l|%6c|%4c)(e|%65|%45)(t|%74|%54)(e|%65|%45)(\+|%2b|%20) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\+|%2b|%20)(i|%69|%49)(n|%6e|%4e)(s|%73|%53)(e|%65|%45)(r|%72|%52)(t|%74|%54)(\+|%2b|%20) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\+|%2b|%20)(s|%73|%53)(e|%65|%45)(l|%6c|%4c)(e|%65|%45)(c|%63|%43)(t|%74|%54)(\+|%2b|%20) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\+|%2b|%20)(u|%75|%55)(p|%70|%50)(d|%64|%44)(a|%61|%41)(t|%74|%54)(e|%65|%45)(\+|%2b|%20) [NC,OR]
+	RewriteCond %{QUERY_STRING} (\\x00|(\"|%22|\'|%27)?0(\"|%22|\'|%27)?(=|%3d)(\"|%22|\'|%27)?0|cast(\(|%28)0x|or%201(=|%3d)1) [NC,OR]
+	RewriteCond %{QUERY_STRING} (g|%67|%47)(l|%6c|%4c)(o|%6f|%4f)(b|%62|%42)(a|%61|%41)(l|%6c|%4c)(s|%73|%53)(=|\[|%[0-9A-Z]{0,2}) [NC,OR]
+	RewriteCond %{QUERY_STRING} (_|%5f)(r|%72|%52)(e|%65|%45)(q|%71|%51)(u|%75|%55)(e|%65|%45)(s|%73|%53)(t|%74|%54)(=|\[|%[0-9A-Z]{2,}) [NC,OR]
+	RewriteCond %{QUERY_STRING} (j|%6a|%4a)(a|%61|%41)(v|%76|%56)(a|%61|%31)(s|%73|%53)(c|%63|%43)(r|%72|%52)(i|%69|%49)(p|%70|%50)(t|%74|%54)(:|%3a)(.*)(;|%3b|\)|%29) [NC,OR]
+	RewriteCond %{QUERY_STRING} (b|%62|%42)(a|%61|%41)(s|%73|%53)(e|%65|%45)(6|%36)(4|%34)(_|%5f)(e|%65|%45|d|%64|%44)(e|%65|%45|n|%6e|%4e)(c|%63|%43)(o|%6f|%4f)(d|%64|%44)(e|%65|%45)(.*)(\()(.*)(\)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (@copy|\$_(files|get|post)|allow_url_(fopen|include)|auto_prepend_file|blexbot|browsersploit|call_user_func_array|(php|web)shell|curl(_exec|test)|disable_functions?|document_root) [NC,OR]
+	RewriteCond %{QUERY_STRING} (elastix|encodeuricom|exploit|fclose|fgets|file_put_contents|fputs|fsbuff|fsockopen|gethostbyname|ghost|grablogin|hmei7|hubs_post-cta|input_file|invokefunction|(\b)load_file|open_basedir|outfile|p3dlite) [NC,OR]
+	RewriteCond %{QUERY_STRING} (pass(=|%3d)shell|passthru|phpinfo|phpshells|popen|proc_open|quickbrute|remoteview|root_path|safe_mode|shell_exec|site((.){0,2})copier|sp_executesql|sux0r|trojan|udtudt|user_func_array|wget|wp_insert_user|xertive) [NC,OR]
+	RewriteCond %{QUERY_STRING} (;|<|>|\'|\"|\)|%0a|%0d|%22|%27|%3c|%3e|%00)(.*)(/\*|alter|base64|benchmark|cast|concat|convert|create|encode|declare|delay|delete|drop|hex|insert|load|md5|null|replace|request|script|select|set|sleep|truncate|unhex|update) [NC,OR]
+	RewriteCond %{QUERY_STRING} ((\+|%2b)(concat|delete|get|select|union)(\+|%2b)) [NC,OR]
+	RewriteCond %{QUERY_STRING} (union)(.*)(select)(.*)(\(|%28) [NC,OR]
+	RewriteCond %{QUERY_STRING} (concat|eval)(.*)(\(|%28) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+# [REQUEST URI]
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_URI} (,,,) [NC,OR]
+	RewriteCond %{REQUEST_URI} (-------) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\^|`|<|>|\\|\|) [NC,OR]
+	RewriteCond %{REQUEST_URI} ([a-z0-9]{2000,}) [NC,OR]
+	RewriteCond %{REQUEST_URI} (=?\\(\'|%27)/?)(\.) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(\*|\"|\'|\.|,|&|&amp;?)/?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.)(php)(\()?([0-9]+)(\))?(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} /((.*)header:|(.*)set-cookie:(.*)=) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.(s?ftp-?)config|(s?ftp-?)config\.) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(f?ckfinder|fck/|fckeditor|fullclick) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)((force-)?download|framework/main)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\{0\}|\"?0\"?=\"?0|\(/\(|\.\.\.|\+\+\+|\\\") [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(vbull(etin)?|boards|vbforum|vbweb|webvb)(/)? [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.|20)(get|the)(_)(permalink|posts_page_url)(\() [NC,OR]
+	RewriteCond %{REQUEST_URI} (///|\?\?|/&&|/\*(.*)\*/|/:/|\\\\|0x00|%00|%0d%0a) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(cgi_?)?alfa(_?cgiapi|_?data|_?v[0-9]+)?(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (thumbs?(_editor|open)?|tim(thumbs?)?)((\.|%2e)php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)((boot)?_?admin(er|istrator|s)(_events)?)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/%7e)(root|ftp|bin|nobody|named|guest|logs|sshd)(/) [NC,OR]
+	RewriteCond %{REQUEST_URI} (archive|backup|db|master|sql|wp|www|wwwroot)\.(gz|zip) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(\.?mad|alpha|c99|php|web)?sh(3|e)ll([0-9]+|\w)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(admin-?|file-?)(upload)(bg|_?file|ify|svu|ye)?(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(etc|var)(/)(hidden|secret|shadow|ninja|passwd|tmp)(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (s)?(ftp|http|inurl|php)(s)?(:(/|%2f|%u2215)(/|%2f|%u2215)) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(=|\$&?|&?(pws|rk)=0|_mm|_vti_|cgi(\.|-)|(=|/|;|,)nt\.) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.)(ds_store|htaccess|htpasswd|init?|mysql-select-db)(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(bin)(/)(cc|chmod|chsh|cpp|echo|id|kill|mail|nasm|perl|ping|ps|python|tclsh)(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(::[0-9999]|%3a%3a[0-9999]|127\.0\.0\.1|ccx|localhost|makefile|pingserver|wwwroot)(/)? [NC,OR]
+	RewriteCond %{REQUEST_URI} ^(/)(123|backup|bak|beta|bkp|default|demo|dev(new|old)?|new-?site|null|old|old_files|old1)(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)?j((\s)+)?a((\s)+)?v((\s)+)?a((\s)+)?s((\s)+)?c((\s)+)?r((\s)+)?i((\s)+)?p((\s)+)?t((\s)+)?(%3a|:) [NC,OR]
+	RewriteCond %{REQUEST_URI} ^(/)(old-?site(back)?|old(web)?site(here)?|sites?|staging|undefined|wordpress([0-9]+)|wordpress-old)(/)?$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(filemanager|htdocs|httpdocs|https?|mailman|mailto|msoffice|undefined|usage|var|vhosts|webmaster|www)(/) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\(null\)|\{\$itemURL\}|cast\(0x|echo(.*)kae|etc/passwd|eval\(|null(.*)null|open_basedir|self/environ|\+union\+all\+select) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(db-?|j-?|my(sql)?-?|setup-?|web-?|wp-?)?(admin-?)?(setup-?)?(conf\b|conf(ig)?)(uration)?(\.?bak|\.inc)?(\.inc|\.old|\.php|\.txt) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)((.*)crlf-?injection|(.*)xss-?protection|__(inc|jsc)|author-panel|cgi-bin|database|downloader|(db|mysql)-?admin)(/) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(haders|head|hello|helpear|incahe|includes?|indo(sec)?|infos?|ioptimizes?|jmail|js|king|kiss|kodox|kro|legion|libsoft)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(awstats|document_root|dologin\.action|error.log|extension/ext|htaccess\.|lib/php|listinfo|phpunit/php|remoteview|server/php|www\.root\.) [NC,OR]
+	RewriteCond %{REQUEST_URI} (base64_(en|de)code|benchmark|curl_exec|e?chr|eval|function|fwrite|(f|p)open|html|leak|passthru|p?fsockopen|phpinfo)(.*)(\(|%28)(.*)(\)|%29) [NC,OR]
+	RewriteCond %{REQUEST_URI} (posix_(kill|mkfifo|setpgid|setsid|setuid)|(child|proc)_(close|get_status|nice|open|terminate)|(shell_)?exec|system)(.*)(\(|%28)(.*)(\)|%29) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)((c99|php|web)?shell|crossdomain|fileditor|locus7|nstview|php(get|remoteview|writer)|r57|remview|sshphp|storm7|webadmin)(.*)(\.|%2e|\(|%28) [NC,OR]
+	RewriteCond %{REQUEST_URI} /((wp-)((201\d|202\d|[0-9]{2})|ad|admin(fx|rss|setup)|booking|confirm|crons|data|file|mail|one|plugins?|readindex|reset|setups?|story))(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(^$|-|\!|\w|\.(.*)|100|123|([^iI])?ndex|index\.php/index|3xp|777|7yn|90sec|99|active|aill|ajs\.delivery|al277|alexuse?|ali|allwrite)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(analyser|apache|apikey|apismtp|authenticat(e|ing)|autoload_classmap|backup(_index)?|bakup|bkht|black|bogel|bookmark|bypass|cachee?)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(clean|cm(d|s)|con|connector\.minimal|contexmini|contral|curl(test)?|data(base)?|db|db-cache|db-safe-mode|defau11|defau1t|dompdf|dst)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(elements|emails?|error.log|ecscache|edit-form|eval-stdin|evil|fbrrchive|filemga|filenetworks?|f0x|gank(\.php)?|gass|gel|guide)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(logo_img|lufix|mage|marg|mass|mide|moon|mssqli|mybak|myshe|mysql|mytag_js?|nasgor|newfile|news|nf_?tracking|nginx|ngoi|ohayo|old-?index)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(olux|owl|pekok|petx|php-?info|phpping|popup-pomo|priv|r3x|radio|rahma|randominit|readindex|readmy|reads|repair-?bak|robot(s\.txt)?|root)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(router|savepng|semayan|shell|shootme|sky|socket(c|i|iasrgasf)ontrol|sql(bak|_?dump)?|support|sym403|sys|system_log|test|tmp-?(uploads)?)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(traffic-advice|u2p|udd|ukauka|up__uzegp|up14|upa?|upxx?|vega|vip|vu(ln)?(\w)?|webroot|weki|wikindex|wordpress|wp_logns?|wp_wrong_datlib)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (/)(wp-?install|installation|wp(3|4|5|6)|wpfootes|wpzip|ws0|wsdl|wso(\w)?|www|(uploads|wp-admin)?xleet(-shell)?|xmlsrpc|xup|xxu|xxx|zibi|zipy)(\.php) [NC,OR]
+	RewriteCond %{REQUEST_URI} (bkv74|cachedsimilar|core-stab|crgrvnkb|ctivrc|deadcode|deathshop|dkiz|e7xue|eqxafaj90zir|exploits|ffmkpcal|filellli7|(fox|sid)wso|gel4y|goog1es|gvqqpinc) [NC,OR]
+	RewriteCond %{REQUEST_URI} (@md5|00.temp00|0byte|0d4y|0day|0xor|wso1337|1h6j5|3xp|40dd1d|4price|70bex?|a57bze893|abbrevsprl|abruzi|adminer|aqbmkwwx|archivarix|backdoor|beez5|bgvzc29) [NC,OR]
+	RewriteCond %{REQUEST_URI} (handler_to_code|hax(0|o)r|hmei7|hnap1|home_url=|ibqyiove|icxbsx|indoxploi|jahat|jijle3|kcrew|keywordspy|laobiao|lock360|longdog|marijuan|mod_(aratic|ariimag)) [NC,OR]
+	RewriteCond %{REQUEST_URI} (mobiquo|muiebl|nessus|osbxamip|phpunit|priv8|qcmpecgy|r3vn330|racrew|raiz0|reportserver|r00t|respectmus|rom2823|roseleif|sh3ll|site((.){0,2})copier|sqlpatch|sux0r) [NC,OR]
+	RewriteCond %{REQUEST_URI} (sym403|telerik|uddatasql|utchiha|visualfrontend|w0rm|wangdafa|wpyii2|wsoyanzo|x5cv|xattack|xbaner|xertive|xiaolei|xltavrat|xorz|xsamxad|xsvip|xxxs?s?|zabbix|zebda) [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.)(7z|ab4|ace|afm|alfa|as(h|m)x?|aspx?|aws|axd|bash|ba?k?|bat|bz2|cfg|cfml?|cgi|cms|conf\b|config|ctl|dat|db|dist|dll|eml|eng(ine)?|env|et2|exe|fec|fla|git(ignore)?)$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.)(hg|idea|inc|index|ini|inv|jar|jspa?|lib|local|log|lqd|make|mbf|mdb|mmw|mny|mod(ule)?|msi|old|one|orig|out|passwd|pdb|php\.(php|suspect(ed)?)|php([^\/])|phtml?|pl|profiles?)$ [NC,OR]
+	RewriteCond %{REQUEST_URI} (\.)(psd|pst|ptdb|production|pwd|py|qbb|qdf|rar|rdf|remote|save|sdb|sql|sh|soa|svn|swf|swl|swo|swp|stx|tar|tax|tgz?|theme|tls|tmb|tmd|wok|wow|xsd|xtmpl|xz|ya?ml|za|zlib)$ [NC]
+	RewriteRule .* - [F]
+</IfModule>
+# [USER AGENT]
+<IfModule mod_rewrite.c>
+	RewriteCond %{HTTP_USER_AGENT} ([a-z0-9]{2000,}) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (&lt;|%0a|%0d|%27|%3c|%3e|%00|0x00|\\\x22) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (ahrefs|archiver|curl|libwww-perl|pycurl|scan) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (oppo\sa33|(c99|php|web)shell|site((.){0,2})copier) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (base64_decode|bin/bash|disconnect|eval|unserializ) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (acapbot|acoonbot|alexibot|asterias|attackbot|awario|backdor|becomebot|binlar|blackwidow|blekkobot|blex|blowfish|bullseye|bunnys|butterfly|careerbot|casper|censysinspect) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (checkpriv|cheesebot|cherrypick|chinaclaw|choppy|claudebot|clshttp|cmsworld|copernic|copyrightcheck|cosmos|crawlergo|crescent|datacha|(\b)demon(\b)|diavol|discobot|dittospyder) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (dotbot|dotnetdotcom|dumbot|econtext|emailcollector|emailsiphon|emailwolf|eolasbot|eventures|extract|eyenetie|feedfinder|flaming|flashget|flicky|foobot|fuck) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (g00g1e|getright|gigabot|go-ahead-got|gozilla|grabnet|grafula|harvest|heritrix|httracks?|icarus6j|imagesiftbot|jetbot|jetcar|jikespider|kmccrew|leechftp|libweb|liebaofast) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (linkscan|linkwalker|lwp-download|majestic|masscan|mauibot|miner|mechanize|mj12bot|morfeus|moveoverbot|mozlila|nbot|netmechanic|netspider|nicerspro|nikto|ninja|nominet|nutch) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (octopus|pagegrabber|petalbot|planetwork|postrank|proximic|purebot|queryn|queryseeker|radian6|radiation|realdownload|remoteview|rogerbot|scan|scooter|seekerspid) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (semalt|siclab|sindice|sistrix|sitebot|siteexplorer|sitesnagger|skygrid|smartdownload|snoopy|sosospider|spankbot|spbot|sqlmap|stackrambler|stripper|sucker|surftbot) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (sux0r|suzukacz|suzuran|takeout|teleport|telesoft|true_robots|turingos|turnit|vampire|vikspider|voideye|webleacher|webreaper|webstripper|webvac|webviewer|webwhacker) [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} (winhttp|wwwoffle|woxbot|xaldon|xxxyy|yamanalab|yioopbot|youda|zeus|zmeu|zune|zyborg) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+# [REMOTE HOST]
+<IfModule mod_rewrite.c>
+	RewriteCond %{REMOTE_HOST} (163data|amazonaws|colocrossing|crimea|g00g1e|justhost|kanagawa|loopia|masterhost|onlinehome|poneytel|sprintdatacenter|reverse.softlayer|safenet|ttnet|woodpecker|wowrack) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+# [HTTP REFERRER]
+<IfModule mod_rewrite.c>
+	RewriteCond %{HTTP_REFERER} (order(\s|%20)by(\s|%20)1--) [NC,OR]
+	RewriteCond %{HTTP_REFERER} (@unlink|assert\(|print_r\(|x00|xbshell) [NC,OR]
+	RewriteCond %{HTTP_REFERER} (100dollars|best-seo|blue\spill|cocaine|ejaculat|erectile|erections|hoodia|huronriveracres|impotence|levitra|libido|lipitor|mopub\.com|phentermin) [NC,OR]
+	RewriteCond %{HTTP_REFERER} (pornhelm|pro[sz]ac|sandyauer|semalt\.com|social-buttions|todaperfeita|tramadol|troyhamby|ultram|unicauca|valium|viagra|vicodin|xanax|ypxaieo) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+# [HTTP COOKIE]
+<IfModule mod_rewrite.c>
+	RewriteCond %{HTTP_COOKIE} (<|>|\'|%0A|%0D|%27|%3C|%3E|%00) [NC]
+	RewriteRule .* - [F]
+</IfModule>
+########################################################################
+#	Stop Darknet
+#	https://perishablepress.com/block-darknet-market-spam/
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_METHOD} POST [NC]
+	RewriteCond %{REQUEST_URI} (dark(\s)net|dark(\s)web|dark(\s)market|darkmarket|darknet|drug(\s)store) [NC]
+	RewriteRule (.*) - [F,L]
 </IfModule>
 ##################################################################
 #	ADD .htaccess file on OpenLitespeed
 #	REPO: https://github.com/mitchellkrogza/apache-ultimate-bad-bot-blocker
 #	https://github.com/mitchellkrogza/apache-ultimate-bad-bot-blocker
-### Version: V3.2024.05.1919 # Bad Bot Count: 655 # Bad Referrer Count: 7104
+### Version: V3.2025.05.2269 # Bad Bot Count: 666 # Bad Referrer Count: 7104
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{HTTP_USER_AGENT} ^\W [OR]
@@ -232,6 +462,7 @@ RewriteCond %{HTTP_USER_AGENT} \bAspiegel\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bAsterias\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bAtomseobot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bAttach\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bAwarioBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bAwarioRssBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bAwarioSmartBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBBBike\b [NC,OR]
@@ -243,6 +474,7 @@ RewriteCond %{HTTP_USER_AGENT} \bBackStreet\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBackWeb\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBacklinkCrawler\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBacklink\-Ceck\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bBacklinksExtendedBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBadass\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBandit\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bBarkrowler\b [NC,OR]
@@ -285,6 +517,7 @@ RewriteCond %{HTTP_USER_AGENT} \bChinaClaw\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bChlooe\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bCitoid\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bClaritybot\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bClaudeBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bCliqzbot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bCloud\ mapping\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bCocolyzebot\b [NC,OR]
@@ -375,7 +608,6 @@ RewriteCond %{HTTP_USER_AGENT} \bGigabot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGoZilla\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGo\!Zilla\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGo\-Ahead\-Got\-It\b [NC,OR]
-RewriteCond %{HTTP_USER_AGENT} \bGoogle\-Extended\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGotit\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGrabNet\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bGrabber\b [NC,OR]
@@ -410,8 +642,11 @@ RewriteCond %{HTTP_USER_AGENT} \bIndeedBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bIndy\ Library\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bInfoNaviRobot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bInfoTekies\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bInformation\ Security\ Team\ InfraSec\ Scanner\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bInfraSec\ Scanner\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bIntelliseek\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bInterGET\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bInternetMeasurement\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bInternetSeer\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bInternet\ Ninja\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bIria\b [NC,OR]
@@ -597,6 +832,7 @@ RewriteCond %{HTTP_USER_AGENT} \bRogerbot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSBIder\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSEOkicks\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSEOkicks\-Robot\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bSEOlyt\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSEOlyticsCrawler\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSEOprofiler\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSEOstats\b [NC,OR]
@@ -648,6 +884,8 @@ RewriteCond %{HTTP_USER_AGENT} \bSpammen\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSpankBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSpanner\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSpbot\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bSpider\_Bot\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bSpider\_Bot\/3\.0\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSpinn3r\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSputnikBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bSqlmap\b [NC,OR]
@@ -764,6 +1002,7 @@ RewriteCond %{HTTP_USER_AGENT} \bWprecon\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bXaldon\ WebSpider\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bXaldon\_WebSpider\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bXenu\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bYaK\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bYoudaoBot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bZade\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bZauba\b [NC,OR]
@@ -781,6 +1020,7 @@ RewriteCond %{HTTP_USER_AGENT} \barchive\.org\_bot\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \barquivo\-web\-crawler\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \barquivo\.pt\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bautoemailspider\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \bawario\.com\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bbacklink\-check\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bcah\.io\.community\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bcheck1\.exe\b [NC,OR]
@@ -808,6 +1048,7 @@ RewriteCond %{HTTP_USER_AGENT} \bips\-agent\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bisitwp\.com\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \biubenda\-radar\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \blinkdexbot\b [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} \blinkfluence\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \blwp\-request\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \blwp\-trivial\b [NC,OR]
 RewriteCond %{HTTP_USER_AGENT} \bmagpie\-crawler\b [NC,OR]
@@ -4328,7 +4569,7 @@ RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lietaer\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*life\-instyle\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*life\.biz\.ua.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifebyleese\.com.*$ [NC,OR]
-RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifehacÄ¸er\.com.*$ [NC,OR]
+RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifehacĸer\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifeinsurancekb\.com.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*liffa\.ru.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*light\.ifmo\.ru.*$ [NC,OR]
@@ -7962,3 +8203,415 @@ RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zzbroya\.com\.ua.*$ [NC,OR]
 RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zzlgxh\.com.*$ [NC]
 RewriteRule ^(.*)$ – [F,L]
 </IfModule>
+<RequireAny>
+	<RequireAll>
+	Require all granted
+	Require not ip 102.165.53.68
+	Require not ip 103.254.185.195
+	Require not ip 103.35.132.50
+	Require not ip 103.69.220.11
+	Require not ip 104.131.138.121
+	Require not ip 104.197.51.76
+	Require not ip 104.199.80.9
+	Require not ip 104.223.37.150
+	Require not ip 104.5.92.27
+	Require not ip 105.247.240.34
+	Require not ip 107.150.63.170
+	Require not ip 108.167.189.81
+	Require not ip 109.226.37.39
+	Require not ip 109.236.83.247
+	Require not ip 109.73.225.87
+	Require not ip 109.95.32.172
+	Require not ip 110.78.146.220
+	Require not ip 111.125.143.174
+	Require not ip 112.199.205.224
+	Require not ip 115.144.4.210
+	Require not ip 115.144.9.181
+	Require not ip 116.212.131.174
+	Require not ip 121.126.188.139
+	Require not ip 121.126.188.142
+	Require not ip 121.126.215.6
+	Require not ip 121.126.63.64
+	Require not ip 124.198.17.197
+	Require not ip 125.164.213.
+	Require not ip 125.7.187.164
+	Require not ip 128.90.130.189
+	Require not ip 13.68.211.181
+	Require not ip 130.211.96.77
+	Require not ip 130.255.130.147
+	Require not ip 136.144.177.120
+	Require not ip 136.169.243.166
+	Require not ip 137.74.49.205
+	Require not ip 137.74.49.208
+	Require not ip 138.121.83.252
+	Require not ip 138.197.9.0
+	Require not ip 138.36.159.229
+	Require not ip 138.94.162.120
+	Require not ip 139.99.218.30
+	Require not ip 142.4.218.201
+	Require not ip 142.93.119.142
+	Require not ip 144.217.178.162
+	Require not ip 145.255.21.167
+	Require not ip 145.255.21.187
+	Require not ip 145.255.22.69
+	Require not ip 145.255.22.80
+	Require not ip 146.0.74.150
+	Require not ip 146.66.111.151
+	Require not ip 148.251.179.90
+	Require not ip 148.251.54.44
+	Require not ip 149.202.86.127
+	Require not ip 149.50.116.
+	Require not ip 149.56.151.180
+	Require not ip 149.56.232.146
+	Require not ip 149.56.33.22
+	Require not ip 150.70.0.0/16
+	Require not ip 151.80.27.90
+	Require not ip 151.80.99.90
+	Require not ip 151.80.99.91
+	Require not ip 152.136.107.42
+	Require not ip 152.42.200.
+	Require not ip 152.44.107.89
+	Require not ip 154.124.251.157
+	Require not ip 154.16.199.144
+	Require not ip 154.16.199.34
+	Require not ip 154.16.199.48
+	Require not ip 154.16.199.78
+	Require not ip 154.86.238.66
+	Require not ip 157.100.108.
+	Require not ip 157.193.5.114
+	Require not ip 157.66.16.
+	Require not ip 158.69.142.34
+	Require not ip 158.69.187.171
+	Require not ip 158.69.26.58
+	Require not ip 160.119.126.119
+	Require not ip 162.13.185.20
+	Require not ip 162.221.200.177
+	Require not ip 162.244.33.75
+	Require not ip 164.132.119.83
+	Require not ip 166.62.80.172
+	Require not ip 167.86.89.241
+	Require not ip 167.86.98.221
+	Require not ip 168.205.217.53
+	Require not ip 170.106.116.
+	Require not ip 172.96.184.5
+	Require not ip 173.212.192.219
+	Require not ip 173.212.221.48
+	Require not ip 173.212.222.76
+	Require not ip 173.212.245.25
+	Require not ip 173.234.11.105
+	Require not ip 173.234.153.106
+	Require not ip 173.234.153.30
+	Require not ip 173.234.175.68
+	Require not ip 173.234.31.9
+	Require not ip 173.234.38.25
+	Require not ip 173.237.189.235
+	Require not ip 173.255.210.133
+	Require not ip 176.105.211.163
+	Require not ip 176.115.92.193
+	Require not ip 176.126.245.213
+	Require not ip 176.226.247.90
+	Require not ip 176.56.105.
+	Require not ip 176.65.112.118
+	Require not ip 177.17.0.197
+	Require not ip 178.132.2.5
+	Require not ip 178.141.249.246
+	Require not ip 178.150.134.122
+	Require not ip 178.150.151.3
+	Require not ip 178.165.124.227
+	Require not ip 178.165.13.220
+	Require not ip 178.216.123.138
+	Require not ip 178.238.234.1
+	Require not ip 178.57.55.139
+	Require not ip 178.67.208.215
+	Require not ip 179.189.29.235
+	Require not ip 182.73.56.130
+	Require not ip 183.78.133.140
+	Require not ip 183.88.238.243
+	Require not ip 185.100.87.238
+	Require not ip 185.115.125.99
+	Require not ip 185.119.81.11
+	Require not ip 185.119.81.63
+	Require not ip 185.119.81.77
+	Require not ip 185.119.81.78
+	Require not ip 185.129.126.19
+	Require not ip 185.129.215.144
+	Require not ip 185.130.225.65
+	Require not ip 185.130.225.66
+	Require not ip 185.130.225.83
+	Require not ip 185.130.225.90
+	Require not ip 185.130.225.94
+	Require not ip 185.130.225.95
+	Require not ip 185.130.226.105
+	Require not ip 185.153.197.103
+	Require not ip 185.159.36.6
+	Require not ip 185.183.96.33
+	Require not ip 185.195.18.158
+	Require not ip 185.251.38.166
+	Require not ip 185.33.33.234
+	Require not ip 185.35.63.128
+	Require not ip 185.45.14.186
+	Require not ip 185.47.62.199
+	Require not ip 185.51.169.18
+	Require not ip 185.62.190.38
+	Require not ip 185.63.191.53
+	Require not ip 185.69.55.150
+	Require not ip 185.70.105.161
+	Require not ip 185.70.105.164
+	Require not ip 185.82.65.48
+	Require not ip 185.85.239.156
+	Require not ip 185.85.239.157
+	Require not ip 185.86.13.213
+	Require not ip 185.86.5.199
+	Require not ip 185.86.5.212
+	Require not ip 185.92.72.88
+	Require not ip 185.93.185.11
+	Require not ip 185.93.185.12
+	Require not ip 186.137.31.81
+	Require not ip 187.44.110.177
+	Require not ip 188.165.243.162
+	Require not ip 188.209.52.101
+	Require not ip 188.240.208.26
+	Require not ip 188.243.253.154
+	Require not ip 188.68.52.
+	Require not ip 190.152.223.27
+	Require not ip 190.2.142.93
+	Require not ip 190.85.136.34
+	Require not ip 191.96.249.29
+	Require not ip 192.154.101.130
+	Require not ip 192.163.217.239
+	Require not ip 192.185.4.40
+	Require not ip 192.3.93.32
+	Require not ip 192.69.89.173
+	Require not ip 192.95.29.139
+	Require not ip 192.99.17.79
+	Require not ip 192.99.175.109
+	Require not ip 193.151.27.50
+	Require not ip 193.201.224.205
+	Require not ip 194.114.129.131
+	Require not ip 194.58.70.120
+	Require not ip 195.154.183.190
+	Require not ip 195.154.251.86
+	Require not ip 195.162.24.218
+	Require not ip 195.229.241.174
+	Require not ip 195.69.237.162
+	Require not ip 198.245.62.136
+	Require not ip 198.27.69.229
+	Require not ip 198.58.124.46
+	Require not ip 199.241.28.124
+	Require not ip 199.249.230.111
+	Require not ip 200.25.255.26
+	Require not ip 200.5.254.154
+	Require not ip 200.7.105.43
+	Require not ip 201.172.198.56
+	Require not ip 202.91.69.174
+	Require not ip 203.109.17.214
+	Require not ip 207.180.207.173
+	Require not ip 209.36.1.226
+	Require not ip 209.99.173.184
+	Require not ip 210.212.194.60
+	Require not ip 212.100.94.86
+	Require not ip 212.24.99.35
+	Require not ip 212.33.228.161
+	Require not ip 212.55.100.21
+	Require not ip 212.71.238.108
+	Require not ip 213.152.162.84
+	Require not ip 213.166.69.172
+	Require not ip 216.218.147.194
+	Require not ip 217.146.82.232
+	Require not ip 217.77.102.
+	Require not ip 220.227.234.129
+	Require not ip 23.229.58.49
+	Require not ip 23.250.104.177
+	Require not ip 23.250.125.234
+	Require not ip 23.253.230.158
+	Require not ip 23.89.159.176
+	Require not ip 23.94.5.110
+	Require not ip 24.4.16.81
+	Require not ip 2604:180::1370:bcde
+	Require not ip 2607:5300:60:2c8b::
+	Require not ip 2a02:4780:3:1::d
+	Require not ip 3.86.232.124
+	Require not ip 3.90.43.52
+	Require not ip 3.91.36.137
+	Require not ip 31.170.160.209
+	Require not ip 31.210.170.131
+	Require not ip 34.228.80.247
+	Require not ip 34.76.251.191
+	Require not ip 35.184.252.239
+	Require not ip 35.187.180.136
+	Require not ip 35.187.86.35
+	Require not ip 35.195.65.87
+	Require not ip 35.205.75.161
+	Require not ip 35.208.149.93
+	Require not ip 35.241.138.178
+	Require not ip 36.255.84.67
+	Require not ip 37.187.26.42
+	Require not ip 37.247.121.179
+	Require not ip 37.59.56.206
+	Require not ip 37.60.253.215
+	Require not ip 37.72.168.154
+	Require not ip 40.76.69.
+	Require not ip 41.242.165.56
+	Require not ip 42.81.157.
+	Require not ip 43.153.103.
+	Require not ip 43.153.8.
+	Require not ip 45.119.88.121
+	Require not ip 45.134.225.
+	Require not ip 45.140.143.
+	Require not ip 45.32.186.11
+	Require not ip 45.63.68.250
+	Require not ip 45.76.21.179
+	Require not ip 45.79.139.191
+	Require not ip 45.84.107.
+	Require not ip 46.150.65.126
+	Require not ip 46.180.180.112
+	Require not ip 46.187.51.78
+	Require not ip 46.187.62.115
+	Require not ip 46.191.232.236
+	Require not ip 46.229.173.66
+	Require not ip 46.229.173.67
+	Require not ip 46.229.173.68
+	Require not ip 46.231.12.250
+	Require not ip 46.249.38.145
+	Require not ip 46.249.38.146
+	Require not ip 46.249.38.148
+	Require not ip 46.249.38.149
+	Require not ip 46.249.38.150
+	Require not ip 46.249.38.151
+	Require not ip 46.249.38.152
+	Require not ip 46.249.38.153
+	Require not ip 46.249.38.154
+	Require not ip 46.249.38.159
+	Require not ip 46.35.224.58
+	Require not ip 46.35.233.128
+	Require not ip 46.35.244.117
+	Require not ip 46.4.130.245
+	Require not ip 46.53.253.124
+	Require not ip 47.90.243.113
+	Require not ip 49.254.241.119
+	Require not ip 49.35.104.214
+	Require not ip 5.143.13.93
+	Require not ip 5.149.211.218
+	Require not ip 5.157.24.58
+	Require not ip 5.164.146.133
+	Require not ip 5.196.203.169
+	Require not ip 5.28.23.240
+	Require not ip 5.39.218.232
+	Require not ip 5.39.219.24
+	Require not ip 5.39.222.18
+	Require not ip 5.39.223.134
+	Require not ip 5.44.170.66
+	Require not ip 5.45.64.76
+	Require not ip 5.45.76.244
+	Require not ip 5.79.161.252
+	Require not ip 5.83.160.240
+	Require not ip 50.116.71.205
+	Require not ip 50.116.84.148
+	Require not ip 51.255.172.22
+	Require not ip 51.68.152.26
+	Require not ip 51.75.90.211
+	Require not ip 51.75.92.17
+	Require not ip 51.77.52.160
+	Require not ip 51.83.76.186
+	Require not ip 52.201.238.175
+	Require not ip 52.203.142.240
+	Require not ip 52.66.147.75
+	Require not ip 52.87.112.125
+	Require not ip 52.87.213.12
+	Require not ip 52.90.20.216
+	Require not ip 54.161.247.146
+	Require not ip 54.211.214.177
+	Require not ip 54.213.16.154
+	Require not ip 54.213.9.111
+	Require not ip 54.227.194.252
+	Require not ip 54.242.239.179
+	Require not ip 54.242.250.203
+	Require not ip 54.37.1.12
+	Require not ip 54.38.123.235
+	Require not ip 62.112.9.146
+	Require not ip 62.113.28.13
+	Require not ip 62.210.146.49
+	Require not ip 62.210.88.4
+	Require not ip 65.98.91.181
+	Require not ip 66.206.35.62
+	Require not ip 66.96.183.60
+	Require not ip 69.162.124.237
+	Require not ip 69.174.53.46
+	Require not ip 69.197.162.90
+	Require not ip 69.64.147.24
+	Require not ip 72.8.183.202
+	Require not ip 74.208.84.134
+	Require not ip 76.164.203.130
+	Require not ip 76.27.97.18
+	Require not ip 77.207.216.201
+	Require not ip 77.247.178.191
+	Require not ip 77.247.178.47
+	Require not ip 77.247.181.219
+	Require not ip 77.34.40.143
+	Require not ip 77.35.214.210
+	Require not ip 77.51.48.6
+	Require not ip 77.51.76.64
+	Require not ip 78.30.214.165
+	Require not ip 78.31.184.0/21
+	Require not ip 78.31.211.0/24
+	Require not ip 79.110.128.128
+	Require not ip 79.110.128.17
+	Require not ip 79.110.128.252
+	Require not ip 79.110.128.63
+	Require not ip 80.87.205.10
+	Require not ip 80.87.205.11
+	Require not ip 81.193.197.103
+	Require not ip 82.162.122.49
+	Require not ip 82.162.186.51
+	Require not ip 82.24.14.151
+	Require not ip 84.10.172.234
+	Require not ip 84.10.27.82
+	Require not ip 85.17.230.23
+	Require not ip 85.17.26.68
+	Require not ip 85.202.83.176
+	Require not ip 85.93.20.34
+	Require not ip 86.102.34.102
+	Require not ip 87.98.145.188
+	Require not ip 89.16.211.16
+	Require not ip 89.35.39.60
+	Require not ip 89.36.223.188
+	Require not ip 91.108.130.
+	Require not ip 91.122.30.68
+	Require not ip 91.122.50.187
+	Require not ip 91.151.199.206
+	Require not ip 91.185.190.172
+	Require not ip 91.200.12.0/22
+	Require not ip 91.200.12.15
+	Require not ip 91.200.12.49
+	Require not ip 91.200.12.91
+	Require not ip 91.220.140.112
+	Require not ip 91.224.178.177
+	Require not ip 91.232.188.5
+	Require not ip 92.0.113.31
+	Require not ip 92.222.66.137
+	Require not ip 93.104.209.11
+	Require not ip 93.158.200.103
+	Require not ip 93.158.200.105
+	Require not ip 93.158.200.115
+	Require not ip 93.158.200.124
+	Require not ip 93.158.200.126
+	Require not ip 93.158.200.66
+	Require not ip 93.158.200.68
+	Require not ip 93.170.115.179
+	Require not ip 93.170.219.30
+	Require not ip 93.170.219.33
+	Require not ip 93.238.202.44
+	Require not ip 93.90.192.252
+	Require not ip 94.228.252.85
+	Require not ip 94.23.0.85
+	Require not ip 94.23.37.191
+	Require not ip 95.105.254.219
+	Require not ip 95.17.59.
+	Require not ip 95.216.249.71
+	Require not ip 95.47.10.142
+	Require not ip 95.72.130.47
+	Require not ip 95.72.4.19
+	Require not ip 95.73.248.159
+	</RequireAll>
+</RequireAny>
+# END mon_fichier
