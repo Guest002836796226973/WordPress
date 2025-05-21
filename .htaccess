@@ -425,7 +425,7 @@ RewriteRule .* - [F,L]
 ##################################################################
 #	ADD .htaccess file on OpenLitespeed
 #	REPO: https://github.com/mitchellkrogza/apache-ultimate-bad-bot-blocker
-#	https://github.com/mitchellkrogza/apache-ultimate-bad-bot-blocker
+#
 ### Version: V3.2025.05.2269 # Bad Bot Count: 666 # Bad Referrer Count: 7104
 <IfModule mod_rewrite.c>
 RewriteEngine On
