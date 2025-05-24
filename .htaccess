@@ -176,7 +176,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteRule ^wp-includes/theme-compat/ - [F,L]
 </IfModule>
 ########################################################################
-#	Filtre hameçonnage Google, Youtube et W3
+#	Filtre Google, Youtube et W3
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
