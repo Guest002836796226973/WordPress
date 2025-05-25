@@ -32,19 +32,19 @@ FileETag None
 	AddCharset utf-8 .html .css .js
 </IfModule>
 <IfModule mod_headers.c>
-Header always set Referrer-Policy "strict-origin"
-Header always set Content-Security-Policy "base-uri https://site_exemple.fr/, child-src https://www.youtube.com/, style-src 'self' 'unsafe-inline' https://site_exemple.fr/, script-src 'self' 'unsafe-inline' https://site_exemple.fr/, font-src https://site_exemple.fr/, object-src https://site_exemple.fr/, plugin-types application, block-all-mixed-content https://site_exemple.fr/, report-uri https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
-Header set Expect-CT "enforce, max-age=0"
-Header always set Strict-Transport-Security "max-age=0; includeSubDomains; preload"
-Header always set X-Xss-Protection "1; report=https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
-Header always set X-Content-Type-Options "nosniff'
-Header always set X-Frame-Options DENY
-Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), gamepad=(), speaker-selection=(), conversion-measurement=(), focus-without-user-activation=(), hid=(), idle-detection=(), interest-cohort=(), serial=(), sync-script=(), trust-token-redemption=(), window-placement=(), vertical-scroll=()"
-Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
-Header unset If-Modified-Since
-Header unset If-Unmodified-Since
-Header unset Last-Modified
-Header unset ETag
+	Header always set Referrer-Policy "strict-origin"
+	Header always set Content-Security-Policy "base-uri https://site_exemple.fr/, child-src https://www.youtube.com/, style-src 'self' 'unsafe-inline' https://site_exemple.fr/, script-src 'self' 'unsafe-inline' https://site_exemple.fr/, font-src https://site_exemple.fr/, object-src https://site_exemple.fr/, plugin-types application, block-all-mixed-content https://site_exemple.fr/, report-uri https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
+	Header set Expect-CT "enforce, max-age=0"
+	Header always set Strict-Transport-Security "max-age=0; includeSubDomains; preload"
+	Header always set X-Xss-Protection "1; report=https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
+	Header always set X-Content-Type-Options "nosniff'
+	Header always set X-Frame-Options DENY
+	Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), gamepad=(), speaker-selection=(), conversion-measurement=(), focus-without-user-activation=(), hid=(), idle-detection=(), interest-cohort=(), serial=(), sync-script=(), trust-token-redemption=(), window-placement=(), vertical-scroll=()"
+	Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
+	Header unset If-Modified-Since
+	Header unset If-Unmodified-Since
+	Header unset Last-Modified
+	Header unset ETag
 </IfModule>
 <IfModule mod_expires.c> 
 	<IfModule mod_headers.c> 
