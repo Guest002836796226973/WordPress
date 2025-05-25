@@ -103,6 +103,49 @@ FileETag None
 	</FilesMatch>
 </IfModule>
 ########################################################################
+#	Suppression les dates des url page et permalink
+#
+<IfModule mod_alias.c>
+	RedirectMatch 301 ^/([0-9]+)/?$ https://site_exemple.fr/$1/
+	RedirectMatch 301 ^/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/page/$2
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/?$ https://site_exemple.fr/$1/$2/
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/$2/page/$3
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/?$ https://site_exemple.fr/$1/$2/$3/
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/$2/$3/page/$4
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/(.*)$ https://site_exemple.fr/$1/$4
+</IfModule>
+########################################################################
+#	Redirection des pages supprimer et suppression des pages mortes
+#
+<IfModule mod_alias.c>
+	RedirectMatch 301 /(feeds|submit|contact|sitemap|guestbook|slideshow)/?$ https://site_exemple.fr/
+	RedirectMatch gone /(nuer|renu|nuwest|nustyle|big\-nu)
+</IfModule>
+########################################################################
+#	Protection POST
+#
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_METHOD} POST
+	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|wp-admin/edit.php)\.php [NC]
+	RewriteCond %{HTTP_REFERER} !(.*)site_exemple.fr [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [L]
+</IfModule>
+########################################################################
+#	Bloquage proxy
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{HTTP:VIA}					!^$ [OR]
+	RewriteCond %{HTTP:FORWARDED}			!^$ [OR]
+	RewriteCond %{HTTP:USERAGENT_VIA}		!^$ [OR]
+	RewriteCond %{HTTP:X_FORWARDED_FOR}		!^$ [OR]
+	RewriteCond %{HTTP:PROXY_CONNECTION}	!^$ [OR]
+	RewriteCond %{HTTP:XPROXY_CONNECTION}	!^$ [OR]
+	RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
+	RewriteCond %{HTTP:HTTP_CLIENT_IP}		!^$
+	RewriteRule .* - [F]
+</IfModule>
+########################################################################
 #	Bloque hameçonnage utilisateur WordPress
 #
 <IfModule mod_rewrite.c>
@@ -176,7 +219,16 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteRule ^wp-includes/theme-compat/ - [F,L]
 </IfModule>
 ########################################################################
-#	Filtre Google, Youtube et W3
+#	Bloque le dossier de téléchargement WordPress
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_URI} /wp-content/uploads/ [NC]
+	RewriteCond %{HTTP_REFERER} !^https://site_exemple.fr [NC]
+	RewriteRule .* - [F,L]
+</IfModule>
+########################################################################
+#	Filtre hameçonnage Google, Youtube et W3
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
