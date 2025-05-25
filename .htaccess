@@ -1,17 +1,20 @@
 # BEGIN mon_fichier
-AddDefaultCharset utf-8
-DirectoryIndex index.php
-Options -Indexes
-IndexIgnore *
-ServerSignature On
-RewriteEngine On
-RewriteBase /
-SetEnv no-gzip 1
-SetEnv dont-vary 1
-FileETag None
+
+	AddDefaultCharset utf-8
+	DirectoryIndex index.php
+	Options -Indexes
+	IndexIgnore *
+	ServerSignature On
+	RewriteEngine On
+	RewriteBase /
+	SetEnv no-gzip 1
+	SetEnv dont-vary 1
+	FileETag None
+
 <IfModule mod_negotiation.c>
 	Options -MultiViews
 </IfModule>
+
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{HTTPS} !on
@@ -23,215 +26,200 @@ FileETag None
 	RewriteRule ^(.*) - [E=BASE:%1]
 	RewriteRule .? %{ENV:BASE}index.php [L]
 </IfModule>
-<IfModule !mod_rewrite.c>
-	<IfModule mod_alias.c>
-	RedirectMatch 307 ^/$ /index.php/
-	</IfModule>
-</IfModule>
+
 <IfModule mod_mime.c>
 	AddCharset utf-8 .html .css .js
 </IfModule>
+
 <IfModule mod_headers.c>
 	Header always set Referrer-Policy "strict-origin"
-	Header always set Content-Security-Policy "base-uri https://site_exemple.fr/, child-src https://www.youtube.com/, style-src 'self' 'unsafe-inline' https://site_exemple.fr/, script-src 'self' 'unsafe-inline' https://site_exemple.fr/, font-src https://site_exemple.fr/, object-src https://site_exemple.fr/, plugin-types application, block-all-mixed-content https://site_exemple.fr/, report-uri https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
-	Header set Expect-CT "enforce, max-age=0"
-	Header always set Strict-Transport-Security "max-age=0; includeSubDomains; preload"
-	Header always set X-Xss-Protection "1; report=https://site_exemple.fr/dossier_exemple/wp-content/uploads/report_uri/"
-	Header always set X-Content-Type-Options "nosniff'
-	Header always set X-Frame-Options DENY
-	Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), gamepad=(), speaker-selection=(), conversion-measurement=(), focus-without-user-activation=(), hid=(), idle-detection=(), interest-cohort=(), serial=(), sync-script=(), trust-token-redemption=(), window-placement=(), vertical-scroll=()"
-	Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
-	Header unset If-Modified-Since
-	Header unset If-Unmodified-Since
-	Header unset Last-Modified
-	Header unset ETag
+	Header always set Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
+	Header always set X-Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
+	Header always set X-Webkit-CSP "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
+	Header always set X-Xss-Protection "1; report=<reporting-uri>"
+	Header always set X-Content-Type-Options "nosniff"
+	Header always set X-Frame-Options "SAMEORIGIN"
+	Header always set X-Robots-Tag "nofollow, max-snippet:-1, noarchive, notranslate, max-image-preview:[large], max-video-preview:0"
+	Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), conversion-measurement=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(self), execution-while-not-rendered=(), execution-while-out-of-viewport=(), focus-without-user-activation=(), fullscreen=(self), gamepad=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), interest-cohort=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), serial=(), screen-wake-lock=(), speaker-selection=(), sync-script=(), sync-xhr=(), trust-token-redemption=(), usb=(), vertical-scroll=(), web-share=(), window-placement=(), xr-spatial-tracking=()"
 </IfModule>
-<IfModule mod_expires.c> 
-	<IfModule mod_headers.c> 
-	Header unset ETag 
-	</IfModule> 
-FileETag None 
+
+<IfModule mod_env.c>
+	SetEnv MAGICK_THREAD_LIMIT 1
 </IfModule>
-<IfModule mod_deflate.c>
-	<IfModule mod_filter.c>
-	AddOutputFilterByType DEFLATE "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)"
-	AddOutputFilterByType DEFLATE "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)"
-	AddOutputFilterByType DEFLATE "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)"
+
+<IfModule mod_filter.c>
+	AddOutputFilterByType DEFLATE text/html text/plain
 	SetOutputFilter DEFLATE
-	SetEnvIfNoCase Request_URI \.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$ no-gzip dont-vary
-	SetEnvIfNoCase Request_URI \.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)$ no-gzip dont-vary
-	SetEnvIfNoCase Request_URI \.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$ no-gzip dont-vary
-	</IfModule>
-	<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-	Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
-	Header unset If-Modified-Since
-	Header unset If-Unmodified-Since
-	Header unset Last-Modified
-	<IfModule mod_expires.c>
+	SetEnvIfNoCase Request_URI "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$" force-gzip dont-vary
+	SetEnvIfNoCase Request_URI "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)$" force-gzip dont-vary
+	SetEnvIfNoCase Request_URI "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$" force-gzip dont-vary
+</IfModule>
+	
+<IfModule mod_expires.c>
 	ExpiresActive on
-	ExpiresDefault "access plus 0 seconds"
-		<IfModule mod_headers.c> 
+	ExpiresDefault "access plus 1 hours"
+	ExpiresByType text/html "modification plus 3 minutes"
+	FileETag None
+	<IfModule mod_headers.c>
+		Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+		Header set Expect-CT "max-age=86400, enforce, report-uri https://mon_site.fr/informations/wp-content/report"
+		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
+		Header unset If-Modified-Since
+		Header unset If-Unmodified-Since
+		Header unset Last-Modified
 		Header unset ETag
-		</IfModule> 
-	FileETag None 
+		<FilesMatch "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
+			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
+			Header unset If-Modified-Since
+			Header unset If-Unmodified-Since
+			Header unset Last-Modified
+			Header unset ETag
+		</FilesMatch>
+		<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
+			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
+			Header unset If-Modified-Since
+			Header unset If-Unmodified-Since
+			Header unset Last-Modified
+			Header unset ETag
+		</FilesMatch>
+		<FilesMatch "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)$">
+			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
+			Header unset If-Modified-Since
+			Header unset If-Unmodified-Since
+			Header unset Last-Modified
+			Header unset ETag
+		</FilesMatch>
 	</IfModule>
-	</FilesMatch>
-	<FilesMatch "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)$">
-	Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
-	Header unset If-Modified-Since
-	Header unset If-Unmodified-Since
-	Header unset Last-Modified
-	<IfModule mod_expires.c>
-	ExpiresActive on
-	ExpiresDefault "access plus 0 seconds"
-		<IfModule mod_headers.c> 
-		Header unset ETag
-		</IfModule> 
-	FileETag None 
-	</IfModule>
-	</FilesMatch>
-	<FilesMatch "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-	Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, max-age=0"
-	Header unset If-Modified-Since
-	Header unset If-Unmodified-Since
-	Header unset Last-Modified
-	<IfModule mod_expires.c>
-	ExpiresActive on
-	ExpiresDefault "access plus 0 seconds"
-		<IfModule mod_headers.c> 
-		Header unset ETag
-		</IfModule> 
-	FileETag None 
-	</IfModule>
-	</FilesMatch>
 </IfModule>
+
 ########################################################################
-#	Suppression les dates des url page et permalink
-#
-<IfModule mod_alias.c>
-	RedirectMatch 301 ^/([0-9]+)/?$ https://site_exemple.fr/$1/
-	RedirectMatch 301 ^/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/page/$2
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/?$ https://site_exemple.fr/$1/$2/
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/$2/page/$3
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/?$ https://site_exemple.fr/$1/$2/$3/
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/page/(.*)$ https://site_exemple.fr/$1/$2/$3/page/$4
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/(.*)$ https://site_exemple.fr/$1/$4
-</IfModule>
-########################################################################
-#	Redirection des pages supprimer et suppression des pages mortes
-#
-<IfModule mod_alias.c>
-	RedirectMatch 301 /(feeds|submit|contact|sitemap|guestbook|slideshow)/?$ https://site_exemple.fr/
-	RedirectMatch gone /(nuer|renu|nuwest|nustyle|big\-nu)
-</IfModule>
-########################################################################
-#	Protection POST
-#
-<IfModule mod_rewrite.c>
-	RewriteCond %{REQUEST_METHOD} POST
-	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|wp-admin/edit.php)\.php [NC]
-	RewriteCond %{HTTP_REFERER} !(.*)site_exemple.fr [NC,OR]
-	RewriteCond %{HTTP_USER_AGENT} ^$
-	RewriteRule .* - [L]
-</IfModule>
-########################################################################
-#	Bloquage proxy
-<IfModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteCond %{HTTP:VIA}			!^$ [OR]
-	RewriteCond %{HTTP:FORWARDED}		!^$ [OR]
-	RewriteCond %{HTTP:USERAGENT_VIA}	!^$ [OR]
-	RewriteCond %{HTTP:X_FORWARDED_FOR}	!^$ [OR]
-	RewriteCond %{HTTP:PROXY_CONNECTION}	!^$ [OR]
-	RewriteCond %{HTTP:XPROXY_CONNECTION}	!^$ [OR]
-	RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
-	RewriteCond %{HTTP:HTTP_CLIENT_IP}	!^$
-	RewriteRule .* - [F]
-</IfModule>
-########################################################################
-#	Bloque hameçonnage utilisateur WordPress
+#	Bloque l'accès utilisateur WordPress
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{QUERY_STRING} ^author=([0-9]*)
 	RewriteRule .* - [F]
 </IfModule>
+
+########################################################################
+#	Protection POST
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_METHOD} POST
+	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|wp-admin/edit.php)\.php [NC]
+	RewriteCond %{HTTP_REFERER} !(.*)mon_site.fr [NC,OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [L]
+</IfModule>
+
+########################################################################
+#	Suppression les dates des url page et permalink
+#
+<IfModule mod_alias.c>
+	RedirectMatch 301 ^/([0-9]+)/?$ https://mon_site.fr/$1/
+	RedirectMatch 301 ^/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/page/$2
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/?$ https://mon_site.fr/$1/$2/
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/$2/page/$3
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/?$ https://mon_site.fr/$1/$2/$3/
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/$2/$3/page/$4
+	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/(.*)$ https://mon_site.fr/$1/$4
+</IfModule>
+
+########################################################################
+#	Redirection des pages supprimer et suppression des pages mortes
+#
+<IfModule mod_alias.c>
+	RedirectMatch 301 /(feeds|submit|contact|sitemap|guestbook|slideshow)/?$ https://mon_site.fr/
+	RedirectMatch gone /(nuer|renu|nuwest|nustyle|big\-nu)
+</IfModule>
+
+########################################################################
+#	Bloquage proxy
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteCond %{HTTP:VIA}					!^$ [OR]
+	RewriteCond %{HTTP:FORWARDED}			!^$ [OR]
+	RewriteCond %{HTTP:USERAGENT_VIA}		!^$ [OR]
+	RewriteCond %{HTTP:X_FORWARDED_FOR}		!^$ [OR]
+	RewriteCond %{HTTP:PROXY_CONNECTION}	!^$ [OR]
+	RewriteCond %{HTTP:XPROXY_CONNECTION}	!^$ [OR]
+	RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
+	RewriteCond %{HTTP:HTTP_CLIENT_IP}		!^$
+	RewriteRule .* - [F]
+</IfModule>
+
 ########################################################################
 #	404 Fix
 #
 ErrorDocument 401 "Autorisation requise"
 ErrorDocument 402 "Refus de paiement"
 ErrorDocument 403 "Acc&egrave;s interdit"
-ErrorDocument 404 https://site_exemple.fr/erreur-404/
+ErrorDocument 404 https://mon_site.fr/erreur-404/
+
 ########################################################################
 #	XMLRPC redirection
 #
 <IfModule mod_alias.c>
 	RedirectMatch 403 (?i)/xmlrpc\.php
 </IfModule>
+
 ########################################################################
-#	Bloque les fichiers sensibles WordPress
+#	Protection des fichiers sensibles WordPress
 #
-# Fichiers stop scan
 <IfModule mod_rewrite.c>
-<files install-helper.php>
-	Order allow,deny
-	Deny from all
-</files>
-<files wp-config.php>
-	Order allow,deny
-	Deny from all
-</files>
-<FilesMatch "\.(.htaccess|.htpasswd)$">
-	Order allow,deny
-	Deny from all
-</FilesMatch>
-<files error_log>
-	Order allow,deny
-	Deny from all
-</files>
-<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-	Order allow,deny
-	Deny from all
-</FilesMatch>
+	RewriteEngine On
+	<files install-helper.php>
+		Order allow,deny
+		Deny from all
+	</files>
+	<files wp-config.php>
+		Order allow,deny
+		Deny from all
+	</files>
+	<files error_log>
+		Order allow,deny
+		Deny from all
+	</files>
+	<FilesMatch "\.(.htaccess|.htpasswd)$">
+		Order allow,deny
+		Deny from all
+	</FilesMatch>
+	<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
+		Order allow,deny
+		Deny from all
+	</FilesMatch>
 </IfModule>
+
 ########################################################################
-#	Bloque tout les fichiers
+#	Protection des fichiers de l'utilisateur
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond "%{HTTP_REFERER}" "!^$"
-	RewriteCond "%{HTTP_REFERER}" "!site_exemple.fr" [NC]
+	RewriteCond "%{HTTP_REFERER}" "!mon_site.fr" [NC]
 	RewriteRule "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$" "-" [F,NC]
 </IfModule>
 <IfModule mod_setenvif.c>
-	SetEnvIf Referer "site_exemple\.fr" localreferer
+	SetEnvIf Referer "mon_site\.fr" localreferer
 	<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
 		Require env localreferer
 	</FilesMatch>
 </IfModule>
+
 ########################################################################
-# Bloque les dossiers sensibles WordPress
-#
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteRule ^wp-admin/includes/ - [F,L]
-	RewriteRule !^wp-includes/ - [S=3]
-	RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
-	RewriteRule ^wp-includes/js/tinymce/.+\.php - [F,L]
-	RewriteRule ^wp-includes/theme-compat/ - [F,L]
-</IfModule>
-########################################################################
-#	Bloque le dossier de téléchargement WordPress
+#	Protection du dossier téléchargement WordPress
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_URI} /wp-content/uploads/ [NC]
-	RewriteCond %{HTTP_REFERER} !^https://site_exemple.fr [NC]
+	RewriteCond %{HTTP_REFERER} !^https://mon_site.fr [NC]
 	RewriteRule .* - [F,L]
 </IfModule>
+
 ########################################################################
-#	Filtre hameçonnage Google, Youtube et W3
+#	Filtre de sécurité Google, Youtube et W3
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -246,6 +234,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3\.org.*$ [NC,OR]
 	RewriteRule .* - [F,L]
 </IfModule>
+
 ########################################################################
 #	Blocking the »ReallyLongRequest« Bandit - New in 2018
 #	https://perishablepress.com/blocking-reallylongrequest-bandit/
@@ -256,8 +245,9 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{QUERY_STRING} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC]
 	RewriteRule .* - [F,L]
 </IfModule>
+
 ########################################################################
-#	Addon: Stop Aggressive Scanning for Uploads-Related Targets
+#	Stop Aggressive Scanning for Uploads-Related Targets
 #	https://perishablepress.com/stop-aggressive-scanning-uploads/
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -268,6 +258,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} /(ajax_pluginconf|apikey|connector(.minimal)?|eval-stdin|f0x|login|router|setup-config|sssp|vuln|xattacker)\.php [NC]
 	RewriteRule .* - [F,L]
 </IfModule>
+
 ########################################################################
 #	6G FIREWALL/BLACKLIST
 #	https://perishablepress.com/6g/
@@ -328,6 +319,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 		</RequireAll>
 	</IfModule>
 </IfModule>
+
 ########################################################################
 #	8G FIREWALL/BLACKLIST
 #	https://perishablepress.com/8g-firewall/
@@ -483,6 +475,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{HTTP_COOKIE} (<|>|\'|%0A|%0D|%27|%3C|%3E|%00) [NC]
 	RewriteRule .* - [F]
 </IfModule>
+
 ########################################################################
 #	Stop Darknet
 #	https://perishablepress.com/block-darknet-market-spam/
@@ -492,6 +485,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} (dark(\s)net|dark(\s)web|dark(\s)market|darkmarket|darknet|drug(\s)store) [NC]
 	RewriteRule (.*) - [F,L]
 </IfModule>
+
 ##################################################################
 #	ADD .htaccess file on OpenLitespeed
 #	REPO: https://github.com/mitchellkrogza/apache-ultimate-bad-bot-blocker
@@ -4639,7 +4633,7 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*life\-instyle\.com.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*life\.biz\.ua.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifebyleese\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifehacĸer\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifehacÄ¸er\.com.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*lifeinsurancekb\.com.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*liffa\.ru.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*light\.ifmo\.ru.*$ [NC,OR]
@@ -8273,6 +8267,10 @@ ErrorDocument 404 https://site_exemple.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zzlgxh\.com.*$ [NC]
 	RewriteRule ^(.*)$ – [F,L]
 </IfModule>
+
+########################################################################
+#	Liste noir des adresses IP
+#
 <RequireAny>
 	<RequireAll>
 	Require all granted
