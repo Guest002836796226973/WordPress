@@ -62,7 +62,7 @@
 	FileETag None
 	<IfModule mod_headers.c>
 		Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-		Header set Expect-CT "max-age=86400, enforce, report-uri https://mon_site.fr/informations/wp-content/report"
+		Header set Expect-CT "max-age=86400, enforce, report-uri https://mon_site.fr/mon_dossier/wp-content/report"
 		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
 		Header unset If-Modified-Since
 		Header unset If-Unmodified-Since
