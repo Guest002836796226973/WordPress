@@ -170,8 +170,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 ########################################################################
 #	Protection des fichiers sensibles WordPress
 #
-<IfModule mod_rewrite.c>
-	RewriteEngine On
+<IfModule core>
 	<files install-helper.php>
 		Order allow,deny
 		Deny from all
