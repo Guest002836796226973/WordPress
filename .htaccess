@@ -1,4 +1,4 @@
-# BEGIN Petitpoids
+# BEGIN mon_fichier
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{HTTPS} !on
@@ -10,4 +10,4 @@
 	RewriteRule ^(.*) - [E=BASE:%1]
 	RewriteRule .? %{ENV:BASE}index.php [L]
 </IfModule>
-# END Petitpoids
+# END mon_fichier
