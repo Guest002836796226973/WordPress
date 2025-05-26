@@ -161,14 +161,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 ########################################################################
-#	404 Fix
-#
-ErrorDocument 401 "Autorisation requise"
-ErrorDocument 402 "Refus de paiement"
-ErrorDocument 403 "Acc&egrave;s interdit"
-ErrorDocument 404 https://mon_site.fr/erreur-404/
-
-########################################################################
 #	XMLRPC redirection
 #
 <IfModule mod_alias.c>
