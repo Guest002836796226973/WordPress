@@ -1,7 +1,6 @@
 # BEGIN mon_fichier
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTPS} !on
 	RewriteCond %{ENV:REDIRECT_STATUS} ^$
 	RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
 	RewriteCond %{REQUEST_FILENAME} -f
