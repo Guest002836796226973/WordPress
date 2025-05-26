@@ -216,7 +216,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteEngine On
 	RewriteCond %{REQUEST_URI} /wp-content/uploads/ [NC]
 	RewriteCond %{HTTP_REFERER} !^https://mon_site.fr [NC]
-	RewriteRule .* - [F,L]
+	RewriteRule .* - [F]
 </IfModule>
 
 ########################################################################
@@ -227,7 +227,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{REQUEST_METHOD} .* [NC]
 	RewriteCond %{THE_REQUEST} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC,OR]
 	RewriteCond %{QUERY_STRING} (YesThisIsAReallyLongRequest|ScanningForResearchPurpose) [NC]
-	RewriteRule .* - [F,L]
+	RewriteRule .* - [F]
 </IfModule>
 
 ########################################################################
@@ -240,7 +240,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} /(comm\.js|mysql-date-function|simplebootadmin|vuln\.htm|www\.root\.) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(admin-uploadify|fileupload|jquery-file-upload|upload_file|upload|uploadify|webforms)/ [NC,OR]
 	RewriteCond %{REQUEST_URI} /(ajax_pluginconf|apikey|connector(.minimal)?|eval-stdin|f0x|login|router|setup-config|sssp|vuln|xattacker)\.php [NC]
-	RewriteRule .* - [F,L]
+	RewriteRule .* - [F]
 </IfModule>
 
 ########################################################################
@@ -460,7 +460,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteEngine On
 	RewriteCond %{REQUEST_METHOD} POST [NC]
 	RewriteCond %{REQUEST_URI} (dark(\s)net|dark(\s)web|dark(\s)market|darkmarket|darknet|drug(\s)store) [NC]
-	RewriteRule (.*) - [F,L]
+	RewriteRule (.*) - [F]
 </IfModule>
 
 ##################################################################
@@ -8242,7 +8242,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zytpirwai\.net.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zzbroya\.com\.ua.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*zzlgxh\.com.*$ [NC]
-	RewriteRule ^(.*)$ – [F,L]
+	RewriteRule ^(.*)$ – [F]
 </IfModule>
 
 ########################################################################
