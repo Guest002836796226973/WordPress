@@ -2,7 +2,7 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{ENV:REDIRECT_STATUS} ^$
-	RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
+	RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,F]
 	RewriteCond %{REQUEST_FILENAME} -f
 	RewriteRule .? - [L]
 	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
