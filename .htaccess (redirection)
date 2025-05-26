@@ -1,134 +1,38 @@
 # BEGIN mon_fichier
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTP:X-Forwarded-Proto} !https
-	RewriteCond %{HTTPS} !on
-	RewriteCond %{HTTP_HOST} ^(?:www\.)?mon_site\.fr(?:.*)$ [nc]
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [redirect=301,L]
-</IfModule>
-
-<IfModule core>
-	DirectoryIndex index.php
-	Options -Indexes
-	IndexIgnore *
-	ServerSignature On
-	FileETag None
-</IfModule>
-
-<IfModule mod_negotiation.c>
-	Options -MultiViews
-</IfModule>
-
-<IfModule mod_mime.c>
-	AddCharset utf-8 .html .css .js
-</IfModule>
-
-<IfModule mod_env.c>
-	SetEnv no-gzip 1
-	SetEnv dont-vary 1
+	RewriteCond %{ENV:REDIRECT_STATUS} ^$
+	RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$2 [R=301,L]
+	RewriteCond %{REQUEST_FILENAME} -f
+	RewriteRule .? - [L]
+	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
+	RewriteRule ^(.*) - [E=BASE:%1]
+	RewriteRule .? %{ENV:BASE}index.php [L]
 </IfModule>
 
 ########################################################################
-#	user-ID phishing WordPress (test : https://example.com/?author=1)
+#	Filtre de sécurité Google, Youtube et W3
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{QUERY_STRING} ^author=([0-9]*)
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?.*gstatic\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(jnn-pa.)?.*googleapis\.com.*$ [NC,OR]
+	#RewriteCond %{HTTP_REFERER} ^http(s)?://(play.)?.*google\.com.*$ [NC,OR]
+	#RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*google\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.fr.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.fr.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3\.org.*$ [NC,OR]
 	RewriteRule .* - [F]
 </IfModule>
 
 ########################################################################
-#	404 Fix
-#
-ErrorDocument 401 "Autorisation requise"
-ErrorDocument 402 "Refus de paiement"
-ErrorDocument 403 "Acc&egrave;s interdit"
-ErrorDocument 404 https://mon_site.fr/erreur-404/
-
-########################################################################
-#	Fixe thread de téléchargement
-#
-<IfModule mod_env.c>
-	SetEnv MAGICK_THREAD_LIMIT 1
-</IfModule>
-
-########################################################################
-#	Fixe utilisateur de site et duration des fichiers mis en cache
-#
-<IfModule mod_headers.c>
-	Header always set Referrer-Policy "strict-origin"
-	Header always set Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
-	Header always set X-Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
-	Header always set X-Webkit-CSP "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, plugin-types application, block-all-mixed-content https://mon_site.fr/"
-	Header always set X-Xss-Protection "1; report=<reporting-uri>"
-	Header always set X-Content-Type-Options "nosniff"
-	Header always set X-Frame-Options "SAMEORIGIN"
-	Header always set X-Robots-Tag "nofollow, max-snippet:-1, noarchive, notranslate, max-image-preview:[large], max-video-preview:0"
-	Header always set Permissions-Policy "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), conversion-measurement=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(self), execution-while-not-rendered=(), execution-while-out-of-viewport=(), focus-without-user-activation=(), fullscreen=(self), gamepad=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), interest-cohort=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), serial=(), screen-wake-lock=(), speaker-selection=(), sync-script=(), sync-xhr=(), trust-token-redemption=(), usb=(), vertical-scroll=(), web-share=(), window-placement=(), xr-spatial-tracking=()"
-</IfModule>
-
-<IfModule mod_filter.c>
-	AddOutputFilterByType DEFLATE text/html text/plain
-	SetOutputFilter DEFLATE
-	SetEnvIfNoCase Request_URI "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$" force-gzip dont-vary
-	SetEnvIfNoCase Request_URI "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)$" force-gzip dont-vary
-	SetEnvIfNoCase Request_URI "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$" force-gzip dont-vary
-</IfModule>
-
-<IfModule mod_expires.c>
-	ExpiresActive on
-	ExpiresDefault "access plus 1 hours"
-	ExpiresByType text/html "modification plus 3 minutes"
-	FileETag None
-	<IfModule mod_headers.c>
-		Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
-		Header set Expect-CT "max-age=86400, enforce, report-uri https://mon_site.fr/mon_dossier/wp-content/report"
-		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
-		Header unset If-Modified-Since
-		Header unset If-Unmodified-Since
-		Header unset Last-Modified
-		Header unset ETag
-		<FilesMatch "\.(?:3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
-			Header unset If-Modified-Since
-			Header unset If-Unmodified-Since
-			Header unset Last-Modified
-			Header unset ETag
-		</FilesMatch>
-		<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
-			Header unset If-Modified-Since
-			Header unset If-Unmodified-Since
-			Header unset Last-Modified
-			Header unset ETag
-		</FilesMatch>
-		<FilesMatch "\.(?:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)$">
-			Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
-			Header unset If-Modified-Since
-			Header unset If-Unmodified-Since
-			Header unset Last-Modified
-			Header unset ETag
-		</FilesMatch>
-	</IfModule>
-</IfModule>
-
-########################################################################
-#	Protection POST
-#
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{REQUEST_METHOD} POST
-	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|wp-admin/edit.php)\.php [NC]
-	RewriteCond %{HTTP_REFERER} !(.*)mon_site.fr [NC,OR]
-	RewriteCond %{HTTP_USER_AGENT} ^$
-	RewriteRule .* - [F]
-</IfModule>
-
-########################################################################
-#	Bloquage proxy 	!# RewriteCond %{HTTP:VIA} !^$ [OR]
+#	Bloquage proxy
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine on
+	RewriteCond %{HTTP:VIA}			!^$ [OR]
 	RewriteCond %{HTTP:FORWARDED}		!^$ [OR]
 	RewriteCond %{HTTP:USERAGENT_VIA}	!^$ [OR]
 	RewriteCond %{HTTP:X_FORWARDED_FOR}	!^$ [OR]
@@ -136,86 +40,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{HTTP:XPROXY_CONNECTION}	!^$ [OR]
 	RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
 	RewriteCond %{HTTP:HTTP_CLIENT_IP}	!^$
-	RewriteRule .* - [F]
-</IfModule>
-
-########################################################################
-#	Suppression les dates des url page et permalink
-#
-<IfModule mod_alias.c>
-	RedirectMatch 301 ^/([0-9]+)/?$ https://mon_site.fr/$1/
-	RedirectMatch 301 ^/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/page/$2
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/?$ https://mon_site.fr/$1/$2/
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/$2/page/$3
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/?$ https://mon_site.fr/$1/$2/$3/
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/page/(.*)$ https://mon_site.fr/$1/$2/$3/page/$4
-	RedirectMatch 301 ^/([0-9]+)/([0-9]+)/([0-9]+)/(.*)$ https://mon_site.fr/$1/$4
-</IfModule>
-
-########################################################################
-#	Redirection des pages supprimer et suppression des pages mortes
-#
-<IfModule mod_alias.c>
-	RedirectMatch 301 /(feeds|submit|contact|sitemap|guestbook|slideshow)/?$ https://mon_site.fr/
-	RedirectMatch gone /(nuer|renu|nuwest|nustyle|big\-nu)
-</IfModule>
-
-########################################################################
-#	XMLRPC redirection
-#
-<IfModule mod_alias.c>
-	RedirectMatch 403 (?i)/xmlrpc\.php
-</IfModule>
-
-########################################################################
-#	Protection des fichiers sensibles WordPress
-#
-<IfModule core>
-	<files install-helper.php>
-		Order allow,deny
-		Deny from all
-	</files>
-	<files wp-config.php>
-		Order allow,deny
-		Deny from all
-	</files>
-	<files error_log>
-		Order allow,deny
-		Deny from all
-	</files>
-	<FilesMatch "\.(.htaccess|.htpasswd)$">
-		Order allow,deny
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-		Order allow,deny
-		Deny from all
-	</FilesMatch>
-</IfModule>
-
-########################################################################
-#	Protection des fichiers de l'utilisateur
-#
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond "%{HTTP_REFERER}" "!^$"
-	RewriteCond "%{HTTP_REFERER}" "!mon_site.fr" [NC]
-	RewriteRule "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$" "-" [F,NC]
-</IfModule>
-<IfModule mod_setenvif.c>
-	SetEnvIf Referer "mon_site\.fr" localreferer
-	<FilesMatch "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)$">
-		Require env localreferer
-	</FilesMatch>
-</IfModule>
-
-########################################################################
-#	Protection du dossier téléchargement WordPress
-#
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{REQUEST_URI} /wp-content/uploads/ [NC]
-	RewriteCond %{HTTP_REFERER} !^https://mon_site.fr [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
@@ -271,6 +95,13 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteRule .* - [F]
 </IfModule>
 #
+# [REFERRER]
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000,}) [NC,OR]
+	RewriteRule .* - [F]
+</IfModule>
+#
 # [REQUEST STRING]	#RedirectMatch 403 (?i)/(\$(\&)?|\*|\"|\.|,|&|&?)/?$
 <IfModule mod_alias.c>
 	RedirectMatch 403 (?i)([a-z0-9]{2000,})
@@ -283,18 +114,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RedirectMatch 403 (?i)(&pws=0|_vti_|\(null\)|\{\$itemURL\}|echo(.*)kae|etc/passwd|eval\(|self/environ)
 	RedirectMatch 403 (?i)\.(aspx?|bash|bak?|cfg|cgi|dll|exe|git|hg|ini|jsp|log|mdb|out|sql|svn|swp|tar|rar|rdf)$
 	RedirectMatch 403 (?i)/(^$|(wp-)?config|mobiquo|phpinfo|shell|sqlpatch|thumb|thumb_editor|thumbopen|timthumb|webshell)\.php
-</IfModule>
-#
-# [USER AGENT]
-<IfModule mod_setenvif.c>
-	SetEnvIfNoCase User-Agent ([a-z0-9]{2000,}) bad_bot
-	SetEnvIfNoCase User-Agent (archive.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|nutch|planetwork|postrank|purebot|pycurl|python|seekerspider|siclab|skygrid|sqlmap|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) bad_bot
-	<IfModule mod_authz_core.c>
-		<RequireAll>
-			Require all Granted
-			Require not env bad_bot
-		</RequireAll>
-	</IfModule>
 </IfModule>
 
 ########################################################################
@@ -8659,13 +8478,4 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	Require not ip 95.73.248.159
 	</RequireAll>
 </RequireAny>
-
-########################################################################
-# Redirections /mon_dossier (ne pas changer l'ordre du fichier !)
-<IfModule mod_rewrite.c>
-	RewriteBase /
-	RewriteCond %{THE_REQUEST} /mon_dossier/([^\s?]*) [NC]
-	RewriteRule ^ %1 [L,NE,R=302]
-	RewriteRule ^(.*)$ mon_dossier/$0 [L,NC]
-</IfModule>
 # END mon_fichier
