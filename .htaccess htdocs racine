@@ -118,7 +118,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_METHOD} POST
-	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|wp-admin/edit.php)\.php [NC]
+	RewriteCond %{REQUEST_URI} (wp-comments-post|wp-login|edit)\.php [NC]
 	RewriteCond %{HTTP_REFERER} !(.*)mon_site.fr [NC,OR]
 	RewriteCond %{HTTP_USER_AGENT} ^$
 	RewriteRule .* - [F]
