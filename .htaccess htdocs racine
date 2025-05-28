@@ -140,7 +140,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 ########################################################################
-#	Suppression les dates des url page et permalink
+#	Suppression des dates et des numéros de page dans les url permalink
 #
 <IfModule mod_alias.c>
 	RedirectMatch 301 ^/([0-9]+)/?$ https://mon_site.fr/$1/
@@ -213,7 +213,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 ########################################################################
-#	Protection du dossier téléchargement WordPress
+#	Protection du dossier de téléchargement WordPress
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
