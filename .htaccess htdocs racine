@@ -4,7 +4,7 @@
 	RewriteCond %{HTTP:X-Forwarded-Proto} !https
 	RewriteCond %{HTTPS} !on
 	RewriteCond %{HTTP_HOST} ^(?:www\.)?mon_site\.fr(?:.*)$ [NC]
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [redirect=301,F]
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI}/$1 [R=301,F]
 </IfModule>
 
 <IfModule core>
