@@ -7981,7 +7981,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 <IfModule mod_rewrite.c>
 	RewriteBase /
 	RewriteCond %{THE_REQUEST} /mon_dossier/([^\s?]*) [NC]
-	RewriteRule ^ %1 [L,NE,R=302]
-	RewriteRule ^(.*)$ mon_dossier/$0 [L,NC]
+	RewriteRule ^ %0 [NE,R=301]
+	RewriteRule ^(.*)$ mon_dossier/$0
 </IfModule>
 # END mon_fichier
