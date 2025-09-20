@@ -11,32 +11,30 @@
 </IfModule>
 
 ########################################################################
-#	Protection des dossiers de WordPress, thème et téléchargement
+#	Protection des dossiers de WordPress, thème et téléchargement (ligne préfixe # = bogue editeur privé)
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{REQUEST_URI} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|post|wp-comments-post|wp-tinymce)\.php [NC,OR]
-	RewriteCond %{REQUEST_URI} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
-	RewriteCond %{REQUEST_URI} /(404|OET|V|analytics|android|android_developpement|black_market|cent_pas|cercle_12345|chatbox_ghost_1|chatbox_ghost_2|chatbox_ghost_3|connexion|coronavirus|cubeOET|hosts|killuminati|la_planete_des_singes|linux|mars_attacks|matiere_noire|matrix|mileena_fatalities|petitdoigts_accueil|petitdoigts_chatbox|pirates_des_caraibes|pirates_des_caraibes_|poche_monnaie|polis_monet_tableau|poulet|satellitetourne|scene_de_crime|scream|un_arameen_nomade.pdf|un_arameen_nomade_format_1.pdf|un_arameen_nomade_format_2.pdf|video|vortex)\.webp [NC,OR]
+#	RewriteCond %{REQUEST_URI} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|post|wp-comments-post|wp-tinymce)\.php [NC,OR]
+#	RewriteCond %{REQUEST_URI} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
 	RewriteCond %{REQUEST_URI} /(/embed/) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(/assets/|/bootstrap/|/css/|/film/|/font/|/javascript/|/media/|/musique/|/televersement/) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(/2024/|/2025/|/2026/|/01/|/02/|/03/|/04/|/05/|/06/|/07/|/08/|/09/|/10/|/11/|/12/) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(/wp-admin/css/|/wp-admin/images/|/wp-admin/includes/|/wp-admin/js/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/|/wp-content/|/wp-includes/) [NC,OR]
 	RewriteCond %{REQUEST_URI} "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CSS|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)" [NC]
-	RewriteCond %{HTTP_REFERER} !https://petitdoigts.fr [OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
 	RewriteCond %{HTTP_USER_AGENT} ^$
 	RewriteRule .* - [F]
 </IfModule>
 
 ########################################################################
-#	Protection thème, lecteur web et fonts (sans : admin|page "edit" et post bbpress "abonner")
+#	Protection thème, lecteur web et fonts (ligne préfixe # = bogue editeur privé)
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{QUERY_STRING} (__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|post|wp-comments-post|index|wp-tinymce)\.php [NC,OR]
-	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
-	RewriteCond %{QUERY_STRING} (__bbpress|__init|export-personal-data|erase-personal-data|file|edit-comments|wp-comments-post|index|wp-tinymce) [NC,OR]
-	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|sidebar|single) [NC,OR]
+#	RewriteCond %{QUERY_STRING} (__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|post|wp-comments-post|index|wp-tinymce)\.php [NC,OR]
+#	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+#	RewriteCond %{QUERY_STRING} (__bbpress|__init|export-personal-data|erase-personal-data|file|edit-comments|wp-comments-post|index|wp-tinymce) [NC,OR]
+#	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|sidebar|single) [NC,OR]
 	RewriteCond %{QUERY_STRING} (#|<|>|</|::|F3D617|D10D10|008080|fill|photo|poster|rgb|span|svg|url|video|xml|xmlns) [NC,OR]
 	RewriteCond %{QUERY_STRING} (::-webkit-media-controls-panel|::-webkit-media-controls-play-button|::-webkit-media-controls-volume-slider-container|::-webkit-media-controls-volume-slider|::-webkit-media-controls-mute-button|::-webkit-media-controls-timeline|::-webkit-media-controls-current-time-display|::-webkit-media-controls-timeline-container|::-webkit-media-controls-time-remaining-display|::-webkit-media-controls-seek-back-button|::-webkit-media-controls-seek-forward-button|::-webkit-media-controls-fullscreen-button|::-webkit-media-controls-rewind-button|::-webkit-media-controls-return-to-realtime-button|::-webkit-media-controls-toggle-closed-captions-button) [NC,OR]
 	RewriteCond %{QUERY_STRING} (-webkit-media-controls-panel|-webkit-media-controls-play-button|-webkit-media-controls-volume-slider-container|-webkit-media-controls-volume-slider|-webkit-media-controls-mute-button|-webkit-media-controls-timeline|-webkit-media-controls-current-time-display|-webkit-media-controls-timeline-container|-webkit-media-controls-time-remaining-display|-webkit-media-controls-seek-back-button|-webkit-media-controls-seek-forward-button|-webkit-media-controls-fullscreen-button|-webkit-media-controls-rewind-button|-webkit-media-controls-return-to-realtime-button|-webkit-media-controls-toggle-closed-captions-button) [NC,OR]
@@ -47,18 +45,14 @@
 </IfModule>
 
 ########################################################################
-#	Protection (youtube et fichier "Un_Arameen_nomade")
+#	Protection Youtube anti-physhing
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
 	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
-	RewriteCond %{HTTP_REFERER} /(/informations/wp-content/uploads/media/Un_Arameen_nomade_Livre|/informations/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC,OR]
-	RewriteCond %{HTTP_REFERER} /(/wp-content/uploads/media/Un_Arameen_nomade_Livre|/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC]	
-	RewriteCond %{REQUEST_URI} /(/informations/wp-content/uploads/media/Un_Arameen_nomade_Livre|/informations/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC,OR]
-	RewriteCond %{REQUEST_URI} /(/wp-content/uploads/media/Un_Arameen_nomade_Livre|/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC]
+	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
