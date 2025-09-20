@@ -11,7 +11,7 @@
 </IfModule>
 
 ########################################################################
-#	Protection des dossiers de WordPress, thème et téléchargement (ligne préfixe # = bogue editeur privé)
+#	Protection des dossiers de WordPress, thème et téléchargement (ligne préfixe # = bogue éditeur privé)
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
@@ -27,7 +27,7 @@
 </IfModule>
 
 ########################################################################
-#	Protection thème, lecteur web et fonts (ligne préfixe # = bogue editeur privé)
+#	Protection thème, lecteur web et fonts (ligne préfixe # = bogue éditeur privé)
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
