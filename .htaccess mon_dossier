@@ -11,19 +11,172 @@
 </IfModule>
 
 ########################################################################
+#	Protection des dossiers de WordPress, thème et téléchargement
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_URI} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|post|wp-comments-post|wp-tinymce)\.php [NC,OR]
+	RewriteCond %{REQUEST_URI} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+	RewriteCond %{REQUEST_URI} /(404|OET|V|analytics|android|android_developpement|black_market|cent_pas|cercle_12345|chatbox_ghost_1|chatbox_ghost_2|chatbox_ghost_3|connexion|coronavirus|cubeOET|hosts|killuminati|la_planete_des_singes|linux|mars_attacks|matiere_noire|matrix|mileena_fatalities|petitdoigts_accueil|petitdoigts_chatbox|pirates_des_caraibes|pirates_des_caraibes_|poche_monnaie|polis_monet_tableau|poulet|satellitetourne|scene_de_crime|scream|un_arameen_nomade.pdf|un_arameen_nomade_format_1.pdf|un_arameen_nomade_format_2.pdf|video|vortex)\.webp [NC,OR]
+	RewriteCond %{REQUEST_URI} /(/embed/) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(/assets/|/bootstrap/|/css/|/film/|/font/|/javascript/|/media/|/musique/|/televersement/) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(/2024/|/2025/|/2026/|/01/|/02/|/03/|/04/|/05/|/06/|/07/|/08/|/09/|/10/|/11/|/12/) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(/wp-admin/css/|/wp-admin/images/|/wp-admin/includes/|/wp-admin/js/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/|/wp-content/|/wp-includes/) [NC,OR]
+	RewriteCond %{REQUEST_URI} "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CSS|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)" [NC]
+	RewriteCond %{HTTP_REFERER} !https://petitdoigts.fr [OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [F]
+</IfModule>
+
+########################################################################
+#	Protection thème, lecteur web et fonts (sans : admin|page "edit" et post bbpress "abonner")
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{QUERY_STRING} (__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|post|wp-comments-post|index|wp-tinymce)\.php [NC,OR]
+	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+	RewriteCond %{QUERY_STRING} (__bbpress|__init|export-personal-data|erase-personal-data|file|edit-comments|wp-comments-post|index|wp-tinymce) [NC,OR]
+	RewriteCond %{QUERY_STRING} (comments|content-none|content-page|content|footer|functions|header|index|sidebar|single) [NC,OR]
+	RewriteCond %{QUERY_STRING} (#|<|>|</|::|F3D617|D10D10|008080|fill|photo|poster|rgb|span|svg|url|video|xml|xmlns) [NC,OR]
+	RewriteCond %{QUERY_STRING} (::-webkit-media-controls-panel|::-webkit-media-controls-play-button|::-webkit-media-controls-volume-slider-container|::-webkit-media-controls-volume-slider|::-webkit-media-controls-mute-button|::-webkit-media-controls-timeline|::-webkit-media-controls-current-time-display|::-webkit-media-controls-timeline-container|::-webkit-media-controls-time-remaining-display|::-webkit-media-controls-seek-back-button|::-webkit-media-controls-seek-forward-button|::-webkit-media-controls-fullscreen-button|::-webkit-media-controls-rewind-button|::-webkit-media-controls-return-to-realtime-button|::-webkit-media-controls-toggle-closed-captions-button) [NC,OR]
+	RewriteCond %{QUERY_STRING} (-webkit-media-controls-panel|-webkit-media-controls-play-button|-webkit-media-controls-volume-slider-container|-webkit-media-controls-volume-slider|-webkit-media-controls-mute-button|-webkit-media-controls-timeline|-webkit-media-controls-current-time-display|-webkit-media-controls-timeline-container|-webkit-media-controls-time-remaining-display|-webkit-media-controls-seek-back-button|-webkit-media-controls-seek-forward-button|-webkit-media-controls-fullscreen-button|-webkit-media-controls-rewind-button|-webkit-media-controls-return-to-realtime-button|-webkit-media-controls-toggle-closed-captions-button) [NC,OR]
+	RewriteCond %{QUERY_STRING} (Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-BoldItalic|CormorantGaramond-Bold|CormorantGaramond-Italic|CormorantGaramond-LightItalic|CormorantGaramond-Light|CormorantGaramond-MediumItalic|CormorantGaramond-Medium|CormorantGaramond-Regular|CormorantGaramond-SemiBoldItalic|CormorantGaramond-SemiBold|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|Inconsolata-VariableFont_wdth,wght|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC,OR]
+	RewriteCond %{QUERY_STRING} (Akronim|AlumniSansPinstripe|AmaticSC|AnnieUseYourTelescope|Asset|BhuTukaExpandedOne|BigelowRules|BungeeHairline|BungeeShade|CinzelDecorative|CormorantGaramond|CormorantGaramond-LightItalic|CormorantGaramond-Regular|CormorantGaramond-Italic|CormorantGaramond-Medium|CormorantGaramond-MediumItalic|CormorantGaramond-Bold|CormorantGaramond_BoldItalic|Danfo|Doto|Eater|EduAUVICWANTArrows|FasterOne|FrederickatheGreat|Georgia|GloriaHallelujah|GreatVibes|Gruppo|Inconsolata|JuliusSansOne|LuckiestGuy|Matemasie|Monoton|MountainsofChristmas|MysteryQuest|Nosifer|PlayfairDisplay|PlaywriteBEWALGuides|RubikDirt|RubikGlitchPop|RubikPuddles|RubikScribble|RuslanDisplay|Sacramento|SirinStencil|SnowburstOne|Wallpoet) [NC,OR]
+	RewriteCond %{QUERY_STRING} "\.(3FR|3G2|3GP|AAI|AI|APNG|ART|ARW|AVI|AVIF|AVS|BGR|BGRA|BGRO|BIE|BMP|BMP2|BMP3|BRF|CAL|CALS|CANVAS|CAPTION|CIN|CIP|CLIP|CMYK|CMYKA|CR2|CR3|CRW|CSS|CUR|CUT|DATA|DCM|DCR|DCX|DDS|DFONT|DNG|DPX|DXT1|DXT5|EPDF|EPI|EPS|EPS2|EPS3|EPSF|EPSI|EPT|EPT2|EPT3|ERF|FAX|FILE|FITS|FRACTAL|FTP|FTS|G3|G4|GIF|GIF87|GRADIENT|GRAY|GRAYA|GROUP4|H|HALD|HDR|HEIC|HISTOGRAM|HRZ|HTM|HTML|HTTP|HTTPS|ICB|ICO|ICON|IIQ|INFO|INLINE|IPL|ISOBRL|ISOBRL6|J2C|J2K|JBG|JBIG|JNG|JNX|JP2|JPC|JPE|JPEG|JPG|JPM|JPS|JPT|JS|JSON|K25|KDC|LABEL|M2V|M4V|MAC|MAGICK|MAP|MASK|MAT|MATTE|MEF|MIFF|MKV|MNG|MONO|MOV|MP4|MPC|MPG|MRW|MSL|MTV|MVG|NEF|NRW|NULL|ORF|OTB|OTF|PAL|PALM|PAM|PATTERN|PBM|PCD|PCDS|PCL|PCT|PCX|PDB|PDF|PDFA|PEF|PES|PFA|PFB|PFM|PGM|PGX|PICON|PICT|PIX|PJPEG|PLASMA|PNG|PNG00|PNG24|PNG32|PNG48|PNG64|PNG8|PNM|POCKETMOD|PPM|PREVIEW|PS|PS2|PS3|PSB|PSD|PTIF|PWP|RADIAL-GRADIENT|RAF|RAS|RAW|RGB|RGBA|RGBO|RGF|RLA|RLE|RMF|RW2|SCR|SCT|SFW|SGI|SHTML|SIX|SIXEL|SPARSE-COLOR|SR2|SRF|STEGANO|SUN|SVG|TEXT|TGA|THUMBNAIL|TIFF|TIFF64|TILE|TIM|TTC|TTF|TXT|UBRL|UBRL6|UIL|UYVY|VDA|VICAR|VID|VIDEO|VIFF|VIPS|VST|WBMP|WEBM|WEBP|WMV|WPG|X|X3F|XBM|XC|XCF|XPM|XPS|XV|XWD|YCbCr|YCbCrA|YUV)" [NC]
+	RewriteRule .* - [F]
+</IfModule>
+
+########################################################################
+#	Protection (youtube et fichier "Un_Arameen_nomade")
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
+	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
+	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
+	RewriteCond %{HTTP_REFERER} /(/informations/wp-content/uploads/media/Un_Arameen_nomade_Livre|/informations/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC,OR]
+	RewriteCond %{HTTP_REFERER} /(/wp-content/uploads/media/Un_Arameen_nomade_Livre|/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC]	
+	RewriteCond %{REQUEST_URI} /(/informations/wp-content/uploads/media/Un_Arameen_nomade_Livre|/informations/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC,OR]
+	RewriteCond %{REQUEST_URI} /(/wp-content/uploads/media/Un_Arameen_nomade_Livre|/wp-content/uploads/media/Un_Arameen_nomade)\.pdf [NC]
+	RewriteRule .* - [F]
+</IfModule>
+
+########################################################################
 #	Filtre GOOGLE YOUTUBE W3
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?.*gstatic\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(jnn-pa.)?.*googleapis\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(play.)?.*google\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*google\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie\.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube\.fr.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie\.fr.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*w3\.org.*$ [NC]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(jnn-pa.)?.*googleapis\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(play.)?.*google\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*google\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube\.fr.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie\.fr.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3\.org.*$ [NC]
+	RewriteRule .* - [F]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons-handoff.gcp.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons.gcp.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons2.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons3.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons4.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*beacons6.gvt2.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*eclectic-twilight-7a616e.netlify.app.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*googleads.g.doubleclick.net.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*googlehosted.l.googleusercontent.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://eclectic-twilight-7a616e.netlify.app/ktool.exe [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://eclectic-twilight-7a616e.netlify.app/lootsubmit.ps1 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://eclectic-twilight-7a616e.netlify.app/trackerjacker.ps1 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://googleads.g.doubleclick.net/pagead/id?slf_rd=1 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/an_webp/WC8FrOl6_G0/mqdefault_6s.webp?du=3000&sqp=CNLXh8AG&rs=AOn4CLBWHGTf8J3zVklZsw2cdd8_r31_rA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/an_webp/gpHfFd-kYn0/mqdefault_6s.webp?du=3000&sqp=CMC6h8AG&rs=AOn4CLB13GUr38ID_mLME-Jg03zFTi-0PA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/3_UN2S8SasY/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLCXUh_hFQ1pcGWAX5LGNO6QN2ZnRA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/Ahv3IKzMdHA/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBrQ9ZXCLwHm8E82CgwlmrkTXwdGw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/PFNTHObSSKE/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLDL-S_6pKN4AcFF1JC1733yICWpGA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/TFUtEPU-F1E/hqdefault.jpg [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/ZAWnlZg2P38/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBTX4OH4Zb1WUTOlqYvOANx9sIZSw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/kDtDbo3fvM0/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAxdhnpsQvvsd8efsKGvSY0PqP2Rg [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/pVs1U9EQMm8/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLBuGAk2oW8yb2Rg1qI9OuRfJCmcyA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://i.ytimg.com/vi/pic35n0xDzI/hqdefault.jpg?sqp=-oaymwEmCKgBEF5IWvKriqkDGQgBFQAAiEIYAdgBAeIBCggYEAIYBjgBQAE=&rs=AOn4CLAQ3sK6QVqehHMbMsyCdhrbzRaauw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://lh6.googleusercontent.com/proxy/Bt7omDNOom9sGf-4UwCsT_JgUi7BOO7Q0wy--xhWlOH7Jn2HoyBh8EhESUXYOZ1rBfwwXT4a2rZLbv-yqGF7JGnHEYNl8mG_dqPgvHvZjAEaxFDBX6UHn73YYIZrvzuvdw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://rr1---sn-5ualdnsl.googlevideo.com/generate_204 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://rr1---sn-5ualdnsl.googlevideo.com/generate_204?conn2 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://rr4---sn-5uaezndd.googlevideo.com/generate_204 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://rr4---sn-5uaezndd.googlevideo.com/generate_204?conn2 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.google.com/js/th/NWLGrHtkF-quwBPAzKtHvMTadBBych65PN2zZuxD0KA.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/api/jnn/v1/GenerateIT [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/api/stats/ads?ver=2&ns=1&event=2&device=1&content_v=jdN847OD-UA&el=detailpage&ei=P-0BaP20OreFy_sP49KhgQY&devicever=2.20250417.01.00&bti=9477942&format=15_2_1&break_type=1&conn=0&cpn=AM_7gx6k2nUo_ps0&lact=131&m_pos=0&mt=0&p_h=453&p_w=806&rwt=[RWT]&sdkv=h.3.0.0&slot_pos=0&vis=0&vol=100&wt=1744956738435&ad_cpn=EMlSaZTztYCd7ebD&ad_id=%2C676551740582&ad_len=166000&ad_mt=0&ad_sys=YT%3AAdSense-Viral%2CAdSense-Viral&ad_v=TFUtEPU-F1E&aqi=P-0BaOG2O7bD9eQP8szc2Qc&ad_rmp=1&sli=1&slfs=1&loginael=1 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/api/stats/watchtime?ns=yt&el=adunit&cpn=EMlSaZTztYCd7ebD&ver=2&cmt=20.177&fmt=397&fs=0&rt=27.006&adformat=15_2_1&content_v=jdN847OD-UA&euri&lact=3382&cl=748101193&state=playing&volume=100&cbr=Chrome&cbrver=134.0.0.0&c=WEB&cver=2.20250417.01.00&cplayer=UNIPLAYER&cos=Windows&cosver=10.0&cplatform=DESKTOP&autoplay=1&delay=28&hl=en_US&cr=US&len=166.141&rtn=37&afmt=251&idpj=0&ldpj=-17&rti=27&st=10.179&et=20.177&muted=0&docid=TFUtEPU-F1E&ei=QO0BaJHaB7eFy_sP49KhgQY&plid=AAYzB2Zn4qDZEJXZ&sdetail=f%3Ayoutu.be%2C&aqi=P-0BaOG2O7bD9eQP8szc2Qc&host_cpn=AM_7gx6k2nUo_ps0&is_ad=1&of=wbAUJoLFDaeeOSJrHXH1sg&vm=CAEQABgEOjJBSHFpSlRLbllGbnB5SEdjUU5LN2RTVlM3WTFlQVI3V0RrdGU5XzA3RE9NcDdseEg2d2JSQUZVQTZSUWlhXzROTjBVRlVoSXFkTEx4NWdaYjk4OU5Ra2lnQ1o2WmczNUgtRWxGRE9FVjFpMmtTM19mTEFUb1VGOEF4UXJWLVdzaXB1WEVsZw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/app_shell [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/generate_204?3V-EOw [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/generate_204?g3HVwQ [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/pagead/1p-user-list/962985656/?backend=innertube&cname=1&cver=2_20250417&data=backend%3Dinnertube%3Bcname%3D1%3Bcver%3D2_20250417%3Bel%3Dadunit%3Bptype%3Df_adview%3Btype%3Dview%3Butuid%3D2O6FyFRBDghjUzMpvXT4RA%3Butvid%3DTFUtEPU-F1E&ptype=f_adview&random=974541277&utuid=2O6FyFRBDghjUzMpvXT4RA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/ptracking?html5=1&video_id=TFUtEPU-F1E&cpn=EMlSaZTztYCd7ebD&ei=QO0BaJHaB7eFy_sP49KhgQY&ptk=youtube_host&ptchn=youtube_host&pltype=adhost&content_v=jdN847OD-UA&m=ArmDC4BTeVmh5timmJ9ZQEWeyfJR9q2aeIcGY5rj0fLtJOZN5MvwAzvoevm3CaM4Z00kWVdYBQ2KCIeE68V4Q1e8 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/_/ytmainappweb/_/js/k=ytmainappweb.kevlar_base.en_US.-aa3SLslbD8.es5.O/d=0/rs=AGKMywGFHjY0F8simS-XAs1I7MGOeSE-MA [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/_/ytmainappweb/_/ss/k=ytmainappweb.kevlar_base.7UoNRzA5Ra8.L.B1.O/am=AAAQKA/d=0/rs=AGKMywHVYfVXwO0K101ooXIT_rmCN6HVvg [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/desktop/c722ba88/cssbin/www-onepick.css [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon.ico [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_32x32.png [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/desktop/c722ba88/jsbin/lottie-light.vflset/lottie-light.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/desktop/c722ba88/jsbin/web-animations-next-lite.min.vflset/web-animations-next-lite.min.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/player/9a279502/player_ias.vflset/en_US/base.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/player/9a279502/player_ias.vflset/en_US/miniplayer.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/player/9a279502/player_ias.vflset/en_US/offline.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/s/search/audio/success.mp3 [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/sw.js [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/youtubei/v1/account/get_setting_values?prettyPrint=false [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://www.youtube.com/youtubei/v1/notification_registration/set_registration?prettyPrint=false [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://youtube.com/ [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://yt3.ggpht.com/4uBCuu8yIpS_xdIEF2o3jtroZed_5fPeDQJbrB32h58RABUarIo0_wAu9tX2FtCy7AIb2PSkHkw=s48-c-k-c0x00ffffff-no-rj [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://yt3.ggpht.com/ukRMUFL2qOkQd2oo0BSN6OGIX0h7abO6tTbUJ2uj1WyvPYfBYp0Ns1llIVHttK39uJzsZD5_jLM=s88-c-k-c0x00ffffff-no-rj [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://yt3.ggpht.com/ytc/AIdro_kBuS2c68y1Zy54KlLCKRmtHIFm1hEQD4tyxhOn-tD0_Eg=s88-c-k-c0x00ffffff-no-rj [NC,OR]
+	RewriteCond %{HTTP_REFERER} https://yt3.ggpht.com/ytc/AIdro_ngp-8W1VUBEl58ZxVFdJyqNi_2z0kD3ISJrBk5DA=s88-c-k-c0x00ffffff-no-rj [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*i.ytimg.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*i1.ytimg.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*i9.ytimg.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*lh6.googleusercontent.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*photos-ugc.l.googleusercontent.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1---sn-5ualdnse.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1---sn-5ualdnsl.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1---sn-5ualdnsz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1---sn-q4fl6nlz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1.sn-5ualdnse.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1.sn-5ualdnsl.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1.sn-5ualdnsz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr1.sn-q4fl6nlz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr2---sn-5uaeznyz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr2.sn-5uaeznyz.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr3---sn-5uaeznez.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr3.sn-5uaeznez.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4---sn-5uaezndd.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4---sn-5ualdnsl.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4---sn-ntqe6n7r.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4---sn-q4flrnld.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4.sn-5uaezndd.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4.sn-5ualdnsl.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4.sn-ntqe6n7r.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr4.sn-q4flrnld.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr5---sn-5ualdnsk.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr5---sn-p5qs7nsk.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr5.sn-5ualdnsk.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*rr5.sn-p5qs7nsk.googlevideo.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*static.doubleclick.net.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*www.youtube.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtu.be.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-ui.l.google.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*yt3.ggpht.com.*$ [NC,OR]
+	#
+	# Extra Google
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*play.google.com.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*www.google.com.*$ [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
