@@ -45,7 +45,7 @@
 </IfModule>
 
 ########################################################################
-#	Protection Youtube anti-physhing
+#	Protection Youtube anti-hammeçonnage
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
