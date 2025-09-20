@@ -32,14 +32,14 @@
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine on
-	RewriteCond %{HTTP:VIA}			!^$ [OR]
-	RewriteCond %{HTTP:FORWARDED}		!^$ [OR]
-	RewriteCond %{HTTP:USERAGENT_VIA}	!^$ [OR]
-	RewriteCond %{HTTP:X_FORWARDED_FOR}	!^$ [OR]
+	RewriteCond %{HTTP:VIA}			        !^$ [OR]
+	RewriteCond %{HTTP:FORWARDED}		    !^$ [OR]
+	RewriteCond %{HTTP:USERAGENT_VIA}	    !^$ [OR]
+	RewriteCond %{HTTP:X_FORWARDED_FOR}	    !^$ [OR]
 	RewriteCond %{HTTP:PROXY_CONNECTION}	!^$ [OR]
 	RewriteCond %{HTTP:XPROXY_CONNECTION}	!^$ [OR]
 	RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
-	RewriteCond %{HTTP:HTTP_CLIENT_IP}	!^$
+	RewriteCond %{HTTP:HTTP_CLIENT_IP}	    !^$
 	RewriteRule .* - [F]
 </IfModule>
 
