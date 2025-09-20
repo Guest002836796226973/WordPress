@@ -6,8 +6,8 @@
 	RewriteCond %{REQUEST_FILENAME} -f
 	RewriteRule .? - [L]
 	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
-	RewriteRule ^(.*) - [E=BASE:%1]
-	RewriteRule .? %{ENV:BASE}index.php [L]
+	RewriteRule ^(.*) - [E=BASE:%1,NS]
+	RewriteRule .? %{ENV:BASE}index.php [L,NS]
 </IfModule>
 
 ########################################################################
