@@ -277,21 +277,23 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]
-	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]
-	RewriteCond %{QUERY_STRING} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{QUERY_STRING} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]
-	RewriteRule %{HTTP_REFERER} !https://mon_site.fr [NS]
+	RewriteCond %{HTTP_REFERER} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{HTTP_REFERER} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC,OR]
+	RewriteCond %{REQUEST_URI} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{REQUEST_URI} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC,OR]
+	RewriteCond %{QUERY_STRING} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{QUERY_STRING} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC]
+	RewriteRule %{HTTP_REFERER} !http(s)?://(www.)?.petitdoigts.fr [NS]
 </IfModule>
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
-	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube.com.*$ [NC,OR]
-	RewriteCond %{REQUEST_URI} http(s)?://(www.)?.*youtube-nocookie.com.*$ [NC]	
+	RewriteCond %{HTTP_REFERER} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{HTTP_REFERER} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC,OR]
+	RewriteCond %{REQUEST_URI} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{REQUEST_URI} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC,OR]
+	RewriteCond %{QUERY_STRING} "http(s)?://(www.)?.*youtube.com.*$" [NC,OR]
+	RewriteCond %{QUERY_STRING} "http(s)?://(www.)?.*youtube-nocookie.com.*$" [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
