@@ -240,6 +240,40 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 ########################################################################
+#	Protection des dossiers de WordPress, thème et téléchargement
+#
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTP_REFERER} (/wp-admin/css/|/wp-admin/images/|/wp-admin/includes/|/wp-admin/js/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/|/wp-content/|/wp-includes/) [NC,OR]
+	RewriteCond %{HTTP_REFERER} (/assets/|/bootstrap/|/css/|/film/|/font/|/informations/|/javascript/|/media/|/musique/|/televersement/) [NC,OR]
+	RewriteCond %{HTTP_REFERER} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|post|wp-comments-post|wp-tinymce)\.php [NC,OR]
+	RewriteCond %{HTTP_REFERER} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+	RewriteCond %{HTTP_REFERER} /(Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-BoldItalic|CormorantGaramond-Bold|CormorantGaramond-Italic|CormorantGaramond-LightItalic|CormorantGaramond-Light|CormorantGaramond-MediumItalic|CormorantGaramond-Medium|CormorantGaramond-Regular|CormorantGaramond-SemiBoldItalic|CormorantGaramond-SemiBold|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC]
+	RewriteRule %{HTTP_REFERER} !http(s)?://(www.)?.petitdoigts.fr [NS]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_URI} (/wp-admin/images/|/wp-admin/includes/|/wp-admin/js/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|wp-comments-post|wp-tinymce)\.php [NC,OR]
+	RewriteCond %{REQUEST_URI} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+	RewriteCond %{REQUEST_URI} /(Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-BoldItalic|CormorantGaramond-Bold|CormorantGaramond-Italic|CormorantGaramond-LightItalic|CormorantGaramond-Light|CormorantGaramond-MediumItalic|CormorantGaramond-Medium|CormorantGaramond-Regular|CormorantGaramond-SemiBoldItalic|CormorantGaramond-SemiBold|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC]
+	RewriteCond %{HTTP_REFERER} !http(s)?://(www.)?.petitdoigts.fr [OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [F]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{QUERY_STRING} (/wp-admin/css/|/wp-admin/images/|/wp-admin/includes/|/wp-admin/js/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/|/wp-content/|/wp-includes/) [NC,OR]
+	RewriteCond %{QUERY_STRING} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|file|edit-comments|index|post|wp-comments-post|wp-tinymce)\.php [NC,OR]
+	RewriteCond %{QUERY_STRING} /(comments|content-none|content-page|content|footer|functions|header|index|page|search|sidebar|single)\.php [NC,OR]
+	RewriteCond %{QUERY_STRING} /(#|<|>|</|::|F3D617|D10D10|008080|article|avatar|avatar-260|body|embed|fill|head|iframe|loginform|photo|poster|primary-sidebar|rgb|span|svg|url|video|widget|xml|xmlns) [NC,OR]
+	RewriteCond %{QUERY_STRING} /(Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-BoldItalic|CormorantGaramond-Bold|CormorantGaramond-Italic|CormorantGaramond-LightItalic|CormorantGaramond-Light|CormorantGaramond-MediumItalic|CormorantGaramond-Medium|CormorantGaramond-Regular|CormorantGaramond-SemiBoldItalic|CormorantGaramond-SemiBold|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC]
+	RewriteRule .* - [F]
+</IfModule>
+
+########################################################################
 #	Protection Youtube anti-hammeçonnage
 #
 <IfModule mod_rewrite.c>
