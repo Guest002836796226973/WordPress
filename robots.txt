@@ -4,14 +4,6 @@
 # Wordpress
 #
 User-agent: *
-Disallow: /mon_dossier/
-Disallow: /mon_dossier/*
-Disallow: /mon_dossier/*/*
-Disallow: /mon_dossier/*/*/*
-Disallow: */mon_dossier/
-Disallow: */mon_dossier/*
-Disallow: */mon_dossier/*/*
-Disallow: */mon_dossier/*/*/*
 Disallow: /.well-known/acme-challenge/*
 ###################################################################
 # Robots Wordpress
@@ -1782,3 +1774,4 @@ User-agent: zauba.io
 Disallow:/
 User-agent: zgrab
 Disallow:/
+
