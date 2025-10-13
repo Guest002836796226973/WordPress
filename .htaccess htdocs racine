@@ -8027,7 +8027,7 @@ RewriteRule %{HTTP_REFERER} !http(s)?://(www.)?.mon_site.fr [NS]
 <IfModule mod_rewrite.c>
 	RewriteBase /
 	RewriteCond %{THE_REQUEST} /mon_dossier/([^\s?]*) [NC]
-	RewriteRule ^ %0 [NS]
-	RewriteRule ^(.*)$ mon_dossier/$0
+	RewriteRule ^ %0 [N,NS]
+	RewriteRule ^(.*)$ mon_dossier/$1
 </IfModule>
 # END mon_fichier
