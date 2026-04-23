@@ -37,7 +37,7 @@
 	RewriteRule .* - [E=AUTH_TOKEN:%1]
 </IfModule>
 <IfModule mod_headers.c>
-	Header set Set-Cookie "TOKEN_CONTAINER=%{AUTH_TOKEN}e; Path=/" env=AUTH_TOKEN
+	Header set Set-Cookie "TOKEN_CONTAINER=%{AUTH_TOKEN}e; Path=/dossier_cookie; SameSite=Strict; __Secure-id=mon_id_site; Secure; Max-Age=86400;" env=AUTH_TOKEN
 </IfModule>
 
 ########################################################################
@@ -68,10 +68,19 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Fixe utilisateur de site et duration des fichiers mis en cache
 #
 <IfModule mod_headers.c>
+	RewriteEngine On
+    RewriteCond %{REQUEST_URI} ^/path-need-cors [NC]
+    RewriteRule .* - [E=CORS_ORIGIN:https://mon_site.fr]
+</IfModule>
+
+<IfModule mod_headers.c>
 	Header always set Referrer-Policy "strict-origin"
-	Header always set Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
-	Header always set X-Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
-	Header always set X-Webkit-CSP "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/ https://coronaboard.fr/ https://www.myabandonware.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
+	Header always set Cross-Origin-Opener-Policy "same-origin"
+	Header always set Access-Control-Allow-Origin "%{CORS_ORIGIN}e" env=CORS_ORIGIN
+	Header always set Access-Control-Allow-Headers "X-Custom-Header"
+	Header always set Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/ https://www.youtube-nocookie.com/ https://player.vimeo.com/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
+	Header always set X-Content-Security-Policy "base-uri https://mon_site.fr/, child-src https://mon_site.fr/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
+	Header always set X-Webkit-CSP "base-uri https://mon_site.fr/, child-src https://mon_site.fr/, style-src 'self' 'unsafe-inline' https://mon_site.fr/, script-src-elem 'self' 'unsafe-inline' https://mon_site.fr/, font-src 'self' https://mon_site.fr/, object-src https://mon_site.fr/, block-all-mixed-content"
 	Header always set X-Xss-Protection "1"
 	Header always set X-Content-Type-Options "nosniff"
 	Header always set X-Frame-Options "SAMEORIGIN"
