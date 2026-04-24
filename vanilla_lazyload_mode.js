@@ -706,3 +706,4 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 		Of_Preloader.init();
 	});
+});
