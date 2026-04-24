@@ -10,13 +10,13 @@ function vanilla_x_lazyload(global, factory) {
   const isHiDpi = runningOnBrowser && window.devicePixelRatio > 1;
   const isBot = runningOnBrowser && window.devicePixelRatio > 1; /* runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined"; */
 
-  const SRC = "src_1WjixVJEcf9dnllWAQbI3JGW";
-  const SRCSET = "srcset_pk92qcdphdK8CemG3HYGFOUh";
-  const SIZES = "sizes_iVOgi3miIZTEku2t9iC3v3p7";
+  const SRC = "src_XXXXXXXXX";
+  const SRCSET = "srcset_XXXXXXXXX";
+  const SIZES = "sizes_XXXXXXXXX";
 /* const POSTER = "poster"; */
   const ORIGINALS = "AllOriginalAttrs";
-  const DATA = "data_6uBRHNFgQQ9d3DvDC1peXNbP";
-  const dataPrefix = "data-GhzYrtYGnTCI0ZtOY7Yke7xf-";
+  const DATA = "data_XXXXXXXXX";
+  const dataPrefix = "data-XXXXXXXXX";
 
   const statusDataName = "All-status";
   const statusLoading = "loading";
@@ -31,14 +31,14 @@ function vanilla_x_lazyload(global, factory) {
 	container: runningOnBrowser ? document : true, /* false */
 	threshold: null, /* false */
 	thresholds: null,
-	data_src: "src_1WjixVJEcf9dnllWAQbI3JGW",
-	data_srcset: "srcset_pk92qcdphdK8CemG3HYGFOUh",
-	data_sizes: "sizes_iVOgi3miIZTEku2t9iC3v3p7",
+	data_src: "src_XXXXXXXXX",
+	data_srcset: "srcset_XXXXXXXXX",
+	data_sizes: "sizes_XXXXXXXXX",
 /*	data_bg: "bg",
 	data_bg_hidpi: "bg-hidpi",
 	data_bg_multi: "bg-multi",
 	data_bg_multi_hidpi: "bg-multi-hidpi", */
-	data_bg_set: "bg-set_M6RK4zO7Of8W1rj2VoGQFCuj",
+	data_bg_set: "bg-set_XXXXXXXXX",
 /*	data_poster: "poster", */
 	class_applied: "applied",
 	class_loading: "loading",
