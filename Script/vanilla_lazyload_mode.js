@@ -192,12 +192,25 @@ function vanilla_x_lazyload(global, factory) {
 	let sourceTags = getSourceTags(parent);
 	sourceTags.forEach(fn);
   };
-
+  
   const forEachVideoSource = (element, fn) => {
-	let sourceTags = getSourceTags(element);
+	const parent = element.parentNode;
+	if (!parent || parent.tagName !== "VIDEO") {
+	  return;
+	}
+	let sourceTags = getSourceTags(parent);
 	sourceTags.forEach(fn);
   };
-
+  
+  const forEachObjectSource = (element, fn) => {
+	const parent = element.parentNode;
+	if (!parent || parent.tagName !== "OBJECT") {
+	  return;
+	}
+	let sourceTags = getSourceTags(parent);
+	sourceTags.forEach(fn);
+  };  
+  
   const attrsSrc = [SRC];
   const attrsSrcSrcsetSizes = [SRC, SRCSET, SIZES];
   const attrsData = [DATA];
