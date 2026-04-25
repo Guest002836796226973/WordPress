@@ -686,3 +686,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 });
+
+function Of_Preloader() {
+	this.init = this.init.bind(this);
+	this.hidePreloader = this.hidePreloader.bind(this);
+	Of_Preloader.init();
+	return;
+}
