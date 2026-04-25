@@ -12,15 +12,6 @@ Ajouter à l'entête Header.php
  * Requires PHP: 8.3
  * Text Domain: 
  */
-
-    unset( $_SESSION[$name] );
-    session_start();
-    session_unset();
-    session_destroy();
-    session_write_close();
-    setcookie(session_name(),'',0,'/');
-    session_regenerate_id(true);
-    session_set_cookie_params(['lifetime' => 0, 'secure' => true, 'samesite' => 'strict']);
 ?>
 
 <script fetchpriority="high" src="../assets/javascript/vanilla_lazyload_mode.js" crossorigin="anonymous"></script>
