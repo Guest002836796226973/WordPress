@@ -653,10 +653,8 @@ function vanilla_x_lazyload(global, factory) {
 
 // Prélecture
 class ThePreloader {
-	constructor('the-petitpoids-element') {
+	constructor(the_petitpoids_element) {
 		this.preloader = document.getElementById(this.preloaderElement);
-		this.init = this.init.bind(this);
-		this.hidePreloader = this.hidePreloader.bind(this);
 	}
 	fadeOut(element, duration) {
 		return new Promise(resolve => {
@@ -684,8 +682,7 @@ class ThePreloader {
 document.addEventListener('DOMContentLoaded', function() {
 	window.addEventListener('load', () => {
 		const Of_Preloader = new ThePreloader({
-			preloaderElement: 'the-petitpoids-element'
+			preloaderElement: 'the_petitpoids_element'
 		});
-		Of_Preloader.init();
 	});
 });
