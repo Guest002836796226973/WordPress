@@ -1,12 +1,11 @@
-function vanilla_x_lazyload(global, factory) {
+function __vanilla_lazyload(global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.LazyLoad = factory());
-  vanilla_x_lazyload.init();
   return;
-}
+};
 
-(function() { 'use strict';
+function __petitpoids_lazyload() { 'use strict';
 
   const runningOnBrowser = typeof window !== "undefined";
   const isHiDpi = runningOnBrowser && window.devicePixelRatio > 1;
@@ -651,7 +650,7 @@ function vanilla_x_lazyload(global, factory) {
 
   return LazyLoad;
 
-});
+};
 
 // Prélecture
 class ThePreloader {
@@ -683,15 +682,17 @@ class ThePreloader {
 
 document.addEventListener('DOMContentLoaded', function() {
 	window.addEventListener('load', () => {
-		const Of_Preloader = new ThePreloader({
+		const __of_Preloader = new ThePreloader({
 			preloaderElement: 'the_petitpoids_element'
 		});
 	});
 });
 
-function Of_Preloader() {
+function __of_Preloader() {
 	this.init = this.init.bind(this);
 	this.hidePreloader = this.hidePreloader.bind(this);
-	Of_Preloader.init();
-	return;
-}
+	__vanilla_lazyload.init();
+	__petitpoids_lazyload.init();
+    __of_Preloader.init();
+    return;
+};
