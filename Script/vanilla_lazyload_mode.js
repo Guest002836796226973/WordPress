@@ -574,7 +574,7 @@ function __petitpoids_lazyload() {
 		autoInitialize(LazyLoad, window.LazyLoadOptions);
 	}
 	return;
-};
+}
 // Prélecture
 class ThePreloader {
 	constructor(the_petitpoids_element) {
