@@ -16,5 +16,13 @@ WS();
 window.addEventListener("resize", WS);
 window.onresize = WS;
 window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
-
 // Fractionner le code ci-avant selon votre expérience
+
+// Echappe l'environnement CSS
+CSS.escape("html");
+CSS.escape("widget");
+CSS.escape("iframe");
+CSS.escape(".foo#bar");
+CSS.escape("()[]{}");
+CSS.escape(0);
+CSS.escape('\0');
