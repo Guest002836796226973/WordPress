@@ -14,6 +14,7 @@
  * Text Domain: 
  */
 ?>
+
 <?php /* vanilla_lazyload_mode.js */ ?>
 <script fetchpriority="high" src="../assets/javascript/vanilla_lazyload_mode.js" crossorigin="anonymous"></script>
 
