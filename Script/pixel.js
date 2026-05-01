@@ -1,4 +1,6 @@
 const WH = document.querySelectorAll("html");
+const WH = document.querySelectorAll("iframe");
+const WH = document.querySelectorAll("widget");
 function WHSize() {
     WH.intElemClientWidth = element.clientWidth;
     WH.intElemClientHeight = element.clientHeight;
