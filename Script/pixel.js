@@ -15,6 +15,6 @@ function WS() {
 WS();
 window.addEventListener("resize", WS);
 window.onresize = WS;
-window.onresize = function(){ location.reload(WS); }
+window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
 
 // Fractionner le code ci-avant selon votre expérience
