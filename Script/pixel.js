@@ -1,5 +1,5 @@
 const WH = document.querySelectorAll("html");
-function WHSize() {
+function WS() {
     WH.intElemClientWidth = element.clientWidth;
     WH.intElemClientHeight = element.clientHeight;
     WH.intElemOffsetWidth = element.offsetWidth;
@@ -9,15 +9,37 @@ function WHSize() {
     WH.textContent = window.innerWidth;
     WH.textContent = window.innerHeight;
 }
-WHSize();
-window.addEventListener("resize", WHSize);
-window.onresize = WHSize;
-// window.onresize = function(){ location.reload(WHSize); } // Recharger la page lors du redimensionnement
+WS();
+window.addEventListener("resize", WS);
+window.onresize = WS;
+// window.onresize = function(){ location.reload(WS); }
 
-CSS.escape("html");
-CSS.escape("widget");
-CSS.escape("iframe");
-CSS.escape(".foo#bar");
-CSS.escape("()[]{}");
-CSS.escape(0);
-CSS.escape('\0');
+const WHIf = document.querySelectorAll("iframe");
+function WSIf() {
+    WHIf.intElemClientWidth = element.clientWidth;
+    WHIf.intElemClientHeight = element.clientHeight;
+    WHIf.intElemOffsetWidth = element.offsetWidth;
+    WHIf.intElemOffsetHeight = element.offsetHeight;
+    WHIf.Width = window.innerWidth;
+    WHIf.Height = window.innerHeight;
+    WHIf.textContent = window.innerWidth;
+    WHIf.textContent = window.innerHeight;
+}
+WSIf();
+window.addEventListener("resize", WSIf);
+window.onresize = WSIf;
+
+const WHWi = document.querySelectorAll("widget");
+function WSWi() {
+    WHWi.intElemClientWidth = element.clientWidth;
+    WHWi.intElemClientHeight = element.clientHeight;
+    WHWi.intElemOffsetWidth = element.offsetWidth;
+    WHWi.intElemOffsetHeight = element.offsetHeight;
+    WHWi.Width = window.innerWidth;
+    WHWi.Height = window.innerHeight;
+    WHWi.textContent = window.innerWidth;
+    WHWi.textContent = window.innerHeight;
+}
+WSWi();
+window.addEventListener("resize", WSWi);
+window.onresize = WSWi;
