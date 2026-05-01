@@ -1,4 +1,4 @@
-const WH = document.querySelectorAll("#pixel");
+const WH = document.querySelectorAll("html");
 function WHSize() {
     WH.intElemClientWidth = element.clientWidth;
     WH.intElemClientHeight = element.clientHeight;
