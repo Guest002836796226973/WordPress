@@ -21,5 +21,5 @@
 <?php /* pixel.js */ ?>
 <script fetchpriority="high" src="../assets/javascript/pixel.js" crossorigin="anonymous"></script>
 <div id="pixel"> // avant la balise <header>
-</div><!-- .pixel --> // après la balise </footer>
+</div><!-- #pixel --> // après la balise </footer>
 
