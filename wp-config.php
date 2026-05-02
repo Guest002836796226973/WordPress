@@ -11,7 +11,9 @@ session_start();
 session_unset();
 session_destroy();
 session_write_close();
-setcookie(session_name(),'',0,'/');
+
+unset($_COOKIE[$key]);
+setcookie(session_name(),'',0,'/','monsite.fr'); // nom du domaine
 session_regenerate_id(true);
 session_set_cookie_params(['lifetime' => 0, 'secure' => true, 'samesite' => 'strict']);
 
