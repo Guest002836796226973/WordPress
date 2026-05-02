@@ -332,7 +332,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3.org.*$ [NC]
-
 	RewriteRule .* - [F]
 </IfModule>
 
