@@ -5,6 +5,14 @@
 	RewriteCond %{HTTPS} !on
 	RewriteCond %{HTTP_HOST} ^(?:www\.)?mon_site\.fr(?:.*)$ [NC,OR]
 	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,F]
+    RewriteBase /
+	RewriteCond %{ENV:REDIRECT_STATUS} ^$
+	RewriteRule ^index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$1/%2 [R=301,E=no-gzip:1,F]
+	RewriteCond %{REQUEST_FILENAME} -f
+	RewriteRule .? - [L]
+	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/%1$
+	RewriteRule .? %{ENV:BASE}index.php [L,NS]
+	RewriteRule ^(.*) - [E=BASE:%1] [L,NS]
 </IfModule>
 
 <IfModule core>
