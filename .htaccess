@@ -271,7 +271,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} /*.png [NC,OR]
 	RewriteCond %{HTTP_REFERER} /*.svg [NC,OR]
 	RewriteCond %{HTTP_REFERER} /(Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-BoldItalic|CormorantGaramond-Bold|CormorantGaramond-Italic|CormorantGaramond-LightItalic|CormorantGaramond-Light|CormorantGaramond-MediumItalic|CormorantGaramond-Medium|CormorantGaramond-Regular|CormorantGaramond-SemiBoldItalic|CormorantGaramond-SemiBold|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC]
-RewriteRule %{HTTP_REFERER} !http(s)?://(www.)?.mon_site.fr [NS]
+	RewriteRule %{HTTP_REFERER} !http(s)?://(www.)?.mon_site.fr [NS]
 </IfModule>
 
 <IfModule mod_rewrite.c>
