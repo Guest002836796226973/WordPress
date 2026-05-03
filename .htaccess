@@ -10,7 +10,7 @@
 	RewriteRule ^/index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$1/%2 [R=301,E=no-gzip:1,F]
 	RewriteCond %{REQUEST_FILENAME} -f
 	RewriteRule .? - [L]
-	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/.*/%1$
+	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/.*/%1/$1/$2/$
 	RewriteRule ^(.*) - [E=BASE:%1] [L,NS]
 </IfModule>
 
