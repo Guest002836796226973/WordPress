@@ -7,11 +7,11 @@
 	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,F]
     RewriteBase /
 	RewriteCond %{ENV:REDIRECT_STATUS} ^$
-	RewriteRule ^/index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$1/%2 [R=301,E=no-gzip:1,F]
+	RewriteRule ^/index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$1/$2 [R=301,E=no-gzip:1,F]
 	RewriteCond %{REQUEST_FILENAME} -f
 	RewriteRule .? - [L]
 	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/.*/%1/$1/$2/$
-	RewriteRule ^(.*) - [E=BASE:%1] [L,NS]
+	RewriteRule ^(.*) - [N=1] [E=BASE:%1] [L,NS]
 </IfModule>
 
 <IfModule core>
@@ -8043,8 +8043,8 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 # Redirections /mon_dossier (ne pas changer l'ordre du fichier !)
 <IfModule mod_rewrite.c>
 	RewriteBase /
-	RewriteCond %{THE_REQUEST} /mon_dossier/([^\s?]*) [NC]
-	RewriteRule ^ %0 [N,NS]
-	RewriteRule ^(.*)$ mon_dossier/$1
+	RewriteCond %{THE_REQUEST} /mon_dossier/ [NC]
+	RewriteRule ^ % [N,NS]
+	RewriteRule ^(.*) mon_dossier/$1 [E=no-gzip:1,L] [END]
 </IfModule>
 # END mon_fichier
