@@ -48,6 +48,7 @@
 	RewriteCond %{HTTP:Authorization} ^Bearer\s+(.+)$ [NC]
 	RewriteRule .* - [E=AUTH_TOKEN:%1]
 </IfModule>
+
 <IfModule mod_headers.c>
 	Header set Set-Cookie "TOKEN_CONTAINER=%{AUTH_TOKEN}e; __Secure-id=92472928; Secure; Path=/; domain=mon_domaine.fr; SameSite=Strict;  Max-Age=86400;" env=AUTH_TOKEN
 </IfModule>
