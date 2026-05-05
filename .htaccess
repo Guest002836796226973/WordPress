@@ -16,7 +16,7 @@
 	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/.*/%1/$1/$2/$
     RewriteRule ^(.*) - [N=1] [E=BASE:%1] [L,NS]
     RewriteRule (.*)/([!\.]+)(.*) $1$2 [N]
-    RewriteRule ^/index\.html - [CO=mon_site:yes:mon_domaine.fr:0:/]
+    RewriteRule ^/index\.html - [CO=mon_site:yes:mon_domaine.fr:86400:/]
 </IfModule>
 
 <IfModule core>
