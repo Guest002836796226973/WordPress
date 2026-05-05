@@ -331,10 +331,30 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+	RewriteCond %{REQUEST_URI} /(.*youtube) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(.*youtu.be) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(.*youtube-nocookie) [NC,OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [F]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{QUERY_STRING} /(youtube) [NC,OR]
+	RewriteCond %{QUERY_STRING} /(youtu.be) [NC,OR]
+	RewriteCond %{QUERY_STRING} /(youtube-nocookie) [NC,OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
+	RewriteCond %{HTTP_USER_AGENT} ^$
+	RewriteRule .* - [F]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtu.be.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie.*$ [NC]
-	RewriteRule .* - [F]
+	RewriteRule %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 ########################################################################
