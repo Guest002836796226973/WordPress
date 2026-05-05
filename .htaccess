@@ -334,7 +334,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} /(.*youtube) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(.*youtu.be) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(.*youtube-nocookie) [NC,OR]
-	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -342,7 +342,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{QUERY_STRING} /(youtube) [NC,OR]
 	RewriteCond %{QUERY_STRING} /(youtu.be) [NC,OR]
 	RewriteCond %{QUERY_STRING} /(youtube-nocookie) [NC,OR]
-	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 <IfModule mod_rewrite.c>
