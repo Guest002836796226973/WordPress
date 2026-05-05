@@ -196,52 +196,95 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des fichiers sensibles WordPress
 #
 <IfModule core>
-	<Files redirects.db>
-		Require all denied
-	</Files>
-	<files install-helper.php>
-		Order allow,deny
-		Deny from all
-	</files>
-	<files wp-config.php>
-		Order allow,deny
-		Deny from all
-	</files>
-	<files error_log>
-		Order allow,deny
-		Deny from all
-	</files>
-	<files style.css>
-		Order allow,deny
-		Deny from all
-	</files>
-	<FilesMatch "\.(.htaccess|.htpasswd)$">
-		Order allow,deny
-		Deny from all
+	<FilesMatch ".htaccess">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch ".htpasswd">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch ".user.ini">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+    <FilesMatch "index.html">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+    </FilesMatch>
+    <FilesMatch "index.php">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+    </FilesMatch>
+	<FilesMatch "install-helper.php">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "wp-config.php">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "error_log">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "log.html">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "redirects.db">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "style.css">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
+	</FilesMatch>
+	<FilesMatch "style_T5sjO4Y4.css">
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
 	</FilesMatch>
 	<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-		Order allow,deny
-		Deny from all
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
 	</FilesMatch>
 	<FilesMatch "\.(?:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)$">
-		Order allow,deny
-		Deny from all
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
 	</FilesMatch>
 	<FilesMatch "\.(?:3fr|3g2|3gp|aai|ai|apng|art|arw|avi|avif|avs|bgr|bgra|bgro|bie|bmp|bmp2|bmp3|brf|cal|cals|canvas|caption|cin|cip|clip|cmyk|cmyka|cr2|cr3|crw|css|cur|cut|data|dcm|dcr|dcx|dds|dfont|dng|dpx|dxt1|dxt5|epdf|epi|eps|eps2|eps3|epsf|epsi|ept|ept2|ept3|erf|fax|file|fits|fractal|ftp|fts|g3|g4|gif|gif87|gradient|gray|graya|group4|h|hald|hdr|heic|histogram|hrz|htm|html|http|https|icb|ico|icon|iiq|info|inline|ipl|isobrl|isobrl6|j2c|j2k|jbg|jbig|jng|jnx|jp2|jpc|jpe|jpeg|jpg|jpm|jps|jpt|js|json|k25|kdc|label|m2v|m4v|mac|magick|map|mask|mat|matte|mef|miff|mkv|mng|mono|mov|mp4|mpc|mpg|mrw|msl|mtv|mvg|nef|nrw|null|orf|otb|otf|pal|palm|pam|pattern|pbm|pcd|pcds|pcl|pct|pcx|pdb|pdf|pdfa|pef|pes|pfa|pfb|pfm|pgm|pgx|picon|pict|pix|pjpeg|plasma|png|png00|png24|png32|png48|png64|png8|pnm|pocketmod|ppm|preview|ps|ps2|ps3|psb|psd|ptif|pwp|radial-gradient|raf|ras|raw|rgb|rgba|rgbo|rgf|rla|rle|rmf|rw2|scr|sct|sfw|sgi|shtml|six|sixel|sparse-color|sr2|srf|stegano|sun|svg|text|tga|thumbnail|tiff|tiff64|tile|tim|ttc|ttf|txt|ubrl|ubrl6|uil|uyvy|vda|vicar|vid|video|viff|vips|vst|wbmp|webm|webp|wmv|wpg|x|x3f|xbm|xc|xcf|xpm|xps|xv|xwd|ycbcr|ycbcra|yuv)$">
-		Order allow,deny
-		Deny from all
+        Order Allow,Deny
+        Allow from https://mon_site.fr
+        Deny from all
 	</FilesMatch>
 </IfModule>
 
 ########################################################################
 #	Protection des types de fichiers de l'utilisateur
 #
-#<IfModule mod_setenvif.c>
-#	SetEnvIf Referer "!https://petitdoigts.fr" localreferer
-#	<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-#		Require env localreferer
-#	</FilesMatch>
-#</IfModule>
+<IfModule mod_setenvif.c>
+	SetEnvIf Referer "!https://mon_site.fr" localreferer
+	<FilesMatch "\.(?:apk|dat|exe|dll|idx|ipa|json|xml)$">
+		Require all denied
+	</FilesMatch>
+    <FilesMatch "^(/data?)$">
+		Require all denied
+    </FilesMatch>
+</IfModule>
 
 ########################################################################
 #	Protection POST
