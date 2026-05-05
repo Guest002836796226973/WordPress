@@ -251,11 +251,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
         Allow from !https://mon_site.fr
         Deny from all
 	</FilesMatch>
-	<FilesMatch "style_T5sjO4Y4.css">
-        Order Allow,Deny
-        Allow from !https://mon_site.fr
-        Deny from all
-	</FilesMatch>
 	<FilesMatch "\.(?:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
         Order Allow,Deny
         Allow from !https://mon_site.fr
