@@ -195,9 +195,10 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 ########################################################################
 #	Protection des fichiers sensibles WordPress
 #
+########################################################################
+#	Protection des fichiers sensibles WordPress
+#
 <IfModule !core>
-	SetEnvIf User-Agent ^!petitdoigts\.fr utilisateur
-#		 Allow from env=utilisateur
 	<FilesMatch ".htaccess">
 		Require all denied
 	</FilesMatch>
@@ -231,7 +232,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	<FilesMatch "blocks.php">
 		Require all denied
 	</FilesMatch>
-	<FilesMatch "cache-compat.php">
+		<FilesMatch "cache-compat.php">
 		Require all denied
 	</FilesMatch>
 	<FilesMatch "cache.php">
@@ -247,9 +248,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 		Require all denied
 	</FilesMatch>
 	<FilesMatch "custom-header.php">
-		Require all denied
-	</FilesMatch>
-	<FilesMatch "edit-comments.php">
 		Require all denied
 	</FilesMatch>
 	<FilesMatch "edit-form-blocks.php">
@@ -388,9 +386,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #### Ajout du répertoire de thème
 #
 #
-	<FilesMatch "comments.php">
-		Require all denied
-	</FilesMatch>
 	<FilesMatch "content.php">
 		Require all denied
 	</FilesMatch>
@@ -438,8 +433,14 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #### Ajout du répertoire racine édition et réponse de poste
 #
 #
+	<FilesMatch "comments.php">
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "edit.php">
         Require all denied
+	</FilesMatch>
+	<FilesMatch "edit-comments.php">
+		Require all denied
 	</FilesMatch>
 	<FilesMatch "post.php">
         Require all denied
