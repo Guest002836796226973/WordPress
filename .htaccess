@@ -195,673 +195,426 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 ########################################################################
 #	Protection des fichiers sensibles WordPress
 #
-<IfModule core>
-    SetEnvIf User-Agent ^!mon_site\.fr utilisateur
+<IfModule !core>
+	SetEnvIf User-Agent ^!petitdoigts\.fr utilisateur
+#		 Allow from env=utilisateur
 	<FilesMatch ".htaccess">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch ".htpasswd">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch ".user.ini">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "admin-ajax.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "admin-functions.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "admin-header.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "async-upload.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "block-editor.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "block-template-utils.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "block-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "blocks.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "cache-compat.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "cache.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "comment-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "comment.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "custom-background.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "custom-header.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "edit-comments.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "edit-form-blocks.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "edit-form-comment.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "edit.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "formatting.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "functions.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "functions.wp-scripts.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "functions.wp-styles.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "general-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-    <FilesMatch "index.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "install-helper.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "install-helper.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "link-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "load-styles.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "media-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "media-upload.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "media.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "menu-header.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "nav-menu-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "nav-menu.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "nav-menus.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "option.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "options-general.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "options.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "plugin-install.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "plugins.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "post-template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "post.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "profile.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "redirects.db">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "session.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "site-editor.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "style-engine.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "template-loader.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "template.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "theme-install.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "theme-templates.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "theme.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "themes.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "update-core.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "update.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "upgrade-functions.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "user-edit.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "user-new.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "user.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "users.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "widgets-form-blocks.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "widgets.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "wp-config.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
+		Require all denied
+	</FilesMatch>
 #
 #### Ajout du répertoire de thème
 #
 #
 	<FilesMatch "comments.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "content.php">
-		Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "content-page.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "content-none.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "footer.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "functions.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "header.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-    <FilesMatch "index.html">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "search.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "sidebar.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "style.css">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
+		Require all denied
 	</FilesMatch>
-	<FilesMatch "style_T5sjO4Y4.css">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
+	<FilesMatch "content.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "content-page.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "content-none.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "footer.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "functions.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "header.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "index.html">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "search.php">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "sidebar.php">
+		Require all denied
 	</FilesMatch>
 	<FilesMatch "theme.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-#
-#### Ajout de la chatbox
-#
-#
-	<FilesMatch "log.html">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-	<FilesMatch "post.php">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
-    </FilesMatch>
-#
-#### Ajout des fonts
-#
-#
-	<FilesMatch "Akronim-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "AlumniSansPinstripe-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "AmaticSC-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "AnnieUseYourTelescope-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Asset-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "BhuTukaExpandedOne-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "BigelowRules-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "BungeeHairline-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "BungeeShade-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CinzelDecorative-Black.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-Light.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-LightItalic.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-Italic.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-Medium.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-MediumItalic.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-Bold.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "CormorantGaramond-BoldItalic.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Danfo-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Doto-Black.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Eater-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "EduAUVICWANTArrows-VariableFont_wght.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "FasterOne-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "FrederickatheGreat-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Georgia.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "GloriaHallelujah-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "GreatVibes-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Gruppo-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "JuliusSansOne-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "LuckiestGuy-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Matemasie-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Monoton-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "MountainsofChristmas-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "MysteryQuest-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Nosifer-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "PlayfairDisplay-VariableFont_wght.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "PlaywriteBEWALGuides-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "RubikDirt-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "RubikGlitchPop-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "RubikPuddles-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "RubikScribble-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "RuslanDisplay-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Sacramento-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "SirinStencil-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "SnowburstOne-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
-	</FilesMatch>
-	<FilesMatch "Wallpoet-Regular.ttf">
-		Order Allow,Deny
-		Allow from !mon_site\.fr -
-		Deny from all
+		Require all denied
 	</FilesMatch>
 #
 #### Ajout des extensions
 #
 #
-	<FilesMatch ".+(zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
+	<FilesMatch ".+(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
+        Require all denied
 	</FilesMatch>
-	<FilesMatch ".+(https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)$">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
+	<FilesMatch ".+(?i:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)$">
+        Require all denied
 	</FilesMatch>
-	<FilesMatch "\.(?:3fr|3g2|3gp|aai|ai|apng|art|arw|avi|avif|avs|bgr|bgra|bgro|bie|bmp|bmp2|bmp3|brf|cal|cals|canvas|caption|cin|cip|clip|cmyk|cmyka|cr2|cr3|crw|css|cur|cut|data|dcm|dcr|dcx|dds|dfont|dng|dpx|dxt1|dxt5|epdf|epi|eps|eps2|eps3|epsf|epsi|ept|ept2|ept3|erf|fax|file|fits|fractal|ftp|fts|g3|g4|gif|gif87|gradient|gray|graya|group4|h|hald|hdr|heic|histogram|hrz|htm|html|http|https|icb|ico|icon|iiq|info|inline|ipl|isobrl|isobrl6|j2c|j2k|jbg|jbig|jng|jnx|jp2|jpc|jpe|jpeg|jpg|jpm|jps|jpt|js|json|k25|kdc|label|m2v|m4v|mac|magick|map|mask|mat|matte|mef|miff|mkv|mng|mono|mov|mp4|mpc|mpg|mrw|msl|mtv|mvg|nef|nrw|null|orf|otb|otf|pal|palm|pam|pattern|pbm|pcd|pcds|pcl|pct|pcx|pdb|pdf|pdfa|pef|pes|pfa|pfb|pfm|pgm|pgx|picon|pict|pix|pjpeg|plasma|png|png00|png24|png32|png48|png64|png8|pnm|pocketmod|ppm|preview|ps|ps2|ps3|psb|psd|ptif|pwp|radial-gradient|raf|ras|raw|rgb|rgba|rgbo|rgf|rla|rle|rmf|rw2|scr|sct|sfw|sgi|shtml|six|sixel|sparse-color|sr2|srf|stegano|sun|svg|text|tga|thumbnail|tiff|tiff64|tile|tim|ttc|ttf|txt|ubrl|ubrl6|uil|uyvy|vda|vicar|vid|video|viff|vips|vst|wbmp|webm|webp|wmv|wpg|x|x3f|xbm|xc|xcf|xpm|xps|xv|xwd|ycbcr|ycbcra|yuv)$">
-        Order Allow,Deny
-        Allow from !mon_site\.fr -
-        Deny from all
+</IfModule>
+
+<IfModule core>
+#
+#### Ajout du répertoire racine édition et réponse de poste
+#
+#
+	<FilesMatch "edit.php">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "post.php">
+        Require all denied
+	</FilesMatch>
+#
+#### Ajout du répertoire de thème
+#
+#
+	<FilesMatch "style.css">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "style_.css">
+        Require all denied
+	</FilesMatch>
+#
+#### Ajout de la chatbox
+#
+#
+	<FilesMatch "log.html">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "post.php">
+        Require all denied
+	</FilesMatch>
+#
+#### Ajout des fonts
+#
+#
+	<FilesMatch "Akronim-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "AlumniSansPinstripe-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "AmaticSC-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "AnnieUseYourTelescope-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Asset-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "BhuTukaExpandedOne-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "BigelowRules-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "BungeeHairline-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "BungeeShade-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CinzelDecorative-Black.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-Light.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-LightItalic.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-Italic.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-Medium.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-MediumItalic.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-Bold.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "CormorantGaramond-BoldItalic.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Danfo-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Doto-Black.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Eater-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "EduAUVICWANTArrows-VariableFont_wght.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "FasterOne-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "FrederickatheGreat-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Georgia.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "GloriaHallelujah-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "GreatVibes-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Gruppo-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "JuliusSansOne-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "LuckiestGuy-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Matemasie-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Monoton-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "MountainsofChristmas-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "MysteryQuest-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Nosifer-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "PlayfairDisplay-VariableFont_wght.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "PlaywriteBEWALGuides-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "RubikDirt-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "RubikGlitchPop-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "RubikPuddles-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "RubikScribble-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "RuslanDisplay-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Sacramento-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "SirinStencil-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "SnowburstOne-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+	<FilesMatch "Wallpoet-Regular.ttf">
+        Require all denied
+	</FilesMatch>
+#
+#### Ajout des extensions
+#
+#
+    <FilesMatch "^(?i:text/|application/xhtml\+xml)">
+        Require all denied
+    </FilesMatch>
+	<FilesMatch "\.(?i:3fr|3g2|3gp|aai|ai|apng|art|arw|avi|avif|avs|bgr|bgra|bgro|bie|bmp|bmp2|bmp3|brf|cal|cals|canvas|caption|cin|cip|clip|cmyk|cmyka|cr2|cr3|crw|css|cur|cut|data|dcm|dcr|dcx|dds|dfont|dng|dpx|dxt1|dxt5|epdf|epi|eps|eps2|eps3|epsf|epsi|ept|ept2|ept3|erf|fax|file|fits|fractal|ftp|fts|g3|g4|gif|gif87|gradient|gray|graya|group4|h|hald|hdr|heic|histogram|hrz|htm|html|http|https|icb|ico|icon|iiq|info|inline|ipl|isobrl|isobrl6|j2c|j2k|jbg|jbig|jng|jnx|jp2|jpc|jpe|jpeg|jpg|jpm|jps|jpt|js|json|k25|kdc|label|m2v|m4v|mac|magick|map|mask|mat|matte|mef|miff|mkv|mng|mono|mov|mp4|mpc|mpg|mrw|msl|mtv|mvg|nef|nrw|null|orf|otb|otf|pal|palm|pam|pattern|pbm|pcd|pcds|pcl|pct|pcx|pdb|pdf|pdfa|pef|pes|pfa|pfb|pfm|pgm|pgx|picon|pict|pix|pjpeg|plasma|png|png00|png24|png32|png48|png64|png8|pnm|pocketmod|ppm|preview|ps|ps2|ps3|psb|psd|ptif|pwp|radial-gradient|raf|ras|raw|rgb|rgba|rgbo|rgf|rla|rle|rmf|rw2|scr|sct|sfw|sgi|shtml|six|sixel|sparse-color|sr2|srf|stegano|sun|svg|text|tga|thumbnail|tiff|tiff64|tile|tim|ttc|ttf|txt|ubrl|ubrl6|uil|uyvy|vda|vicar|vid|video|viff|vips|vst|wbmp|webm|webp|wmv|wpg|x|x3f|xbm|xc|xcf|xpm|xps|xv|xwd|ycbcr|ycbcra|yuv)$">
+        Require all denied
 	</FilesMatch>
 </IfModule>
 
@@ -870,7 +623,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_setenvif.c>
 	SetEnvIf Referer "!https://petitdoigts.fr" localreferer
-	<FilesMatch "\.(?:apk|dat|exe|dll|idx|ipa|json|xml)$">
+	<FilesMatch "^(?i:apk|dat|exe|dll|idx|ipa|json|xml)">
 		Require all denied
 	</FilesMatch>
     <FilesMatch ".+(/data?)$">
