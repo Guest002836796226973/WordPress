@@ -196,7 +196,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des fichiers sensibles WordPress
 #
 <IfModule core>
-    SetEnvIf User-Agent ^mon_site\.fr utilisateur
+    SetEnvIf User-Agent ^!mon_site\.fr utilisateur
 	<FilesMatch ".htaccess">
         Order Allow,Deny
         Allow from env=utilisateur
