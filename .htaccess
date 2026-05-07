@@ -197,14 +197,14 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule !core>
 	<FilesMatch ".+(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)$">
-        Require all denied
+		Require all denied
 	</FilesMatch>
 	<FilesMatch ".+(?i:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)$">
-        Require all denied
+		Require all denied
 	</FilesMatch>
-    <FilesMatch "^(?i:text/|application/xhtml\+xml)">
-        Require all denied
-    </FilesMatch>
+	<FilesMatch ".+(?i:text/|application/xhtml\+xml)">
+		Require all denied
+	</FilesMatch>
 	<FilesMatch "^(?i:\.apk|\.dat|\.exe|\.dll|\.idx|\.ipa|\.json|\.xml)">
 		Require all denied
 	</FilesMatch>
