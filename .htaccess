@@ -247,7 +247,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des types de fichiers de l'utilisateur
 #
 <IfModule mod_setenvif.c>
-	SetEnvIf Referer "!https://petitdoigts.fr" localreferer
+	SetEnvIf Referer "!https://mon_site.fr" localreferer
 	<FilesMatch "^.*\.(?i:apk|dat|exe|dll|idx|ipa|json|xml)">
 		Require all denied
 	</FilesMatch>
@@ -342,7 +342,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} /(.*youtube\.com) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(.*youtu\.be) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(.*youtube-nocookie\.com) [NC,OR]
-	RewriteCond %{HTTP_REFERER} !https://petitdoigts.fr
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -350,7 +350,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{QUERY_STRING} (youtube) [NC,OR]
 	RewriteCond %{QUERY_STRING} (youtu\.be) [NC,OR]
 	RewriteCond %{QUERY_STRING} (youtube-nocookie) [NC]	
-	RewriteCond %{HTTP_REFERER} !https://petitdoigts.fr
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -359,7 +359,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtu.be.*$ [NC,OR]
 	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie.*$ [NC]
-	RewriteRule %{HTTP_REFERER} !https://petitdoigts.fr
+	RewriteRule %{HTTP_REFERER} !https://mon_site.fr
 </IfModule>
 
 ########################################################################
