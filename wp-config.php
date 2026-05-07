@@ -13,9 +13,9 @@ session_destroy();
 session_write_close();
 
 unset($_COOKIE[$key]);
-setcookie(session_name(),'',0,'/','monsite.fr'); // nom du domaine
+setcookie(session_name(),'',86400,'/','monsite.fr'); // nom du domaine
 session_regenerate_id(true);
-session_set_cookie_params(['lifetime' => 0, 'secure' => true, 'samesite' => 'strict']);
+session_set_cookie_params(['lifetime' => 86400, 'secure' => true, 'samesite' => 'strict']);
 
 // url site
 define('WP_SITEURL', 'https://monsite.fr');
