@@ -217,9 +217,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 <IfModule core>
-	<FilesMatch "^(404|bulle-animation|comment-tinymce|couverture|impression-de-page|instructions-bbp|livre-300-000|livre-page|style|style-zone-alerte|style_|tinymce|un-arameen-nomade)\.css">
-		Require all denied
-	</FilesMatch>
 	<FilesMatch "^(page|single|functions|assets|header|footer|comments|theme|sidebar|content-page|content|content-none|search)\.php">
 		Require all denied
 	</FilesMatch>
