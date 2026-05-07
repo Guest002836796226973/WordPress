@@ -3,7 +3,6 @@
 <p>07 - MAI - 2026</p>
 <p>Le fichier .htaccess est mise à jour normalement sans bogue.</p>
 <p>Signaler ses bogues en suivant l'adresse https://petitdoigts.fr/sujet/html-la-securite.</p>
-<br />
 <p>Découvrir les indispensables des fichiers wp-config.php (corrigé), .user.ini et robots.txt.</p>
 <br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
