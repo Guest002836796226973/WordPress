@@ -258,7 +258,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 
 <IfModule mod_setenvif.c>
 	SetEnvIf Referer "https://mon_site.fr" localreferer
-    <FilesMatch "^.*(mon_fichier\.php|mon_fichier_2\.php)$">
+    <FilesMatch "^(data?|.*data?|post\.php)$">
 		Require env localreferer
     </FilesMatch>
 </IfModule>
