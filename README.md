@@ -7,4 +7,6 @@
 <br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
 <hr />
-
+<h1>Script mode</h1>
+<p>Encapsuler votre thème avec les scripts vanilla_lazyload_mode.js et pixel.js</p>
+<p>Merci à Verlok pour son script original https://github.com/verlok/vanilla-lazyload</p>
