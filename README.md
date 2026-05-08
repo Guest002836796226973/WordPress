@@ -6,9 +6,9 @@
 <p>Découvrir les indispensables des fichiers wp-config.php (corrigé), .user.ini et robots.txt.</p>
 <br />
 <p>08 - MAI - 2026</p>
-Correction des blocs .htaccess suivant :
-#	Protection des types de fichiers de l'utilisateur
-#	Protection des fichiers sensibles WordPress
+<p>Correction des blocs .htaccess suivant :</p>
+<p>#	Protection des types de fichiers de l'utilisateur</p>
+<p>#	Protection des fichiers sensibles WordPress</p>
 <br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
 <hr />
