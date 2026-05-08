@@ -7,6 +7,7 @@
 <br />
 <p>08 - MAI - 2026</p>
 <p>Correction des blocs .htaccess suivant :</p>
+<p>#	Fixe utilisateur de site et duration des fichiers mis en cache</p>
 <p>#	Protection des fichiers sensibles WordPress</p>
 <p>#	Protection des types de fichiers de l'utilisateur</p>
 <br />
