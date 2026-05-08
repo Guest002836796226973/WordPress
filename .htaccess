@@ -199,19 +199,19 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des fichiers sensibles WordPress
 #
 <IfModule !core>
-	<FilesMatch ".+(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)">
-		Require all denied
-	</FilesMatch>
-	<FilesMatch ".+\.(?i:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)">
-		Require all denied
-	</FilesMatch>
 	<FilesMatch ".+(?i:text/|application/xhtml\+xml)">
 		Require all denied
 	</FilesMatch>
-	<FilesMatch "^=.*(?i:\.apk|\.dat|\.exe|\.dll|\.idx|\.ipa|\.json|\.xml)">
+	<FilesMatch ".+(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)">
 		Require all denied
 	</FilesMatch>
-	<FilesMatch ".+(data?|.*data?|\.data?)$">
+	<FilesMatch ".+(.*)(?i:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch "^(.*)(?i:\.apk|\.dat|\.exe|\.dll|\.idx|\.ipa|\.json|\.xml)">
+		Require all denied
+	</FilesMatch>
+	<FilesMatch ".+(\.data?|.*\.data?|.+/data?|.+\./data?)">
 		Require all denied
 	</FilesMatch>
 </IfModule>
@@ -246,16 +246,6 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 ########################################################################
 #	Protection des types de fichiers de l'utilisateur
 #
-<IfModule mod_setenvif.c>
-	SetEnvIf Referer "mon_site.fr" localreferer
-	<FilesMatch "^.*\.(?i:apk|dat|exe|dll|idx|ipa|json|xml)">
-		Require all denied
-	</FilesMatch>
-    <FilesMatch "^(\.data?|.*\.data?|.+/data?|.+\./data?)">
-		Require all denied
-    </FilesMatch>
-</IfModule>
-
 <IfModule mod_setenvif.c>
 	SetEnvIf Referer "mon_site.fr" localreferer
     <FilesMatch "^(data?|.*data?|post\.php)$">
