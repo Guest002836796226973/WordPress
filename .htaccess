@@ -247,7 +247,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des types de fichiers de l'utilisateur
 #
 <IfModule mod_setenvif.c>
-	SetEnvIf Referer "!https://mon_site.fr" localreferer
+	SetEnvIf Referer "mon_site.fr" localreferer
 	<FilesMatch "^.*\.(?i:apk|dat|exe|dll|idx|ipa|json|xml)">
 		Require all denied
 	</FilesMatch>
@@ -257,7 +257,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 </IfModule>
 
 <IfModule mod_setenvif.c>
-	SetEnvIf Referer "https://mon_site.fr" localreferer
+	SetEnvIf Referer "mon_site.fr" localreferer
     <FilesMatch "^(data?|.*data?|post\.php)$">
 		Require env localreferer
     </FilesMatch>
