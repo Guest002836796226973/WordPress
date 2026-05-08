@@ -7,8 +7,8 @@
 <br />
 <p>08 - MAI - 2026</p>
 <p>Correction des blocs .htaccess suivant :</p>
-<p>#	Protection des types de fichiers de l'utilisateur</p>
 <p>#	Protection des fichiers sensibles WordPress</p>
+<p>#	Protection des types de fichiers de l'utilisateur</p>
 <br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
 <hr />
