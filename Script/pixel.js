@@ -1,7 +1,7 @@
 // Le mode multi-selectors à un meilleur retour ?!
 const WH = document.querySelectorAll("html");
-const WH = document.querySelectorAll("iframe");
-const WH = document.querySelectorAll("widget");
+// const WH = document.querySelectorAll("iframe");
+// const WH = document.querySelectorAll("widget");
 function WS() {
     WH.intElemClientWidth = element.clientWidth;
     WH.intElemClientHeight = element.clientHeight;
@@ -22,7 +22,6 @@ window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne 
 CSS.escape("html");
 CSS.escape("widget");
 CSS.escape("iframe");
-CSS.escape(".foo#bar");
 CSS.escape("()[]{}");
 CSS.escape(0);
 CSS.escape('\0');
