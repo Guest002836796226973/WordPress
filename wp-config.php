@@ -6,7 +6,6 @@ header('Surrogate-Control: BigPipe/1.0');
 header('X-Accel-Buffering: no');
 
 ini_set('session.cookie_secure', 'On');
-unset( $_SESSION[$name] );
 // session_start(); // Démarrage intempestif de la session "ex:chat"
 session_unset();
 session_destroy();
