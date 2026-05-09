@@ -22,3 +22,6 @@
 <p>Fiddles https://jsfiddle.net/Petitpoids/wma1dexs/</p>
 <br />
 <p>Merci à Verlok pour son script original https://github.com/verlok/vanilla-lazyload</p>
+<hr />
+<h1>Function mode</h1>
+<p>(script/function.php > thème_wp) Youtube cookies claire, nettoyage.</p>
