@@ -15,8 +15,10 @@
 <p>Correction du bloc .htaccess suivant :</p>
 <p>#	Fixe utilisateur de site et duration des fichiers mis en cache</p>
 <br />
-Merci à shapeSpace https://perishablepress.com/category/wordpress/
+<p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
 <hr />
 <h1>Script mode</h1>
 <p>Encapsuler votre thème avec les scripts vanilla_lazyload_mode.js et pixel.js</p>
+<p>Fiddles https://jsfiddle.net/Petitpoids/wma1dexs/</p>
+<br />
 <p>Merci à Verlok pour son script original https://github.com/verlok/vanilla-lazyload</p>
