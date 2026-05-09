@@ -11,6 +11,10 @@
 <p>#	Protection des fichiers sensibles WordPress</p>
 <p>#	Protection des types de fichiers de l'utilisateur</p>
 <br />
+<p>09 - MAI - 2026</p>
+<p>Correction du bloc .htaccess suivant :</p>
+#	Fixe utilisateur de site et duration des fichiers mis en cache
+<br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
 <hr />
 <h1>Script mode</h1>
