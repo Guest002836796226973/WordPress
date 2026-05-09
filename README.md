@@ -13,7 +13,7 @@
 <br />
 <p>09 - MAI - 2026</p>
 <p>Correction du bloc .htaccess suivant :</p>
-#	Fixe utilisateur de site et duration des fichiers mis en cache
+<p>#	Fixe utilisateur de site et duration des fichiers mis en cache</p>
 <br />
 Merci à shapeSpace https://perishablepress.com/category/wordpress/
 <hr />
