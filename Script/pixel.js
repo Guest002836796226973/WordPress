@@ -12,7 +12,6 @@ function WS() {
     WH.textContent = window.innerWidth;
     WH.textContent = window.innerHeight;
 }
-WS();
 window.addEventListener("resize", WS);
 window.onresize = WS;
 window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
