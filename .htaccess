@@ -293,6 +293,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteCond %{REQUEST_URI} /(.*)\.(css|js|pdf|png|svg|ttf|webp|woff2) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(.*)(<h1|<h2|<h3|<h4|<h5|<h6|<p|<a|<video|<iframe|<img|<link|<meta)(.*) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(?i:Akronim-Regular|AlumniSansPinstripe-Regular|AmaticSC-Regular|AnnieUseYourTelescope-Regular|Asset-Regular|BhuTukaExpandedOne-Regular|BigelowRules-Regular|BungeeHairline-Regular|BungeeShade-Regular|CinzelDecorative-Black|CormorantGaramond-Light|CormorantGaramond-LightItalic|CormorantGaramond-Regular|CormorantGaramond-Italic|CormorantGaramond-Medium|CormorantGaramond-MediumItalic|CormorantGaramond-Bold|CormorantGaramond-BoldItalic|Danfo-Regular|Doto-Black|Eater-Regular|EduAUVICWANTArrows-VariableFont_wght|FasterOne-Regular|FrederickatheGreat-Regular|Georgia|GloriaHallelujah-Regular|GreatVibes-Regular|Gruppo-Regular|JuliusSansOne-Regular|LuckiestGuy-Regular|Matemasie-Regular|Monoton-Regular|MountainsofChristmas-Regular|MysteryQuest-Regular|Nosifer-Regular|PlayfairDisplay-VariableFont_wght|PlaywriteBEWALGuides-Regular|RubikDirt-Regular|RubikGlitchPop-Regular|RubikPuddles-Regular|RubikScribble-Regular|RuslanDisplay-Regular|Sacramento-Regular|SirinStencil-Regular|SnowburstOne-Regular|Wallpoet-Regular)\.ttf [NC]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 	RewriteCond %{HTTP_USER_AGENT} ^$
 	RewriteRule .* - [F]
 </IfModule>
