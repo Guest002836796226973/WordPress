@@ -38,5 +38,5 @@ function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr)
 	} else if ( str_contains($attr, $replace) ) {
        $attr = str_replace( $replace, 'youtube-nocookie.com', $attr);
 	}
-    return $html;
+    return;
 }
