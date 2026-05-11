@@ -125,7 +125,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 		Header set Expect-CT "max-age=86400, enforce, report-uri https://mon_site.fr/mon_dossier/wp-content/report"
 		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
 		<IfModule mod_setenvif.c>
-        SetEnvIfNoCase Referer "petitdoigts.fr" localreferer
+        SetEnvIfNoCase Referer "mon_site.fr" localreferer
 		    <FilesMatch "^(.*)(?i:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)">
 			    Header unset If-Modified-Since
 			    Header unset If-Unmodified-Since
