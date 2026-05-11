@@ -14,28 +14,29 @@
 
 
 /* patch youtube */
-add_filter('embed_oembed_html', 'html_youtube_replace', 10, 6);
-function html_youtube_replace( $html, $cached_html, $url, $content, $post_id, $attr) {
-    if (str_contains($html, $strings_to_replace)) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $html = str_replace( $strings_to_replace, 'youtube-nocookie.com', $html);
-    } else if ( str_contains($cached_html, $strings_to_replace) ) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $cached_html = str_replace( $strings_to_replace, 'youtube-nocookie.com', $cached_html);
-	} else if ( str_contains($url, $strings_to_replace) ) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $url = str_replace( $strings_to_replace, 'youtube-nocookie.com', $url);
-	} else if ( str_contains($content, $strings_to_replace) ) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $content = str_replace( $strings_to_replace, 'youtube-nocookie.com', $content);
-	} else if ( str_contains($post_id, $strings_to_replace) ) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $post_id = str_replace( $strings_to_replace, 'youtube-nocookie.com', $post_id);
-	} else if ( str_contains($attr, $strings_to_replace) ) {
-       $strings_to_replace = array( 'youtube.com', 'youtu.be' );
-       $attr = str_replace( $strings_to_replace, 'youtube-nocookie.com', $attr);
-	}	
-    return $strings_to_replace;
+add_filter('embed_oembed_html', 'replace_youtube', 10, 6);
+function replace_youtube( $html, $cached_html, $url, $content, $post_id, $attr) {
+    $fragmenter = parse_url($url);
+	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragmenter['host']);
+	if ( !$you_t ) {
+        $html = str_replace( $you_t, 'youtube-nocookie.com', $html );
+    }	
+    $iframe_yt = preg_match( '/<iframe[^>]*>/', $html );
+    $replace = array( 'youtube.com', 'youtu.be' ); 
+    if ( !$iframe_yt ) {
+        $iframe_yt = str_replace( $replace, 'youtube-nocookie.com', $html );
+    } else if (str_contains($html, $replace)) {
+       $html = str_replace( $replace, 'youtube-nocookie.com', $html);
+    } else if ( str_contains($cached_html, $replace) ) {
+       $cached_html = str_replace( $replace, 'youtube-nocookie.com', $cached_html);
+	} else if ( str_contains($url, $replace) ) {
+       $url = str_replace( $replace, 'youtube-nocookie.com', $url);
+	} else if ( str_contains($content, $replace) ) {
+       $content = str_replace( $replace, 'youtube-nocookie.com', $content);
+	} else if ( str_contains($post_id, $replace) ) {
+       $post_id = str_replace( $replace, 'youtube-nocookie.com', $post_id);
+	} else if ( str_contains($attr, $replace) ) {
+       $attr = str_replace( $replace, 'youtube-nocookie.com', $attr);
+	}
+    return $html;
 }
-
-?>
