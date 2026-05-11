@@ -5,15 +5,8 @@
 <p>Signaler ses bogues en suivant l'adresse https://petitdoigts.fr/sujet/html-la-securite.</p>
 <p>Découvrir les indispensables des fichiers wp-config.php (corrigé), .user.ini et robots.txt.</p>
 <br />
-<p>08 - MAI - 2026</p>
-<p>Correction des blocs .htaccess suivant :</p>
-<p>#	Fixe utilisateur de site et duration des fichiers mis en cache</p>
-<p>#	Protection des fichiers sensibles WordPress</p>
-<p>#	Protection des types de fichiers de l'utilisateur</p>
-<br />
-<p>09 - MAI - 2026</p>
-<p>Correction du bloc .htaccess suivant :</p>
-<p>#	Fixe utilisateur de site et duration des fichiers mis en cache</p>
+<p>11 - MAI - 2026</p>
+<p>Correction des blocs .htaccess :</p>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
 <hr />
