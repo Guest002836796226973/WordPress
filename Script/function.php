@@ -14,8 +14,8 @@
 
 
 /* patch youtube */
-add_filter('embed_oembed_html', 'replace_youtube', 10, 6);
-function replace_youtube( $html, $cached_html, $url, $content, $post_id, $attr) {
+add_filter('embed_oembed_html', 'remplace_youtube', 10, 6);
+function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr) {
     $fragmenter = parse_url($url);
 	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragmenter['host']);
 	if ( !$you_t ) {
