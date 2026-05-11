@@ -334,10 +334,10 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{REQUEST_URI} /(.*)youtube(.*) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(.*)(youtube\.com) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(.*)(youtu\.be) [NC,OR]
-	RewriteCond %{REQUEST_URI} /(.*)(youtube-nocookie\.com) [NC]
+	RewriteCond %{REQUEST_URI} /youtube(.*) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(youtube\.com) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(youtu\.be) [NC,OR]
+	RewriteCond %{REQUEST_URI} /(youtube-nocookie\.com) [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
@@ -351,9 +351,9 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtu.be.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie.*$ [NC]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtube.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtu.be.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtube-nocookie.*$ [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
@@ -362,14 +362,15 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?.*googleapis.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?.*gstatic.*$ [NC,OR]
-##	RewriteCond %{HTTP_REFERER} ^http(s)?://(jnn-pa.)?.*googleapis.*$ [NC,OR]   # Bloque l'accès direct via la barre HTML du navigateur
-#	RewriteCond %{HTTP_REFERER} ^http(s)?://(play.)?.*google.*$ [NC,OR]
-#	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*google.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*youtube-nocookie.*$ [NC,OR]
-	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?.*w3.org.*$ [NC]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?googleapis.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(fonts.)?gstatic.*$ [NC,OR]
+##	RewriteCond %{HTTP_REFERER} ^http(s)?://(jnn-pa.)?googleapis.*$ [NC,OR]
+#	RewriteCond %{HTTP_REFERER} ^http(s)?://(play.)?google.*$ [NC,OR]
+#	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?google.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtube.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtu.be.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?youtube-nocookie.*$ [NC,OR]
+	RewriteCond %{HTTP_REFERER} ^http(s)?://(www.)?w3.org.*$ [NC]
 	RewriteRule .* - [F]
 </IfModule>
 
