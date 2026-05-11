@@ -19,7 +19,7 @@ function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr)
     $i = 1;
     do {
 	$i;
-	// $i++; // compte à rebours;
+	// $i++; // compte de _ > _;
     $fragmenter = parse_url($url);
 	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragmenter['host']);
 	if ( !$you_t ) {
