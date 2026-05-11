@@ -207,7 +207,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	RewriteEngine On
 	RewriteCond %{REQUEST_METHOD} POST
 	RewriteCond %{REQUEST_URI} (admin|export-personal-data|erase-personal-data|file|post|edit-comments|wp-comments-post|index|wp-tinymce)\.php [NC]
-	RewriteCond %{HTTP_REFERER} !https://mon_site.fr [OR]
+	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 	RewriteCond %{HTTP_USER_AGENT} ^$
 	RewriteRule .* - [F]
 </IfModule>
