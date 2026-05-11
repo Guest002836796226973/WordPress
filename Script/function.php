@@ -16,6 +16,8 @@
 /* patch youtube */
 add_filter('embed_oembed_html', 'remplace_youtube', 10, 6);
 function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr) {
+    $i = 1;
+    do {
     $fragmenter = parse_url($url);
 	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragmenter['host']);
 	if ( !$you_t ) {
@@ -38,5 +40,8 @@ function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr)
 	} else if ( str_contains($attr, $replace) ) {
        $attr = str_replace( $replace, 'youtube-nocookie.com', $attr);
 	}
-    return;
+	echo $i;
+	// $i++;
+    }
+	while ($i < 2); // tourne en boucle
 }
