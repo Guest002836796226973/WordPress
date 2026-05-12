@@ -18,8 +18,8 @@ add_filter('embed_oembed_html', 'remplace_youtube', 10, 6);
 function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr) {
     $rep = 1;
     do {
-    $fragmenter = parse_url($url);
-	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragmenter['host'], $match);
+    $fragment = parse_url($url);
+	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragment['host'], $match);
 	$host = $match[1];
 	if ( !$you_t ) {
         $html = str_replace( $match, 'youtube-nocookie.com', $html );
