@@ -22,6 +22,7 @@ function remplace_youtube( $html, $cached_html, $url, $content, $post_id, $attr)
 	$you_t = preg_match('/^((m|www)\.)?youtube\.com|youtu\.be$/i', $fragment['host'], $match);
 	$host = $match[1];
 	if ( !$you_t ) {
+        $html = str_replace( $you_t, 'youtube-nocookie.com', $html );
         $html = str_replace( $match, 'youtube-nocookie.com', $html );
     }	
     $iframe_yt = preg_match( '/<iframe[^>]*>/', $html );
