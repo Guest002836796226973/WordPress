@@ -17,4 +17,4 @@
 <p>Merci à Verlok pour son script original https://github.com/verlok/vanilla-lazyload</p>
 <hr />
 <h1>Function mode</h1>
-<p>(script/function.php > thème_wp) Youtube cookies claire, nettoyage.</p>
+<p>(script/function.php > thème_wp) Youtube cookies claires effectue une boucle pour décharger les liens recréés.</p>
