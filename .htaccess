@@ -222,7 +222,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	<FilesMatch ".+(.*)(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)">
 		Require all denied
 	</FilesMatch>
-	<FilesMatch ".+(.*)(?i:https|ftps|compress.zlib|compress.bzip2|file|glob|data|http|ftp|phar|zip)">
+	<FilesMatch ".+(.*)(?i:https|ftps|compress.zlib|compress.bzip2|glob|data|http|ftp|phar|zip)">
 		Require all denied
 	</FilesMatch>
 	<FilesMatch "^(.*)(?:.*\.apk|.*\.dat|.*\.exe|.*\.dll|.*\.idx|.*\.ipa|.*\.json|.*\.xml)">
