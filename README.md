@@ -6,7 +6,7 @@
 <p>Découvrir les indispensables des fichiers wp-config.php (corrigé), .user.ini et robots.txt.</p>
 <br />
 <p>11 - MAI - 2026</p>
-<p>Correction des blocs .htaccess :</p>
+<p>Correction des blocs .htaccess</p>
 <p>14 - MAI - 2026</p>
 <p>Correction des blocs .htaccess :</p>
 <blockquote><p>#	Protection des fichiers sensibles WordPress</p>
