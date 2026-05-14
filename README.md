@@ -7,6 +7,11 @@
 <br />
 <p>11 - MAI - 2026</p>
 <p>Correction des blocs .htaccess :</p>
+<p>14 - MAI - 2026</p>
+<p>Correction des blocs .htaccess :</p>
+<blockquote><p>#	Protection des fichiers sensibles WordPress</p>
+<p>#	Protection des types de fichiers de l'utilisateur</p>
+<p>#	Protection des dossiers de WordPress, thème et téléchargement</p></blockquote>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
 <hr />
