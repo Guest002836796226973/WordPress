@@ -13,7 +13,7 @@
 <p>#	Protection des types de fichiers de l'utilisateur</p>
 <p>#	Protection des dossiers de WordPress, thème et téléchargement</p></blockquote>
 <br />
-<p>15 - MAI - 2026</p>
+<p>15-19 MAI 2026</p>
 <p>Correction finale des blocs .htaccess</p>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
