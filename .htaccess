@@ -286,7 +286,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_URI} !
-	RewriteCond %{REQUEST_URI} ~((?:a?)|(?:a+?)|(?:1?)|(?:1+?)) [NC,OR]
+#	RewriteCond %{REQUEST_URI} ~((?:a?)|(?:a+?)|(?:1?)|(?:1+?)) [NC,OR]
 	RewriteCond %{REQUEST_URI} ^(/wp-admin/images/|/wp-admin/includes/|/wp-admin/maint/|/wp-admin/network/|/wp-admin/user/) [NC,OR]
 	RewriteCond %{REQUEST_URI} ^(/assets/css/|/bootstrap/|/font/|/fonts/|/javascript/) [NC,OR]
 	RewriteCond %{REQUEST_URI} /(__bbpress|__init|admin|export-personal-data|erase-personal-data|edit-comments|wp-login|wp-tinymce)\.php [NC,OR]
