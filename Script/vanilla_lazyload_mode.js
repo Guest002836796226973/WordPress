@@ -8,12 +8,12 @@ function __petitpoids_lazyload() {
 	const runningOnBrowser = typeof window !== "undefined";
 	const isHiDpi = runningOnBrowser && window.devicePixelRatio > 1;
 	const isBot = runningOnBrowser && window.devicePixelRatio > 1;
-	const SRC = "src_XXXXXXXXX";
-	const SRCSET = "srcset_XXXXXXXXX";
-	const SIZES = "sizes_XXXXXXXXX";
+	const SRC = "src";
+	const SRCSET = "srcset";
+	const SIZES = "sizes";
 	const ORIGINALS = "AllOriginalAttrs";
-	const DATA = "data_XXXXXXXXX";
-	const dataPrefix = "data-XXXXXXXXX-";
+	const DATA = "data";
+	const dataPrefix = "data-";
 	const statusDataName = "All-status";
 	const statusLoading = "loading";
 	const statusLoaded = "loaded";
@@ -27,9 +27,9 @@ function __petitpoids_lazyload() {
 		threshold: 1,
 		thresholds: 1,
 		rootMargin: "0px",
-		data_src: "src_XXXXXXXXX",
-		data_srcset: "srcset_XXXXXXXXX",
-		data_sizes: "sizes_XXXXXXXXX",
+		data_src: "src",
+		data_srcset: "srcset",
+		data_sizes: "sizes",
 		class_applied: "applied",
 		class_loading: "loading",
 		class_loaded: "loaded",
