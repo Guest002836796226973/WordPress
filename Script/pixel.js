@@ -3,15 +3,13 @@ const WH = document.querySelectorAll("html");
 // const WH = document.querySelectorAll("iframe");
 // const WH = document.querySelectorAll("widget");
 function WS() {
-    WH.intElemClientWidth = element.clientWidth;
-    WH.intElemClientHeight = element.clientHeight;
-    WH.intElemOffsetWidth = element.offsetWidth;
-    WH.intElemOffsetHeight = element.offsetHeight;
-    WH.Width = window.innerWidth;
-    WH.Height = window.innerHeight;
-    WH.textContent = window.innerWidth;
-    WH.textContent = window.innerHeight;
+    WidthHeight.Width = window.innerWidth;
+    WidthHeight.Height = window.innerHeight;
+    WidthHeight.textContent = window.innerWidth;
+    WidthHeight.textContent = window.innerHeight;
+    return();
 }
+WindowSize();
 window.addEventListener("resize", WS);
 window.onresize = WS;
 window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
