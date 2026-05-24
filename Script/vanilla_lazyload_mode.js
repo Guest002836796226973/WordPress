@@ -573,7 +573,7 @@ function __petitpoids_lazyload() {
 	if (runningOnBrowser) {
 		autoInitialize(LazyLoad, window.LazyLoadOptions);
 	}
-	return;
+	return (0);
 }
 // Prélecture
 class ThePreloader {
@@ -595,5 +595,5 @@ function __of_Preloader() {
 	__vanilla_lazyload.init();
 	__petitpoids_lazyload.init();
 	__of_Preloader.init();
-	return;
+	return (0);
 }
