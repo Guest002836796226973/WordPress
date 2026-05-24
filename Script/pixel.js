@@ -7,10 +7,10 @@ function WS() {
     WidthHeight.Height = window.innerHeight;
     WidthHeight.textContent = window.innerWidth;
     WidthHeight.textContent = window.innerHeight;
-    return();
+    return;
 }
 WindowSize();
 window.addEventListener("resize", WS);
-window.onresize = WS;
+window.onresize = WS();
 window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
 // Fractionner le code ci-avant selon l'expérience de l'utilisateur
