@@ -3,10 +3,10 @@ const WH = document.querySelectorAll("html");
 // const WH = document.querySelectorAll("iframe");
 // const WH = document.querySelectorAll("widget");
 function WS() {
-    WidthHeight.Width = window.innerWidth;
-    WidthHeight.Height = window.innerHeight;
-    WidthHeight.textContent = window.innerWidth;
-    WidthHeight.textContent = window.innerHeight;
+    WH.Width = window.innerWidth;
+    WH.Height = window.innerHeight;
+    WH.textContent = window.innerWidth;
+    WH.textContent = window.innerHeight;
     return;
 }
 WS();
