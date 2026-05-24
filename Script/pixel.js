@@ -9,7 +9,7 @@ function WS() {
     WidthHeight.textContent = window.innerHeight;
     return;
 }
-WindowSize();
+WS();
 window.addEventListener("resize", WS);
 window.onresize = WS();
 window.onresize = function(){ location.reload(WS); } // Désactiver cette ligne en cas de rechargement intempestif
