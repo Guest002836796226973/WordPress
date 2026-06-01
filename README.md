@@ -11,7 +11,7 @@
 <ul><p>Limiter l'accès de vos fichiers</p>
 <blockquote>Require local</blockquote>
 <p>Autoriser l'accès pour les téléchargements de vos fichiers</p>
-<blockquote>voir le fichier .htaccess_folder et renommer vers .htaccess</blockquote></ul>
+<blockquote>voir le fichier <a href="https://github.com/Guest002836796226973/WordPress/blob/main/.htaccess_folder">.htaccess_folder</a> et renommer vers .htaccess</blockquote></ul>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
 <hr />
