@@ -191,7 +191,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_METHOD} POST
-	RewriteCond %{REQUEST_URI} (export-personal-data|erase-personal-data|file|post|edit-comments|wp-comments-post|index|wp-tinymce)\.php
+	RewriteCond %{REQUEST_URI} (export-personal-data|erase-personal-data|file|post|edit-comments|wp-comments-post|index|wp-tinymce)\.php(.*)
 	RewriteCond %{HTTP_REFERER} !https://mon_site.fr
 	RewriteCond %{HTTP_USER_AGENT} ^$
 	RewriteRule .* - [F]
