@@ -8,15 +8,15 @@
 <p>01-06-2026</p>
 <p>Correction des blocs .htaccess</p>
 <p>Ajouter à l'interrieur vos dossiers privés ou personnalisés les fichiers .htaccess contenant le code :</p>
-<ul><p>Limiter l'accès de vos fichiers</p></ul>
+<ul><p>Limiter l'accès de vos fichiers</p>
 <blockquote>Require local</blockquote>
-<ul><p>Autoriser l'accès pour les téléchargements de fihier</p></ul>
+<p>Autoriser l'accès pour les téléchargements de fihier</p>
 <blockquote><IfModule mod_setenvif.c>
-    SetEnvIfNoCase Referer "petitdoigts.fr" localreferer
-    <FilesMatch "^(?i:.*)">
-		Require env localreferer
-    </FilesMatch>
-</IfModule></blockquote>
+    <p>SetEnvIfNoCase Referer "petitdoigts.fr" localreferer</p>
+    <p><FilesMatch "^(?i:.*)"></p>
+	<p>	Require env localreferer</p>
+    <p></FilesMatch></p>
+</IfModule></blockquote></ul>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
 <hr />
