@@ -214,7 +214,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #
 <IfModule mod_setenvif.c>
 	SetEnvIf Referer "mon_site.fr" localreferer
-    <FilesMatch "^(?i:data?|.*data?|chat\.php|post\.php|wp-login\.php|file)">
+    <FilesMatch "^(?i:data?|chat\.php|post\.php|wp-login\.php|file)">
 		Require env localreferer
     </FilesMatch>
 </IfModule>
