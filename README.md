@@ -15,7 +15,7 @@
     <p>SetEnvIfNoCase Referer "petitdoigts.fr" localreferer</p>
     <p>< _FilesMatch "^(?i:.*)"></p>
 	<p>	Require env localreferer</p>
-    <p></FilesMatch _></p>
+    <p></_ FilesMatch></p>
 </IfModule></blockquote></ul>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
