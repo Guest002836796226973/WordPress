@@ -7,10 +7,10 @@
 <br />
 <p>01-06-2026</p>
 <p>Correction des blocs .htaccess</p>
-<p>Ajouter à l'interrieur vos dossiers privés ou personnalisés les fichiers .htaccess contenant le code :</p>
+<p>Ajouter à l'intérieur vos dossiers privés ou personnalisés les fichiers .htaccess contenant le code :</p>
 <ul><p>Limiter l'accès de vos fichiers</p>
 <blockquote>Require local</blockquote>
-<p>Autoriser l'accès pour les téléchargements de fihier</p>
+<p>Autoriser l'accès pour les téléchargements de vos fichiers</p>
 <blockquote><IfModule mod_setenvif.c>
     <p>SetEnvIfNoCase Referer "petitdoigts.fr" localreferer</p>
     <p><FilesMatch "^(?i:.*)"></p>
