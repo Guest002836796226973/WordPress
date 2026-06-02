@@ -67,7 +67,7 @@
 #
 ErrorDocument 401 "Autorisation requise"
 ErrorDocument 402 "Refus de paiement"
-ErrorDocument 403 "Acc&egrave;s interdit"
+ErrorDocument 403 https://mon_site.fr/erreur-404/
 ErrorDocument 404 https://mon_site.fr/erreur-404/
 
 ########################################################################
@@ -106,9 +106,9 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 
 <IfModule mod_filter.c>
 	SetOutputFilter DEFLATE
-	SetEnvIfNoCase Request_URI "(.*)(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)" no-gzip dont-vary
-	SetEnvIfNoCase Request_URI "(.*)(?i:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)" no-gzip dont-vary
-	SetEnvIfNoCase Request_URI "\.(?i:3fr|3g2|3gp|aai|ai|apng|art|arw|avi|avif|avs|bgr|bgra|bgro|bie|bmp|bmp2|bmp3|brf|cal|cals|canvas|caption|cin|cip|clip|cmyk|cmyka|cr2|cr3|crw|css|cur|cut|data|dcm|dcr|dcx|dds|dfont|dng|dpx|dxt1|dxt5|epdf|epi|eps|eps2|eps3|epsf|epsi|ept|ept2|ept3|erf|fax|file|fits|fractal|ftp|fts|g3|g4|gif|gif87|gradient|gray|graya|group4|h|hald|hdr|heic|histogram|hrz|htm|html|http|https|icb|ico|icon|iiq|info|inline|ipl|isobrl|isobrl6|j2c|j2k|jbg|jbig|jng|jnx|jp2|jpc|jpe|jpeg|jpg|jpm|jps|jpt|js|json|k25|kdc|label|m2v|m4v|mac|magick|map|mask|mat|matte|mef|miff|mkv|mng|mono|mov|mp4|mpc|mpg|mrw|msl|mtv|mvg|nef|nrw|null|orf|otb|otf|pal|palm|pam|pattern|pbm|pcd|pcds|pcl|pct|pcx|pdb|pdf|pdfa|pef|pes|pfa|pfb|pfm|pgm|pgx|picon|pict|pix|pjpeg|plasma|png|png00|png24|png32|png48|png64|png8|pnm|pocketmod|ppm|preview|ps|ps2|ps3|psb|psd|ptif|pwp|radial-gradient|raf|ras|raw|rgb|rgba|rgbo|rgf|rla|rle|rmf|rw2|scr|sct|sfw|sgi|shtml|six|sixel|sparse-color|sr2|srf|stegano|sun|svg|text|tga|thumbnail|tiff|tiff64|tile|tim|ttc|ttf|txt|ubrl|ubrl6|uil|uyvy|vda|vicar|vid|video|viff|vips|vst|wbmp|webm|webp|wmv|wpg|x|x3f|xbm|xc|xcf|xpm|xps|xv|xwd|ycbcr|ycbcra|yuv)" no-gzip dont-vary
+	SetEnvIf Request_URI "(.*)(?i:zlib.*|bzip2.*|convert.iconv.*|string.rot13|string.toupper|string.tolower|convert.*|consumed|dechunk)" no-gzip dont-vary
+	SetEnvIf Request_URI "(.*)(?i:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip|css)" no-gzip dont-vary
+	SetEnvIf Request_URI "\.(?i:3fr|3g2|3gp|aai|ai|apng|art|arw|avi|avif|avs|bgr|bgra|bgro|bie|bmp|bmp2|bmp3|brf|cal|cals|canvas|caption|cin|cip|clip|cmyk|cmyka|cr2|cr3|crw|css|cur|cut|data|dcm|dcr|dcx|dds|dfont|dng|dpx|dxt1|dxt5|epdf|epi|eps|eps2|eps3|epsf|epsi|ept|ept2|ept3|erf|fax|file|fits|fractal|ftp|fts|g3|g4|gif|gif87|gradient|gray|graya|group4|h|hald|hdr|heic|histogram|hrz|htm|html|http|https|icb|ico|icon|iiq|info|inline|ipl|isobrl|isobrl6|j2c|j2k|jbg|jbig|jng|jnx|jp2|jpc|jpe|jpeg|jpg|jpm|jps|jpt|js|json|k25|kdc|label|m2v|m4v|mac|magick|map|mask|mat|matte|mef|miff|mkv|mng|mono|mov|mp4|mpc|mpg|mrw|msl|mtv|mvg|nef|nrw|null|orf|otb|otf|pal|palm|pam|pattern|pbm|pcd|pcds|pcl|pct|pcx|pdb|pdf|pdfa|pef|pes|pfa|pfb|pfm|pgm|pgx|picon|pict|pix|pjpeg|plasma|png|png00|png24|png32|png48|png64|png8|pnm|pocketmod|ppm|preview|ps|ps2|ps3|psb|psd|ptif|pwp|radial-gradient|raf|ras|raw|rgb|rgba|rgbo|rgf|rla|rle|rmf|rw2|scr|sct|sfw|sgi|shtml|six|sixel|sparse-color|sr2|srf|stegano|sun|svg|text|tga|thumbnail|tiff|tiff64|tile|tim|ttc|ttf|txt|ubrl|ubrl6|uil|uyvy|vda|vicar|vid|video|viff|vips|vst|wbmp|webm|webp|wmv|wpg|x|x3f|xbm|xc|xcf|xpm|xps|xv|xwd|ycbcr|ycbcra|yuv)" no-gzip dont-vary
 </IfModule>
 
 <IfModule mod_expires.c>
@@ -125,7 +125,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
 		Header set Vary "Origin"
 		<IfModule mod_setenvif.c>
-        SetEnvIfNoCase Referer "mon_site.fr" localreferer
+        SetEnvIf Referer "mon_site.fr" localreferer
 		    <FilesMatch "^(.*)(?i:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)">
 			    Header append Vary User-Agent
 		    </FilesMatch>
