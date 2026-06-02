@@ -1,5 +1,5 @@
 <IfModule mod_setenvif.c>
-    SetEnvIfNoCase Referer "petitdoigts.fr" localreferer
+    SetEnvIfNoCase Referer mon_site\.fr localreferer
     <FilesMatch "^(?i:.*)">
 		Require env localreferer
     </FilesMatch>
