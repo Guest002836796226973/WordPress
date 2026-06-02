@@ -125,7 +125,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 		Header set Cache-Control "private, must-understand, no-store, no-transform, immutable, no-cache"
 		Header set Vary "Origin"
 		<IfModule mod_setenvif.c>
-        SetEnvIf Referer "mon_site.fr" localreferer
+        SetEnvIf Referer mon_site\.fr localreferer
 		    <FilesMatch "^(.*)(?i:https|ftps|compress.zlib|compress.bzip2|php|file|glob|data|http|ftp|phar|zip)">
 			    Header append Vary User-Agent
 		    </FilesMatch>
@@ -213,7 +213,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 #	Protection des types de fichiers de l'utilisateur
 #
 <IfModule mod_setenvif.c>
-	SetEnvIf Referer "mon_site.fr" localreferer
+	SetEnvIf Referer mon_site\.fr localreferer
     <FilesMatch "^(?i:data?|chat\.php|post\.php|wp-login\.php|file)">
 		Require env localreferer
     </FilesMatch>
