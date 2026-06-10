@@ -204,7 +204,7 @@ ErrorDocument 404 https://mon_site.fr/erreur-404/
 	<FilesMatch "^(?i:(.*\.apk)|(.*\.dat)|(.*\.exe)|(.*\.dll)|(.*\.idx)|(.*\.ipa)|(.*\.json)|(.*\.xml))">
 		Require all denied
 	</FilesMatch>
-	<FilesMatch "(?i:(/data_(.*)))">
+	<FilesMatch "/(?i:(data_(.*)))">
 		Require all denied
 	</FilesMatch>
 </IfModule>
