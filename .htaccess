@@ -13,7 +13,7 @@
 	RewriteRule /index\.php(/(.*)|$) %{CONTEXT_PREFIX}/$1/$2 [R=301,E=no-gzip:1,F]
 	RewriteCond %{REQUEST_FILENAME} -f
 	RewriteRule .? - [L]
-	RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\/.*/%1/$1/$2/$
+	RewriteCond %{REQUEST_URI} ^([%1]|[\s])$
     RewriteRule ^(.*) - [N=1] [E=BASE:%1] [L,NS]
     RewriteRule (.*)/([!\.]+)(.*) $1$2 [N]
     RewriteRule ^/index\.html - [CO=mon_site:yes:mon_domaine.fr:86400:/]
