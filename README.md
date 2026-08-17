@@ -14,6 +14,11 @@
 <blockquote>voir le fichier <a href="https://github.com/Guest002836796226973/WordPress/blob/main/.htaccess_folder">.htaccess_folder</a> puis renommer vers .htaccess</blockquote></ul>
 <br />
 <p>Merci à shapeSpace https://perishablepress.com/category/wordpress/</p>
+<br />
+<p>18-08-2026 Sécurité Cookie</p>
+<p>Mise à jour des fichiers .htaccess et wp-config.php</p>
+
+
 <hr />
 <h1>Script mode</h1>
 <p>Encapsuler votre thème avec les scripts vanilla_lazyload_mode.js et pixel.js</p>
