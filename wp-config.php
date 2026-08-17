@@ -1,11 +1,11 @@
 /* Add any custom values between this line and the "stop editing" line. */
 
-// Sécurité et cookie
+// Sécurité
 header('Content-Type: text/html; charset=utf-8');
 header('Surrogate-Control: BigPipe/1.0');
 header('X-Accel-Buffering: no');
 
-
+// Cookie
 ini_set('session.cookie_secure', 'On');
 
 session_unset();
