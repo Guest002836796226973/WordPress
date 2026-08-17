@@ -7,7 +7,6 @@ header('X-Accel-Buffering: no');
 
 // Cookie
 ini_set('session.cookie_secure', 'On');
-
 session_unset();
 session_destroy();
 session_write_close();
