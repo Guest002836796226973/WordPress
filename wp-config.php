@@ -11,7 +11,6 @@ ini_set('session.cookie_secure', 'On');
 session_unset();
 session_destroy();
 session_write_close();
-
 unset($_COOKIE[$key]);
 setcookie(session_name(),'',0,'/','monsite.fr');
 session_set_cookie_params(['lifetime' => 0, 'secure' => true, 'samesite' => 'strict']);
@@ -34,11 +33,8 @@ if (isset($_SESSION['destroyed'])
 
 $old_sessionid = session_id();
 $_SESSION['destroyed'] = time();
-
 session_regenerate_id();
-
 unset($_SESSION['destroyed']);
-
 $new_sessionid = session_id();
 
 // url site
